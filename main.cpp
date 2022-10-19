@@ -35,10 +35,10 @@ public:
          std::cout << "Killing the professor.\n";
     }
     std::string get_name() { return this -> name; }
-    std::string get_subject() { return this -> subject; }
-    std::string get_email() { return this -> email; }
-    std::string get_phoneNumber() { return this -> phoneNumber; }
-    int get_age() { return this -> age; }
+//    std::string get_subject() { return this -> subject; }
+//    std::string get_email() { return this -> email; }
+//    std::string get_phoneNumber() { return this -> phoneNumber; }
+//    int get_age() { return this -> age; }
 };
 
 class Student {
@@ -77,12 +77,12 @@ public:
     ~Student() {
          std::cout << "Killing the student.\n";
     }
-    std::string get_name() { return this -> name; }
-    std::string get_email() { return this -> email; }
-    std::string get_phoneNumber() { return this -> phoneNumber; }
-    int get_group() { return this -> group; }
-    int get_age() { return this -> age; }
-    bool get_tuitionFree() { return this -> tuitionFree; }
+//    std::string get_name() { return this -> name; }
+//    std::string get_email() { return this -> email; }
+//    std::string get_phoneNumber() { return this -> phoneNumber; }
+//    int get_group() { return this -> group; }
+//    int get_age() { return this -> age; }
+//    bool get_tuitionFree() { return this -> tuitionFree; }
 };
 
 class University {
@@ -106,13 +106,15 @@ public:
         this -> s = s;
         std:: cout << "Building the University from a regular-constructor.\n";
     }
-    University(const University& other) : name{other.name}, subject(other.subject), foundationYear{other.foundationYear}, p{other.p}, s{other.s} {
+    University(const University& other) : name{other.name}, subject(other.subject), foundationYear{other.foundationYear}, numberOfProfessors{other.numberOfProfessors}, numberOfStudents{other.numberOfStudents}, p{other.p}, s{other.s} {
          std:: cout << "Building the University from a copy-constructor.\n";
     }
     University& operator = (const University &other) {
         name = other.name;
         subject = other.subject;
         foundationYear = other.foundationYear;
+        numberOfProfessors = other.numberOfProfessors;
+        numberOfStudents = other.numberOfStudents;
         p = other.p;
         s = other.s;
          std:: cout << "Operator University =\n";
@@ -121,9 +123,9 @@ public:
     ~University() {
          std:: cout << "Destructing the University.\n";
     }
-    std::string get_name() { return this -> name; }
-    std::string get_subject() { return this -> subject; }
-    int get_foundationYear() { return this -> foundationYear; }
+//    std::string get_name() { return this -> name; }
+//    std::string get_subject() { return this -> subject; }
+//    int get_foundationYear() { return this -> foundationYear; }
 //    Professor get_p() { // test
 //        return this -> p[0];
 //    }
