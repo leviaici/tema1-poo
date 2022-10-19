@@ -3,11 +3,11 @@
 
 class Professor {
 private:
-    std::string name;
-    std::string subject;
-    std::string email;
-    std::string phoneNumber;
-    int age;
+    std::string name = NULL;
+    std::string subject = NULL;
+    std::string email = NULL;
+    std::string phoneNumber = NULL;
+    int age = int(NULL);
 
 public:
     Professor() = default;
@@ -42,12 +42,12 @@ public:
 
 class Student {
 private:
-    std::string name;
-    std::string email;
-    std::string phoneNumber;
-    int group;
-    int age;
-    bool tuitionFree;
+    std::string name = NULL;
+    std::string email = NULL;
+    std::string phoneNumber = NULL;
+    int group = int(NULL);
+    int age = int(NULL);
+    bool tuitionFree = bool(NULL);
 
 public:
     Student() = default;
