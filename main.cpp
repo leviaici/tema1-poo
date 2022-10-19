@@ -11,7 +11,7 @@ private:
 
 public:
     Professor() = default;
-    Professor(const std::string name, const std::string subject, const std::string email, const std::string phoneNumber, const int age) {
+    Professor(const std::string& name, const std::string& subject, const std::string& email, const std::string& phoneNumber, const int& age) {
         this -> name = name;
         this -> subject = subject;
         this -> email = email;
@@ -52,7 +52,7 @@ private:
 
 public:
     Student() = default;
-    Student(const std::string name, const std::string email, const std::string phoneNumber, const int group, const int age, const bool tuitionFree) {
+    Student(const std::string& name, const std::string& email, const std::string& phoneNumber, const int& group, const int& age, const bool& tuitionFree) {
         this -> name = name;
         this -> email = email;
         this -> phoneNumber = phoneNumber;
@@ -96,7 +96,7 @@ private:
     std::vector<Student> s;
 
 public:
-    University(const std::string name, const std::string subject, const int foundationYear, const int numberOfProfessors, const int numberOfStudents, const std::vector<Professor> p, const std::vector<Student> s) {
+    University(const std::string& name, const std::string& subject, const int& foundationYear, const int& numberOfProfessors, const int& numberOfStudents, const std::vector<Professor>& p, const std::vector<Student>& s) {
         this -> name = name;
         this -> subject = subject;
         this -> foundationYear = foundationYear;
