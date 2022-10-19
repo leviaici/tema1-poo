@@ -7,7 +7,7 @@ private:
     std::string subject = NULL;
     std::string email = NULL;
     std::string phoneNumber = NULL;
-    int age = int(NULL);
+    int age = 0;
 
 public:
     Professor() = default;
@@ -45,9 +45,9 @@ private:
     std::string name = NULL;
     std::string email = NULL;
     std::string phoneNumber = NULL;
-    int group = int(NULL);
-    int age = int(NULL);
-    bool tuitionFree = bool(NULL);
+    int group = 0;
+    int age = 0;
+    bool tuitionFree = false;
 
 public:
     Student() = default;
