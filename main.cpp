@@ -3,10 +3,10 @@
 
 class Professor {
 private:
-    std::string name = NULL;
-    std::string subject = NULL;
-    std::string email = NULL;
-    std::string phoneNumber = NULL;
+    std::string name = "Unknown";
+    std::string subject = "Unknown";
+    std::string email = "Unknown";
+    std::string phoneNumber = "Unknown";
     int age = 0;
 
 public:
@@ -42,9 +42,9 @@ public:
 
 class Student {
 private:
-    std::string name = NULL;
-    std::string email = NULL;
-    std::string phoneNumber = NULL;
+    std::string name = "Unknown";
+    std::string email = "Unknown";
+    std::string phoneNumber = "Unknown";
     int group = 0;
     int age = 0;
     bool tuitionFree = false;
