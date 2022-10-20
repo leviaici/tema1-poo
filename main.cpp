@@ -295,7 +295,7 @@ public:
 
 
 int main() {
-    /*std::vector<Professor> p;
+    std::vector<Professor> p;
 
     Professor p1 = Professor("Marius Micluta", "Informatica", "marius.micluta@unibuc.ro", "Unknown", 23);
     Professor p2 = Professor("Radu Boriga", "Informatica", "radu.boriga@unibuc.ro", "Unknown", 50);
@@ -305,11 +305,11 @@ int main() {
 
     Student s1 = Student("Adrian Leventiu", "adrian.leventiu@s.unibuc.ro", "Unknown", 262, 19);
     Student s2 = Student("Stefan Radu", "stefan.radu@s.unibuc.ro", "Unknown", 263, 19);
-    s.push_back(s1); s.push_back(s2);*/
+    s.push_back(s1); s.push_back(s2);
 
     University unibuc("Universitatea din Bucuresti", "Matematica si Informatica", 1864);
-//    unibuc.add_professor(Professor("Liliana Mitre", "Matematica", "liliana.mitre@unibuc.ro", "Unknown", 35));
-//    unibuc.add_vectorOfProfessors(p);
+    unibuc.add_professor(Professor("Liliana Mitre", "Matematica", "liliana.mitre@unibuc.ro", "Unknown", 35));
+    unibuc.add_vectorOfProfessors(p);
 
     std::vector<int> g;
     g.push_back(4); g.push_back(8); g.push_back(7); g.push_back(5);
@@ -323,8 +323,7 @@ int main() {
 
 
     unibuc.add_student(Student("Flavius Popescu", "flavius.popescu@s.unibuc.ro", "0711223344", 261, 19, note3));
-//    unibuc.add_vectorOfStudents(s);
-//    unibuc.print();
+    unibuc.add_vectorOfStudents(s);
     unibuc.add_student(Student("Flavius ratat", "flavius.popescu@s.damada.ro", "nu am", 262, 25, note4));
     unibuc.print_students();
     unibuc.reclassify();
