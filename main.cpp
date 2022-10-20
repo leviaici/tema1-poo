@@ -34,11 +34,11 @@ public:
     ~Professor() {
          std::cout << "Killing the professor.\n";
     }
-    std::string get_name() { return this -> name; }
-//    std::string get_subject() { return this -> subject; }
-//    std::string get_email() { return this -> email; }
-//    std::string get_phoneNumber() { return this -> phoneNumber; }
-//    int get_age() { return this -> age; }
+    [[maybe_unused]] std::string get_name() { return this -> name; }
+    [[maybe_unused]] std::string get_subject() { return this -> subject; }
+    [[maybe_unused]] std::string get_email() { return this -> email; }
+    [[maybe_unused]] std::string get_phoneNumber() { return this -> phoneNumber; }
+    [[maybe_unused]] int get_age() { return this -> age; }
 };
 
 class Student {
@@ -77,12 +77,12 @@ public:
     ~Student() {
          std::cout << "Killing the student.\n";
     }
-//    std::string get_name() { return this -> name; }
-//    std::string get_email() { return this -> email; }
-//    std::string get_phoneNumber() { return this -> phoneNumber; }
-//    int get_group() { return this -> group; }
-//    int get_age() { return this -> age; }
-//    bool get_tuitionFree() { return this -> tuitionFree; }
+    [[maybe_unused]] std::string get_name() { return this -> name; }
+    [[maybe_unused]] std::string get_email() { return this -> email; }
+    [[maybe_unused]] std::string get_phoneNumber() { return this -> phoneNumber; }
+    [[maybe_unused]] int get_group() { return this -> group; }
+    [[maybe_unused]] int get_age() { return this -> age; }
+    [[maybe_unused]] bool get_tuitionFree() { return this -> tuitionFree; }
 };
 
 class University {
@@ -96,14 +96,22 @@ private:
     std::vector<Student> s;
 
 public:
+    University(const std::string& name, const std::string& subject, const int& foundationYear, const int& numberOfProfessors, const int& numberOfStudents, const std::vector<Professor>& p, const std::vector<Student>& s) {
+        this -> name = name;
+        this -> subject = subject;
+        this -> foundationYear = foundationYear;
+        this -> numberOfProfessors = numberOfProfessors;
+        this -> numberOfStudents = numberOfStudents;
+        this -> p = p;
+        this -> s = s;
+        std:: cout << "Building the University from a regular-constructor.\n";
+    }
     University(const std::string& name, const std::string& subject, const int& foundationYear, const int& numberOfProfessors, const int& numberOfStudents) {
         this -> name = name;
         this -> subject = subject;
         this -> foundationYear = foundationYear;
         this -> numberOfProfessors = numberOfProfessors;
         this -> numberOfStudents = numberOfStudents;
-//        this -> p = p;
-//        this -> s = s;
         std:: cout << "Building the University from a regular-constructor.\n";
     }
     University(const University& other) : name{other.name}, subject(other.subject), foundationYear{other.foundationYear}, numberOfProfessors{other.numberOfProfessors}, numberOfStudents{other.numberOfStudents}, p{other.p}, s{other.s} {
@@ -123,36 +131,26 @@ public:
     ~University() {
          std:: cout << "Destructing the University.\n";
     }
-//    std::string get_name() { return this -> name; }
-//    std::string get_subject() { return this -> subject; }
-//    int get_foundationYear() { return this -> foundationYear; }
-//    Professor get_p() { // test
-//        return this -> p[0];
-//    }
+    [[maybe_unused]] std::string get_name() { return this -> name; }
+    [[maybe_unused]] std::string get_subject() { return this -> subject; }
+    [[maybe_unused]] int get_foundationYear() { return this -> foundationYear; }
     void print() {
         std::cout << this -> name << " cu specializarea " << this -> subject << " a fost fondata in anul " << this -> foundationYear << ".\nAre un cumul de " << this -> numberOfProfessors << " de profesori de exceptie printre care si " << (this -> p)[0].get_name() << "\n";
     }
     void add_professor(const Professor& other) {
         (this -> p).push_back(other);
     }
+    void add_student(const Student& other) {
+        (this -> s).push_back(other);
+    }
 };
 
 
 int main() {
-//    std::vector<Professor> p;
-//    Professor p1("Gigel Militaru", "Matematica", "gigel.militaru@s.unibuc.ro", "0722113344", 50);
-//    Professor p2("Gigel Militianu", "Informatica", "gigel.militianu@s.unibuc.ro", "0722113355", 70);
-//    p.push_back(p1);
-//    p.push_back(p2);
-//
-//    std::vector<Student> s;
-//    Student s1("Gigel Soldatu", "gigel.soldatu@s.unibuc.ro", "0711223344", 262, 19, true);
-//    Student s2("Gigel Copoiu", "gigel.copoiu@s.unibuc.ro", "0711223311", 261, 20, false);
-//    s.push_back(s1);
-//    s.push_back(s2);
-
     University unibuc("Universitatea din Bucuresti", "Matematica si Informatica", 1864, 500, 4000);
     unibuc.add_professor(Professor("Gigel Militaru", "Matematica", "gigel.militaru@s.unibuc.ro", "123", 50));
+    unibuc.add_student(Student("Gigel Soldatu", "gigel.soldatu@s.unibuc.ro", "0711223344", 262, 19, true));
     unibuc.print();
+
     return 0;
 }
