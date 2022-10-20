@@ -96,14 +96,14 @@ private:
     std::vector<Student> s;
 
 public:
-    University(const std::string& name, const std::string& subject, const int& foundationYear, const int& numberOfProfessors, const int& numberOfStudents, const std::vector<Professor>& p, const std::vector<Student>& s) {
+    University(const std::string& name, const std::string& subject, const int& foundationYear, const int& numberOfProfessors, const int& numberOfStudents) {
         this -> name = name;
         this -> subject = subject;
         this -> foundationYear = foundationYear;
         this -> numberOfProfessors = numberOfProfessors;
         this -> numberOfStudents = numberOfStudents;
-        this -> p = p;
-        this -> s = s;
+//        this -> p = p;
+//        this -> s = s;
         std:: cout << "Building the University from a regular-constructor.\n";
     }
     University(const University& other) : name{other.name}, subject(other.subject), foundationYear{other.foundationYear}, numberOfProfessors{other.numberOfProfessors}, numberOfStudents{other.numberOfStudents}, p{other.p}, s{other.s} {
@@ -132,23 +132,27 @@ public:
     void print() {
         std::cout << this -> name << " cu specializarea " << this -> subject << " a fost fondata in anul " << this -> foundationYear << ".\nAre un cumul de " << this -> numberOfProfessors << " de profesori de exceptie printre care si " << (this -> p)[0].get_name() << "\n";
     }
+    void add_professor(const Professor& other) {
+        (this -> p).push_back(other);
+    }
 };
 
 
 int main() {
-    std::vector<Professor> p;
-    Professor p1("Gigel Militaru", "Matematica", "gigel.militaru@s.unibuc.ro", "0722113344", 50);
-    Professor p2("Gigel Militianu", "Informatica", "gigel.militianu@s.unibuc.ro", "0722113355", 70);
-    p.push_back(p1);
-    p.push_back(p2);
+//    std::vector<Professor> p;
+//    Professor p1("Gigel Militaru", "Matematica", "gigel.militaru@s.unibuc.ro", "0722113344", 50);
+//    Professor p2("Gigel Militianu", "Informatica", "gigel.militianu@s.unibuc.ro", "0722113355", 70);
+//    p.push_back(p1);
+//    p.push_back(p2);
+//
+//    std::vector<Student> s;
+//    Student s1("Gigel Soldatu", "gigel.soldatu@s.unibuc.ro", "0711223344", 262, 19, true);
+//    Student s2("Gigel Copoiu", "gigel.copoiu@s.unibuc.ro", "0711223311", 261, 20, false);
+//    s.push_back(s1);
+//    s.push_back(s2);
 
-    std::vector<Student> s;
-    Student s1("Gigel Soldatu", "gigel.soldatu@s.unibuc.ro", "0711223344", 262, 19, true);
-    Student s2("Gigel Copoiu", "gigel.copoiu@s.unibuc.ro", "0711223311", 261, 20, false);
-    s.push_back(s1);
-    s.push_back(s2);
-
-    University unibuc("Universitatea din Bucuresti", "Matematica si Informatica", 1864, 500, 4000, p, s);
+    University unibuc("Universitatea din Bucuresti", "Matematica si Informatica", 1864, 500, 4000);
+    unibuc.add_professor(Professor("Gigel Militaru", "Matematica", "gigel.militaru@s.unibuc.ro", "123", 50));
     unibuc.print();
     return 0;
 }
