@@ -278,10 +278,10 @@ public:
             c.print();
     }
 
-    void print_professors() {
-        for(auto c : this -> p)
-            c.print();
-    }
+//    void print_professors() {
+//        for(auto c : this -> p)
+//            c.print();
+//    }
 
     void reclassify() {
         sort((this -> s).begin(), (this -> s).end(), [](Student s1, Student s2) { return(s1.get_overallAverage() > s2.get_overallAverage()); });
