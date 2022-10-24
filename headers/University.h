@@ -22,8 +22,6 @@ private:
 public:
     University(const std::string& name, const std::string& subject, const int& foundationYear, const std::vector<Professor>& p, const std::vector<Student>& s);
 
-    University(const std::string& name, const std::string& subject, const int& foundationYear);
-
     University(const University& other);
 
     University& operator = (const University &other) {

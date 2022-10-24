@@ -15,7 +15,7 @@ int main() {
     Student s2 = Student("Stefan Radu", "stefan.radu@s.unibuc.ro", "Unknown", 263, 19);
     s.push_back(s1); s.push_back(s2);
 
-    University unibuc("Universitatea din Bucuresti", "Matematica si Informatica", 1864);
+    University unibuc("Universitatea din Bucuresti", "Matematica si Informatica", 1864, {}, {});
     unibuc.add_professor(Professor("Liliana Mitre", "Matematica", "liliana.mitre@unibuc.ro", "Unknown", 35));
     unibuc.add_vectorOfProfessors(p);
 

@@ -15,12 +15,6 @@ University::University(const std::string& name, const std::string& subject, cons
     this -> s = s;
 }
 
-University::University(const std::string& name, const std::string& subject, const int& foundationYear) {
-    this -> name = name;
-    this -> subject = subject;
-    this -> foundationYear = foundationYear;
-}
-
 University::University(const University& other) : name{other.name}, subject(other.subject), foundationYear{other.foundationYear}, p{other.p}, s{other.s} {
     std::cout << "Creating University via copy-constructor.\n";
 }
