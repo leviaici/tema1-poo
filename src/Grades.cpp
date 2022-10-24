@@ -2,7 +2,7 @@
 // Created by Adrian Leventiu on 23.10.2022.
 //
 
-#include "Grades.h"
+#include "../headers/Grades.h"
 #include <iostream>
 
 Grades::Grades() = default;

@@ -2,7 +2,7 @@
 // Created by Adrian Leventiu on 23.10.2022.
 //
 
-#include "Professor.h"
+#include "../headers/Professor.h"
 
 Professor::Professor() = default;
 

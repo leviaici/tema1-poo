@@ -2,7 +2,7 @@
 // Created by Adrian Leventiu on 23.10.2022.
 //
 
-#include "University.h"
+#include "../headers/University.h"
 #include <iostream>
 #include <algorithm>
 #include <vector>

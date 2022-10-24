@@ -2,7 +2,7 @@
 // Created by Adrian Leventiu on 23.10.2022.
 //
 
-#include "Student.h"
+#include "../headers/Student.h"
 
 Student::Student() = default;
 

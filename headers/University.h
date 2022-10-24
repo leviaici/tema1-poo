@@ -43,7 +43,7 @@ public:
     int get_foundationYear();
     std::vector<Student> get_students();*/
 
-    void print() ;
+    void print();
 
     void add_professor(const Professor& other);
 
