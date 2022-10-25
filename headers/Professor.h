@@ -28,7 +28,7 @@ public:
         email = other.email;
         phoneNumber = other.phoneNumber;
         age = other.age;
-        std::cout << "Professor Operator =\n";
+//        std::cout << "Professor Operator =\n";
         return *this;
     }
 
@@ -36,8 +36,8 @@ public:
 
     void print();
 
-    std::string get_name();
-    /*[[maybe_unused]] std::string get_subject();
+    /*std::string get_name();
+    [[maybe_unused]] std::string get_subject();
     [[maybe_unused]] std::string get_email();
     [[maybe_unused]] std::string get_phoneNumber();
     [[maybe_unused]] int get_age(); */

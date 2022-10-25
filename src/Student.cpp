@@ -27,11 +27,11 @@ Student::Student(const std::string& firstName, const std::string& lastName, cons
 }
 
 Student::Student(const Student& other) : firstName{other.firstName}, lastName{other.lastName}, email{other.email}, phoneNumber{other.phoneNumber}, group{other.group}, age{other.age}, id{other.id}, overallAverage{other.overallAverage}, tuitionFree{other.tuitionFree}, subjects{other.subjects} {
-    std::cout << "Creating Student via copy-constructor.\n";
+//    std::cout << "Creating Student via copy-constructor.\n";
 }
 
 Student::~Student() {
-    std::cout << "Killing the student.\n";
+//    std::cout << "Killing the student.\n";
 }
 
 void Student::set_id(const int& other) { this -> id = other; }

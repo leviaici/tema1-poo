@@ -16,11 +16,11 @@ University::University(const std::string& name, const std::string& subject, cons
 }
 
 University::University(const University& other) : name{other.name}, subject(other.subject), foundationYear{other.foundationYear}, professors{other.professors}, students{other.students} {
-    std::cout << "Creating University via copy-constructor.\n";
+//    std::cout << "Creating University via copy-constructor.\n";
 }
 
 University::~University() {
-    std::cout << "Destructing the university.\n";
+//    std::cout << "Destructing the university.\n";
 }
 
 /*std::string University::get_name() { return this -> name; }

@@ -15,11 +15,11 @@ Subject::Subject(const std::string& subject, const std::vector<int>& grades) {
 }
 
 Subject::Subject(const Subject& other) : subject{other.subject}, grades{other.grades}, average{other.average}, passed{other.passed} {
-    std::cout << "Creating Subject via copy-constructor.\n";
+//    std::cout << "Creating Subject via copy-constructor.\n";
 }
 
 Subject::~Subject() {
-    std::cout << "Killing the grades.\n";
+//    std::cout << "Killing the grades.\n";
 }
 
 void Subject::print() {

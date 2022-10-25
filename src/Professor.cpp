@@ -15,11 +15,11 @@ Professor::Professor(const std::string& name, const std::string& subject, const 
 }
 
 Professor::Professor(const Professor& other) : name{other.name}, subject{other.subject}, email{other.email}, phoneNumber{other.phoneNumber}, age{other.age} {
-    std::cout << "Creating Professor via copy-constructor.\n";
+//    std::cout << "Creating Professor via copy-constructor.\n";
 }
 
 Professor::~Professor() {
-    std::cout << "Killing the professor.\n";
+//    std::cout << "Killing the professor.\n";
 }
 
 void Professor::print() {
@@ -30,8 +30,8 @@ void Professor::print() {
     std::cout << this -> age << "\n\n\n";
 }
 
-std::string Professor::get_name() { return this -> name; }
-/*[[maybe_unused]] std::string Professor::get_subject() { return this -> subject; }
+/*std::string Professor::get_name() { return this -> name; }
+[[maybe_unused]] std::string Professor::get_subject() { return this -> subject; }
 [[maybe_unused]] std::string Professor::get_email() { return this -> email; }
 [[maybe_unused]] std::string Professor::get_phoneNumber() { return this -> phoneNumber; }
 [[maybe_unused]] int Professor::get_age() { return this -> age; } */

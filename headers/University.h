@@ -29,7 +29,7 @@ public:
         foundationYear = other.foundationYear;
         professors = other.professors;
         students = other.students;
-        std::cout << "University Operator =\n";
+//        std::cout << "University Operator =\n";
         return *this;
     }
 

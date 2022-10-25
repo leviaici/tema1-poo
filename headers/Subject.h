@@ -28,7 +28,7 @@ public:
         grades = other.grades;
         average = other.average;
         passed = other.passed;
-        std::cout << "Subject Operator =\n";
+//        std::cout << "Subject Operator =\n";
         return *this;
     }
 
