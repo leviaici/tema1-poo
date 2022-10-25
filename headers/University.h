@@ -52,9 +52,11 @@ public:
 
     void print_students();
 
-//    void print_professors();
+    void print_professors();
 
     void reclassify();
+
+    void sortProfessors();
 
     void divisionIntoGroups();
 

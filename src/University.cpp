@@ -55,10 +55,11 @@ void University::print_students() {
         std :: cout << c;
 }
 
-//void University::print_professors() {
-//    for(auto c : this -> professors)
-//        c.print();
-//}
+void University::print_professors() {
+    std::cout << "List of professors:\n";
+    for(auto c : this -> professors)
+        std::cout << c;
+}
 
 void University::reclassify() {
     sort((this -> students).begin(), (this -> students).end(), [](Student s1, Student s2) { return(s1.get_overallAverage() > s2.get_overallAverage()); });
@@ -67,6 +68,10 @@ void University::reclassify() {
         c.set_id(int(count));
         c.set_tuitionFree((count++ <= ((this -> students).size() * 80 /100)));
     }
+}
+
+void University::sortProfessors() {
+    sort((this -> professors).begin(), (this -> professors).end(), [](Professor p1, Professor p2) { return(p1.get_subject() < p2.get_subject()); });
 }
 
 void University::divisionIntoGroups() {

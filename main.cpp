@@ -19,6 +19,9 @@ int main() {
     unibuc.add_professor(Professor("Liliana Mitre", "Matematica", "liliana.mitre@unibuc.ro", "Unknown", 35));
     unibuc.add_multipleProfessors(p);
 
+    unibuc.sortProfessors();
+    unibuc.print_professors();
+
     std::vector<int> g;
     g.push_back(4); g.push_back(8); g.push_back(7); g.push_back(5);
 
@@ -37,7 +40,7 @@ int main() {
     unibuc.print_students();
     unibuc.reclassify();
     unibuc.print_students();
-
+//
     unibuc.print_groups();
 //    Student s5("Flavius Popescu", "flavius.popescu@s.unibuc.ro", "0711223344", 261, 19, note3);
 //    s5.print();

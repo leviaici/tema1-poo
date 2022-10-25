@@ -34,10 +34,19 @@ public:
 
     ~Professor();
 
-    void print();
+    friend std::ostream& operator<< (std::ostream& os, const Professor& other)
+    {
+        os << "Name: " << other.name << "\n";
+        os << "Subject: " << other.subject << "\n";
+        os << "E-mail: " << other.email << "\n";
+        os << "Phone number: " << other.phoneNumber << "\n";
+        os << "Age: " << other.age << "\n\n";
 
+        return os;
+    }
+
+    std::string get_subject();
     /*std::string get_name();
-    [[maybe_unused]] std::string get_subject();
     [[maybe_unused]] std::string get_email();
     [[maybe_unused]] std::string get_phoneNumber();
     [[maybe_unused]] int get_age(); */

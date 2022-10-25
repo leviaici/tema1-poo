@@ -46,19 +46,6 @@ float Student::get_overallAverage() { return this -> overallAverage; }
 
 int Student::get_group() { return this -> group; }
 
-void Student::print() {
-    std::cout << "Full name: " << this -> lastName << " " << this -> firstName << "\n";
-    std::cout << "E-mail: " << this -> email << "\n";
-    std::cout << "Phone number: " << this -> phoneNumber << "\n";
-    std::cout << "Group: " << this -> group << "\n";
-    std::cout << "Age: " << this -> age << "\n";
-    std::cout << "ID: " << this -> id << "\n";
-    std::cout << "Overall average: " << this -> overallAverage << "\n";
-    for(auto c : this -> subjects)
-        c.print();
-    std::cout << "Tuition free: " << this -> tuitionFree << "\n\n\n";
-}
-
 void Student::set_tuitionFree(const bool& status) { this -> tuitionFree = status; }
 
 std::string Student::get_firstName() { return this -> firstName; }

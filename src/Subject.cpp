@@ -22,14 +22,6 @@ Subject::~Subject() {
 //    std::cout << "Killing the grades.\n";
 }
 
-void Subject::print() {
-    std::cout << this -> subject << "\n" << "Grades: ";
-    for(auto c : this -> grades)
-        std::cout << c << " ";
-    std::cout << "\n" << "Average: " << this -> average << "\n";
-    std::cout << "Passed/Failed (1/0): " << this -> passed << "\n\n";
-}
-
 float Subject::calculateAverage() {
     float sum = 0;
     for(auto c : this -> grades)
