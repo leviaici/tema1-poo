@@ -43,7 +43,7 @@ public:
         overallAverage = other.overallAverage;
         tuitionFree = other.tuitionFree;
         subjects = other.subjects;
-//        std::cout << "Student Operator =\n";
+        std::cout << "Student Operator =\n";
         return *this;
     }
 
