@@ -68,6 +68,22 @@ public:
     int get_group();
     int get_age();
     bool get_tuitionFree();*/
+    friend std::ostream& operator<< (std::ostream& os, const Student& other)
+    {
+        os << "Full name: " << other.lastName << " " << other.firstName << "\n";
+        os << "E-mail: " << other.email << "\n";
+        os << "Phone number: " << other.phoneNumber << "\n";
+        os << "Group: " << other.group << "\n";
+        os << "Age: " << other.age << "\n";
+        os << "ID: " << other.id << "\n";
+        os << "Overall average: " << other.overallAverage << "\n";
+
+        for(auto c: other.subjects)
+            os << c;
+
+        os << "Tuition free: " << other.tuitionFree << "\n\n\n";
+        return os;
+    }
 };
 
 

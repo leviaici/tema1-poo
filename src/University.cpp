@@ -52,7 +52,7 @@ void University::add_multipleStudents(const std::vector<Student>& other) {
 
 void University::print_students() {
     for(auto c : this -> students)
-        c.print();
+        std :: cout << c;
 }
 
 //void University::print_professors() {
@@ -90,6 +90,6 @@ void University::print_groups() {
             group = c.get_group();
             std::cout << group << "\n\n\n";
         }
-        c.print();
+        std:: cout << c;
     }
 }

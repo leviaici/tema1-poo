@@ -43,6 +43,17 @@ public:
     //void sortGrades();
 
     float get_average();
+
+    friend std::ostream& operator<< (std::ostream& os, const Subject& other)
+    {
+        os << other.subject << "\n" << "Grades: ";
+        for(auto c: other.grades)
+            os << c << " ";
+        os << "\n" << "Avearge: " << other.average << "\n";
+        os << "Passed/Failed (1/0): " << other.passed << "\n\n";
+
+        return os;
+    }
 };
 
 
