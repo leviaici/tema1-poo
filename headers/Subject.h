@@ -2,13 +2,13 @@
 // Created by Adrian Leventiu on 23.10.2022.
 //
 
-#ifndef OOP_GRADES_H
-#define OOP_GRADES_H
+#ifndef OOP_SUBJECT_H
+#define OOP_SUBJECT_H
 
 #include <iostream>
 #include <vector>
 
-class Grades {
+class Subject {
 private:
     std::string subject = "Unknown";
     std::vector<int> grades;
@@ -17,22 +17,22 @@ private:
     bool passed = false;
 
 public:
-    Grades();
+    Subject();
 
-    Grades(const std::string& subject, const std::vector<int>& grades);
+    Subject(const std::string& subject, const std::vector<int>& grades);
 
-    Grades(const Grades& other);
+    Subject(const Subject& other);
 
-    Grades& operator = (const Grades& other) {
+    Subject& operator = (const Subject& other) {
         subject = other.subject;
         grades = other.grades;
         average = other.average;
         passed = other.passed;
-        std::cout << "Grades Operator =\n";
+//        std::cout << "Subject Operator =\n";
         return *this;
     }
 
-    ~Grades();
+    ~Subject();
 
     void print();
 
@@ -46,4 +46,4 @@ public:
 };
 
 
-#endif //OOP_GRADES_H
+#endif //OOP_SUBJECT_H

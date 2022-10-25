@@ -9,18 +9,17 @@
 #include "Professor.h"
 #include "Student.h"
 
-
 class University {
 private:
     std::string name;
     std::string subject;
     int foundationYear;
 
-    std::vector<Professor> p;
-    std::vector<Student> s;
+    std::vector<Professor> professors;
+    std::vector<Student> students;
 
 public:
-    University(const std::string& name, const std::string& subject, const int& foundationYear, const std::vector<Professor>& p, const std::vector<Student>& s);
+    University(const std::string& name, const std::string& subject, const int& foundationYear, const std::vector<Professor>& professors, const std::vector<Student>& students);
 
     University(const University& other);
 
@@ -28,9 +27,9 @@ public:
         name = other.name;
         subject = other.subject;
         foundationYear = other.foundationYear;
-        p = other.p;
-        s = other.s;
-        std::cout << "University Operator =\n";
+        professors = other.professors;
+        students = other.students;
+//        std::cout << "University Operator =\n";
         return *this;
     }
 
@@ -41,21 +40,25 @@ public:
     int get_foundationYear();
     std::vector<Student> get_students();*/
 
-    void print();
+//    void print();
 
     void add_professor(const Professor& other);
 
     void add_student(const Student& other);
 
-    void add_vectorOfProfessors(const std::vector<Professor>& other);
+    void add_multipleProfessors(const std::vector<Professor>& other);
 
-    void add_vectorOfStudents(const std::vector<Student>& other);
+    void add_multipleStudents(const std::vector<Student>& other);
 
     void print_students();
 
 //    void print_professors();
 
     void reclassify();
+
+    void divisionIntoGroups();
+
+    void print_groups();
 };
 
 

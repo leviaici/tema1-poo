@@ -28,7 +28,7 @@ public:
         email = other.email;
         phoneNumber = other.phoneNumber;
         age = other.age;
-        std::cout << "Professor Operator =\n";
+//        std::cout << "Professor Operator =\n";
         return *this;
     }
 
