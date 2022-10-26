@@ -1,5 +1,6 @@
 #include <vector>
 #include "headers/University.h"
+#include <fstream>
 
 std::string toLower(std::string word) {
     if(word[0] >= 65 && word[0] <= 90)
@@ -71,11 +72,12 @@ void test() {
 }
 
 void initializer() {
+    std::ifstream read("../tastatura.txt"); ///din fisier ca sa nu crape github actions...
     std::string firstName, lastName, email, phoneNumber;
     int group, age;
 
     std::cout << "Hello! What's your name?\n";
-    std::cin >> firstName >> lastName;
+    read >> firstName >> lastName;
 
     std::cout << "Nice to meet you, " << firstName << "!\n";
 
@@ -83,13 +85,13 @@ void initializer() {
     std::cout << "Here's your brand new generated e-mail: " << email << "\n";
 
     std::cout << "What's your phone number?\n";
-    std::cin >> phoneNumber;
+    read >> phoneNumber;
 
     std::cout << "What group were you assigned to?\n";
-    std::cin >> group;
+    read >> group;
 
     std::cout << "How old are you?\n";
-    std::cin >> age;
+    read >> age;
 
     std::cout << "Great! Now the next step...\n";
 
@@ -100,13 +102,15 @@ void initializer() {
         Subject subject(listOfSubjects[i], {});
         std::cout << "Tell us your grades at " + listOfSubjects[i] + ": ";
         while (grade != 0) {
-            std::cin >> grade;
+            read >> grade;
             subject.addGrade(grade);
         }
         subjects.push_back(subject);
     }
     for(unsigned i = 0; i < listOfSubjects.size(); i++)
         std::cout << subjects[i] << "\n";
+
+    read.close();
 
     Student student(firstName, lastName, email, phoneNumber, group, age, subjects);
 
@@ -117,7 +121,7 @@ void initializer() {
 }
 
 int main() {
-    test();
+//    test();
     initializer();
     return 0;
 }
