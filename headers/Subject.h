@@ -44,6 +44,8 @@ public:
 
     float get_average();
 
+    void addGrade(int grade);
+
     friend std::ostream& operator<< (std::ostream& os, const Subject& other)
     {
         os << other.subject << "\n" << "Grades: ";

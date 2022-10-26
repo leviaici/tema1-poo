@@ -36,3 +36,10 @@ bool Subject::passedOrFailed() {
 //void Subject::sortGrades() { sort((this -> grades).begin(), (this -> grades).end()); }
 
 float Subject::get_average() { return this ->  average; }
+
+void Subject::addGrade(int grade) {
+    if(grade > 0 && grade <= 10) {
+        (this->grades).push_back(grade);
+        (this->average) = calculateAverage();
+    }
+}

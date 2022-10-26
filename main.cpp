@@ -1,8 +1,32 @@
 #include <vector>
 #include "headers/University.h"
 
+std::string toLower(std::string word) {
+    if(word[0] >= 65 && word[0] <= 90)
+        word[0] += 32;
+    for(unsigned i = 1; i < word.size(); i++)
+        if(word[i] == '-' && word[i + 1] >= 65 && word[i + 1] <= 90)
+            word[i + 1] += 32;
+    return word;
+}
+/*std::string toLowerWholeWord(std::string word) {
+    for(unsigned i = 0; i < word.size(); i++)
+        if(word[i] >= 65 && word[i] <= 90)
+            word[i] += 32;
+    return word;
+}*/
 
-int main() {
+/*std::string generateEmail(std::string university, std::string firstName, std::string lastName) {
+    university = toLowerWholeWord(university);
+    if(strstr(university, "universitate"))
+        return toLower(firstName) + "." + toLower(lastName) + "@s.unibuc.ro";
+    if(strstr(university, "politehnica"))
+        return toLower(firstName) + "." + toLower(lastName) + "@upb.ro";
+    if(strstr(university, "babes"))
+        return toLower(firstName) + "." + toLower(lastName) + "@ubb.ro";
+}*/ ///TBA
+
+void test() {
     std::vector<Professor> p;
 
     Professor p1 = Professor("Marius Micluta", "Informatica", "marius.micluta@unibuc.ro", "Unknown", 23);
@@ -40,9 +64,60 @@ int main() {
     unibuc.print_students();
     unibuc.reclassify();
     unibuc.print_students();
-//
+
     unibuc.print_groups();
 //    Student s5("Flavius Popescu", "flavius.popescu@s.unibuc.ro", "0711223344", 261, 19, note3);
 //    s5.print();
+}
+
+void initializer() {
+    std::string firstName, lastName, email, phoneNumber, university;
+    int group, age;
+
+    std::cout << "Hello! What's your name?\n";
+    std::cin >> firstName >> lastName;
+
+    std::cout << "Nice to meet you, " << firstName << "!\n";
+
+    email = toLower(firstName) + "." + toLower(lastName) + "@s.unibuc.ro";
+    std::cout << "Here's your brand new generated e-mail: " << email << "\n";
+
+    std::cout << "What's your phone number?\n";
+    std::cin >> phoneNumber;
+
+    std::cout << "What group were you assigned to?\n";
+    std::cin >> group;
+
+    std::cout << "How old are you?\n";
+    std::cin >> age;
+
+    std::cout << "Great! Now the next step...\n";
+
+    std::vector<Subject> subjects;
+    std::vector<std::string> listOfSubjects = {"Mathematics", "Computer Science", "Physics"};
+    for(unsigned i = 0; i < listOfSubjects.size(); i++) {
+        int grade = 1;
+        Subject subject(listOfSubjects[i], {});
+        std::cout << "Tell us your grades at " + listOfSubjects[i] + ": ";
+        while (grade != 0) {
+            std::cin >> grade;
+            subject.addGrade(grade);
+        }
+        subjects.push_back(subject);
+    }
+    for(unsigned i = 0; i < listOfSubjects.size(); i++)
+        std::cout << subjects[i] << "\n";
+
+    Student student(firstName, lastName, email, phoneNumber, group, age, subjects);
+
+    std::cout << student;
+
+    ///salvam in fisiere, la fel ca in login system. la fel facem si login system ul, "cryptam" prin aceeasi metoda
+    ///salvam in fisier luna + anul in care am ajuns cu simulatul pentru a putea relua o salvare deja existenta
+}
+
+int main() {
+    test();
+    initializer();
     return 0;
 }
