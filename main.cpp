@@ -71,7 +71,7 @@ void test() {
 }
 
 void initializer() {
-    std::string firstName, lastName, email, phoneNumber, university;
+    std::string firstName, lastName, email, phoneNumber;
     int group, age;
 
     std::cout << "Hello! What's your name?\n";
