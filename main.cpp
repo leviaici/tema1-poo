@@ -72,12 +72,11 @@ void test() {
 }
 
 void initializer() {
-    std::ifstream read("../tastatura.txt"); ///din fisier ca sa nu crape github actions...
     std::string firstName, lastName, email, phoneNumber;
     int group, age;
 
     std::cout << "Hello! What's your name?\n";
-    read >> firstName >> lastName;
+    std::cin >> firstName >> lastName;
 
     std::cout << "Nice to meet you, " << firstName << "!\n";
 
@@ -85,13 +84,13 @@ void initializer() {
     std::cout << "Here's your brand new generated e-mail: " << email << "\n";
 
     std::cout << "What's your phone number?\n";
-    read >> phoneNumber;
+    std::cin >> phoneNumber;
 
     std::cout << "What group were you assigned to?\n";
-    read >> group;
+    std::cin >> group;
 
     std::cout << "How old are you?\n";
-    read >> age;
+    std::cin >> age;
 
     std::cout << "Great! Now the next step...\n";
 
@@ -102,15 +101,13 @@ void initializer() {
         Subject subject(listOfSubjects[i], {});
         std::cout << "Tell us your grades at " + listOfSubjects[i] + ": ";
         while (grade != 0) {
-            read >> grade;
+            std::cin >> grade;
             subject.addGrade(grade);
         }
         subjects.push_back(subject);
     }
     for(unsigned i = 0; i < listOfSubjects.size(); i++)
         std::cout << subjects[i] << "\n";
-
-    read.close();
 
     Student student(firstName, lastName, email, phoneNumber, group, age, subjects);
 
