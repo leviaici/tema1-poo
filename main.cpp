@@ -97,7 +97,7 @@ void initializer() {
     std::vector<Subject> subjects;
     std::vector<std::string> listOfSubjects = {"Mathematics", "Computer Science", "Physics"};
     for(unsigned i = 0; i < listOfSubjects.size(); i++) {
-        int grade = 1;
+        int grade = -1;
         Subject subject(listOfSubjects[i], {});
         std::cout << "Tell us your grades at " + listOfSubjects[i] + ": ";
         while (grade != 0) {
