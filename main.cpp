@@ -121,7 +121,7 @@ void initializer() {
 }
 
 int main() {
-//    test();
+    test();
     initializer();
     return 0;
 }
