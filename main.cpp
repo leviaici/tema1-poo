@@ -104,7 +104,6 @@ void initializer() {
         while (grade != 0) {
             read >> grade;
             subject.addGrade(grade);
-//            grade = 0; ///doar pentru github actions, in mod normal nu are ce cauta aici
         }
         subjects.push_back(subject);
     }
