@@ -1,6 +1,6 @@
 #include <vector>
-#include "headers/University.h"
 #include <fstream>
+#include "headers/University.h"
 
 std::string toLower(std::string word) {
     if(word[0] >= 65 && word[0] <= 90)
