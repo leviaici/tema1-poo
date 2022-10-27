@@ -214,14 +214,14 @@ void loginOrRegister() {
     char choice;
     sleep(1);
     std::cout << "Login to an already existent account or register a new one?\n(L/R): ";
-    std::cin >> choice; tolower(choice);
+    std::cin >> choice;
 
-    while(tolower(choice) != 'l' && tolower(choice) != 'r') {
+    while(choice != 'l' && choice != 'r' && choice != 'L' && choice != 'R') {
         std::cout << "Asked for L or R... Please, try again!\n";
         std::cin >> choice;
     }
 
-    if(choice == 'r')
+    if(choice == 'r' || choice == 'R')
         registerAccount();
 //    else loginAccount();
 }
