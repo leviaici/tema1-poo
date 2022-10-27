@@ -89,7 +89,7 @@ void createSavingsFile(const std::string& firstName, const std::string& lastName
     Student student(firstName, lastName, email, phoneNumber, group, age, subjects);
 }
 
-bool checkExistingAccount(std::string& email) {
+bool checkExistingAccount(const std::string& email) {
     std::ifstream read("../savings/" + email + ".txt");
     if(read)
         return true;
