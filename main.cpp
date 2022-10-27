@@ -1,6 +1,7 @@
 #include <vector>
 #include "headers/University.h"
 #include <fstream>
+#include <unistd.h>
 
 std::string toLower(std::string word) {
     if(word[0] >= 65 && word[0] <= 90)
@@ -71,54 +72,162 @@ void test() {
 //    s5.print();
 }
 
-void initializer() {
+void createSavingsFile(std::string& firstName, std::string& lastName, std::string& email, std::string& password, std::string& phoneNumber, int& group, int& age, std::vector<Subject>& subjects) {
+    std::ofstream print("../savings/" + email + ".txt");
+
+    print << email + "\n" + password + "\n" + firstName + "\n" + lastName + "\n" + phoneNumber + "\n" << group << "\n" << age << "\n";
+
+    for(auto c1: subjects) {
+        print << c1.get_subject() << "\n" << "Grades: ";
+        for(auto c2: c1.get_grades())
+            print << c2 << " ";
+        print << "\n" << "Average: " << c1.get_average() << "\n";
+        print << "Passed/Failed (1/0): " << c1.get_passed() << "\n\n";
+    }
+
+    print.close();
+
+    Student student(firstName, lastName, email, phoneNumber, group, age, subjects);
+}
+
+bool checkExistingAccount(std::string& email) {
+    std::ifstream read("../savings/" + email + ".txt");
+    if(read)
+        return true;
+    return false;
+}
+
+void registerAccount() {
     std::string firstName, lastName, email, phoneNumber;
     int group, age;
 
-    std::cout << "Hello! What's your name?\n";
+    sleep(1);
+    std::cout << "Let's start creating your brand new account!\nWhat's your name?\n";
     std::cin >> firstName >> lastName;
 
-    std::cout << "Nice to meet you, " << firstName << "!\n";
 
     email = toLower(firstName) + "." + toLower(lastName) + "@s.unibuc.ro";
-    std::cout << "Here's your brand new generated e-mail: " << email << "\n";
 
-    std::cout << "What's your phone number?\n";
-    std::cin >> phoneNumber;
+    if(checkExistingAccount(email)) {
+        char choice;
+        std::cout << "Account already exists. Do you want to login?\nY/N: ";
+        std::cin >> choice;
+        if(choice == 'Y')
+            //login
+        return;
+    }else {
 
-    std::cout << "What group were you assigned to?\n";
-    std::cin >> group;
+        std::cout << "Nice to meet you, " << firstName << "!\n";
+        sleep(1);
 
-    std::cout << "How old are you?\n";
-    std::cin >> age;
+        std::cout << "Here's your brand new generated e-mail: " << email << "\n";
+        sleep(1);
 
-    std::cout << "Great! Now the next step...\n";
+        std::cout << "Key note if you ever forget your e-mail. It's your firstName.lastName@s.unibuc.ro\n";
+        sleep(1);
+        std::cout << "If you have 2 first names, it's going to be firstName1-firstName2.lastName@s.unibuc.ro\n";
+        sleep(2);
 
-    std::vector<Subject> subjects;
-    std::vector<std::string> listOfSubjects = {"Mathematics", "Computer Science", "Physics"};
-    for(unsigned i = 0; i < listOfSubjects.size(); i++) {
-        int grade = -1;
-        Subject subject(listOfSubjects[i], {});
-        std::cout << "Tell us your grades at " + listOfSubjects[i] + ": ";
-        while (grade != 0) {
-            std::cin >> grade;
-            subject.addGrade(grade);
+        std::cout << "What's your phone number?\n";
+        std::cin >> phoneNumber;
+        sleep(1);
+
+        std::cout << "What group were you assigned to?\n";
+        std::cin >> group;
+        sleep(1);
+
+        std::cout << "How old are you?\n";
+        std::cin >> age;
+        sleep(1);
+
+        std::cout << "Great! Now the next step...\n";
+        sleep(1);
+
+        std::vector<Subject> subjects;
+        std::vector<std::string> listOfSubjects = {"Mathematics", "Computer Science", "Physics"};
+        unsigned length = listOfSubjects.size();
+
+        for (unsigned i = 0; i < length; i++) {
+            int grade = -1;
+            Subject subject(listOfSubjects[i], {});
+            std::cout << "Tell us your grades at " + listOfSubjects[i] + ": ";
+
+            while (grade != 0) {
+                std::cin >> grade;
+                subject.addGrade(grade);
+            }
+            subjects.push_back(subject);
         }
-        subjects.push_back(subject);
+
+        std::cout<< "Super! Now that we completed all these steps, we have one last step and we finished the registration!\n";
+        sleep(1);
+        std::cout << "Let's choose a password!\n";
+        sleep(1);
+
+        std::string password, passwordVerification;
+        std::cin >> password;
+        std::cout << "Now let's verify the password!\n";
+        std::cin >> passwordVerification;
+
+        while (password != passwordVerification) {
+            std::cout << "Passwords don't match. Try again!\n";
+            std::cin >> password;
+            std::cout << "Now let's verify the password!\n";
+            std::cin >> passwordVerification;
+        }
+
+        createSavingsFile(firstName, lastName, email, password, phoneNumber, group, age, subjects);
+
+        std::cout << "Great! Now, when you'll want to login you'll need to enter your data as it is like in the example below:\n";
+        sleep(1);
+        std::cout << "E-mail: generated_email@s.unibuc.ro\n";
+        sleep(1);
+        std::cout << "Password: yourPasswordHere\n";
+        sleep(1);
     }
-    for(unsigned i = 0; i < listOfSubjects.size(); i++)
-        std::cout << subjects[i] << "\n";
 
-    Student student(firstName, lastName, email, phoneNumber, group, age, subjects);
 
-    std::cout << student;
+
+//    for(unsigned i = 0; i < listOfSubjects.size(); i++)
+//        std::cout << subjects[i] << "\n";
+
+
+//    std::cout << student;
 
     ///salvam in fisiere, la fel ca in login system. la fel facem si login system ul, "cryptam" prin aceeasi metoda
     ///salvam in fisier luna + anul in care am ajuns cu simulatul pentru a putea relua o salvare deja existenta
 }
 
+void stART() {
+    std::cout << " ___  ___  ________   ___  ___       ________  _________  ________  ________\n";
+    std::cout << "|\\  \\|\\  \\|\\   ___  \\|\\  \\|\\  \\     |\\   __  \\|\\___   ___\\\\   __  \\|\\   __  \\\n";
+    std::cout << "\\ \\  \\\\\\  \\ \\  \\\\ \\  \\ \\  \\ \\  \\    \\ \\  \\|\\  \\|___ \\  \\_\\ \\  \\|\\  \\ \\  \\|\\  \\\n";
+    std::cout << " \\ \\  \\\\\\  \\ \\  \\\\ \\  \\ \\  \\ \\  \\    \\ \\   __  \\   \\ \\  \\ \\ \\  \\\\\\  \\ \\   _  _\\\n";
+    std::cout<< "  \\ \\  \\\\\\  \\ \\  \\\\ \\  \\ \\  \\ \\  \\____\\ \\  \\ \\  \\   \\ \\  \\ \\ \\  \\\\\\  \\ \\  \\\\  \\|\n";
+    std::cout << "   \\ \\_______\\ \\__\\\\ \\__\\ \\__\\ \\_______\\ \\__\\ \\__\\   \\ \\__\\ \\ \\_______\\ \\__\\\\ _\\\n";
+    std::cout << "    \\|_______|\\|__| \\|__|\\|__|\\|_______|\\|__|\\|__|    \\|__|  \\|_______|\\|__|\\|__|\n\n";
+    std::cout << "Hi! Welcome to Unilator, a University based Simulator!\n";
+}
+
+void loginOrRegister() {
+    stART();
+    char choice;
+    sleep(1);
+    std::cout << "Login to an already existent account or register a new one?\n(L/R): ";
+    std::cin >> choice; tolower(choice);
+
+    while(tolower(choice) != 'l' && tolower(choice) != 'r') {
+        std::cout << "Asked for L or R... Please, try again!\n";
+        std::cin >> choice;
+    }
+
+    if(choice == 'r')
+        registerAccount();
+//    else loginAccount();
+}
+
 int main() {
     test();
-    initializer();
+    loginOrRegister();
     return 0;
 }

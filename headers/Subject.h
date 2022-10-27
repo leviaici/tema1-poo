@@ -34,15 +34,19 @@ public:
 
     ~Subject();
 
-    void print();
-
     float calculateAverage();
 
     bool passedOrFailed();
 
     //void sortGrades();
 
+    std::string get_subject();
+
+    std::vector<int> get_grades();
+
     float get_average();
+
+    bool get_passed();
 
     void addGrade(int grade);
 
@@ -51,11 +55,12 @@ public:
         os << other.subject << "\n" << "Grades: ";
         for(auto c: other.grades)
             os << c << " ";
-        os << "\n" << "Avearge: " << other.average << "\n";
+        os << "\n" << "Average: " << other.average << "\n";
         os << "Passed/Failed (1/0): " << other.passed << "\n\n";
 
         return os;
     }
+
 };
 
 
