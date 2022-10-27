@@ -97,8 +97,7 @@ bool checkExistingAccount(const std::string& email) {
 }
 
 void registerAccount() {
-    std::string firstName, lastName, email, phoneNumber;
-    int group, age;
+    std::string firstName, lastName, email;
 
     std::cout << "Let's start creating your brand new account!\nWhat's your name?\n";
     std::cin >> firstName >> lastName;
@@ -114,6 +113,8 @@ void registerAccount() {
             //login
         return;
     }else {
+        std::string phoneNumber;
+        int group, age;
 
         std::cout << "Nice to meet you, " << firstName << "!\n";
 
