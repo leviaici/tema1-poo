@@ -1,7 +1,6 @@
 #include <vector>
 #include "headers/University.h"
 #include <fstream>
-#include <unistd.h>
 
 std::string toLower(std::string word) {
     if(word[0] >= 65 && word[0] <= 90)
@@ -72,7 +71,7 @@ void test() {
 //    s5.print();
 }
 
-void createSavingsFile(std::string& firstName, std::string& lastName, std::string& email, std::string& password, std::string& phoneNumber, int& group, int& age, std::vector<Subject>& subjects) {
+void createSavingsFile(const std::string& firstName, const std::string& lastName, const std::string& email, const std::string& password, const std::string& phoneNumber, const int& group, const int& age, const std::vector<Subject>& subjects) {
     std::ofstream print("../savings/" + email + ".txt");
 
     print << email + "\n" + password + "\n" + firstName + "\n" + lastName + "\n" + phoneNumber + "\n" << group << "\n" << age << "\n";
@@ -101,7 +100,6 @@ void registerAccount() {
     std::string firstName, lastName, email, phoneNumber;
     int group, age;
 
-    sleep(1);
     std::cout << "Let's start creating your brand new account!\nWhat's your name?\n";
     std::cin >> firstName >> lastName;
 
@@ -118,30 +116,22 @@ void registerAccount() {
     }else {
 
         std::cout << "Nice to meet you, " << firstName << "!\n";
-        sleep(1);
 
         std::cout << "Here's your brand new generated e-mail: " << email << "\n";
-        sleep(1);
 
         std::cout << "Key note if you ever forget your e-mail. It's your firstName.lastName@s.unibuc.ro\n";
-        sleep(1);
         std::cout << "If you have 2 first names, it's going to be firstName1-firstName2.lastName@s.unibuc.ro\n";
-        sleep(2);
 
         std::cout << "What's your phone number?\n";
         std::cin >> phoneNumber;
-        sleep(1);
 
         std::cout << "What group were you assigned to?\n";
         std::cin >> group;
-        sleep(1);
 
         std::cout << "How old are you?\n";
         std::cin >> age;
-        sleep(1);
 
         std::cout << "Great! Now the next step...\n";
-        sleep(1);
 
         std::vector<Subject> subjects;
         std::vector<std::string> listOfSubjects = {"Mathematics", "Computer Science", "Physics"};
@@ -160,9 +150,7 @@ void registerAccount() {
         }
 
         std::cout<< "Super! Now that we completed all these steps, we have one last step and we finished the registration!\n";
-        sleep(1);
         std::cout << "Let's choose a password!\n";
-        sleep(1);
 
         std::string password, passwordVerification;
         std::cin >> password;
@@ -179,11 +167,8 @@ void registerAccount() {
         createSavingsFile(firstName, lastName, email, password, phoneNumber, group, age, subjects);
 
         std::cout << "Great! Now, when you'll want to login you'll need to enter your data as it is like in the example below:\n";
-        sleep(1);
         std::cout << "E-mail: generated_email@s.unibuc.ro\n";
-        sleep(1);
         std::cout << "Password: yourPasswordHere\n";
-        sleep(1);
     }
 
 
@@ -212,7 +197,6 @@ void stART() {
 void loginOrRegister() {
     stART();
     char choice;
-    sleep(1);
     std::cout << "Login to an already existent account or register a new one?\n(L/R): ";
     std::cin >> choice;
 
