@@ -1,0 +1,22 @@
+test.testulus@s.unibuc.ro
+Test
+Test
+Testulus
+0711223344
+262
+20
+Mathematics
+Grades: 10 10 10 
+Average: 10
+Passed/Failed (1/0): 0
+
+Computer Science
+Grades: 10 6 
+Average: 8
+Passed/Failed (1/0): 0
+
+Physics
+Grades: 10 9 8 10 
+Average: 9.25
+Passed/Failed (1/0): 0
+
