@@ -76,8 +76,6 @@ void createProfessorSavingsFile(const std::string& firstName, const std::string&
 
     print << email + "\n" + password + "\n" + firstName + "\n" + lastName + "\n" + subject + "\n" + phoneNumber + "\n" << age << "\n";
     print.close();
-
-    Professor professor(firstName, lastName, subject, email, phoneNumber, age);
 }
 void createStudentSavingsFile(const std::string& firstName, const std::string& lastName, const std::string& email, const std::string& password, const std::string& phoneNumber, const int& group, const int& age, const std::vector<Subject>& subjects) {
     std::ofstream print("../savings/students/" + email + ".txt");
@@ -93,8 +91,6 @@ void createStudentSavingsFile(const std::string& firstName, const std::string& l
     }
 
     print.close();
-
-    Student student(firstName, lastName, email, phoneNumber, group, age, subjects);
 }
 
 bool checkExistingAccount(const std::string& email, const std::string& accountType) {
@@ -250,7 +246,7 @@ void stART() {
     std::cout << "Hi! Welcome to Unilator, a University based Simulator!\n";
 }
 
-void loginOrRegister() {
+void registerOrLogin() {
     stART();
     char choice;
     std::cout << "Login to an already existent account or register a new one?\n(L/R): ";
@@ -268,6 +264,6 @@ void loginOrRegister() {
 
 int main() {
     test();
-    loginOrRegister();
+    registerOrLogin();
     return 0;
 }
