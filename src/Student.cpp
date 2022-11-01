@@ -6,27 +6,31 @@
 
 Student::Student() = default;
 
-Student::Student(const std::string& firstName, const std::string& lastName, const std::string& email, const std::string& phoneNumber, const int& group, const std::string& birthDate, const std::vector<Subject>& subjects) {
+Student::Student(const std::string& firstName, const std::string& lastName, const std::string& email, const std::string& phoneNumber, const int& group, const int& birthDay, const int& birthMonth, const int& birthYear, const std::vector<Subject>& subjects) {
     this -> firstName = firstName;
     this -> lastName = lastName;
     this -> email = email;
     this -> phoneNumber = phoneNumber;
     this -> group = group;
-    this -> birthDate = birthDate;
+    this -> birthDay = birthDay;
+    this -> birthMonth = birthMonth;
+    this -> birthYear = birthYear;
     this -> subjects = subjects;
     calculateOverallAverage();
 }
 
-Student::Student(const std::string& firstName, const std::string& lastName, const std::string& email, const std::string& phoneNumber, const int& group, const std::string& birthDate) {
+Student::Student(const std::string& firstName, const std::string& lastName, const std::string& email, const std::string& phoneNumber, const int& group, const int& birthDay, const int& birthMonth, const int& birthYear) {
     this -> firstName = firstName;
     this -> lastName = lastName;
     this -> email = email;
     this -> phoneNumber = phoneNumber;
     this -> group = group;
-    this -> birthDate = birthDate;
+    this -> birthDay = birthDay;
+    this -> birthMonth = birthMonth;
+    this -> birthYear = birthYear;
 }
 
-Student::Student(const Student& other) : firstName{other.firstName}, lastName{other.lastName}, email{other.email}, phoneNumber{other.phoneNumber}, group{other.group}, birthDate{other.birthDate}, id{other.id}, overallAverage{other.overallAverage}, tuitionFree{other.tuitionFree}, subjects{other.subjects} {
+Student::Student(const Student& other) : firstName{other.firstName}, lastName{other.lastName}, email{other.email}, phoneNumber{other.phoneNumber}, group{other.group}, birthDay{other.birthDay}, birthMonth{other.birthMonth}, birthYear{other.birthYear}, id{other.id}, overallAverage{other.overallAverage}, tuitionFree{other.tuitionFree}, subjects{other.subjects} {
 //    std::cout << "Creating Student via copy-constructor.\n";
 }
 
@@ -53,5 +57,4 @@ std::string Student::get_lastName() { return this -> lastName; }
 /*std::string Student::get_email() { return this -> email; }
 std::string Student::get_phoneNumber() { return this -> phoneNumber; }
 int Student::get_group() { return this -> group; }
-int Student::get_age() { return this -> birthDate; }
 bool Student::get_tuitionFree() { return this -> tuitionFree; } */

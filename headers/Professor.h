@@ -14,12 +14,15 @@ private:
     std::string subject = "Unknown";
     std::string email = "Unknown";
     std::string phoneNumber = "Unknown";
-    std::string birthDate = "Unknown";
+
+    int birthDay = 0;
+    int birthMonth = 0;
+    int birthYear = 0;
 
 public:
     Professor();
 
-    Professor(const std::string& firstName, const std::string& lastName, const std::string& subject, const std::string& email, const std::string& phoneNumber, const std::string& birthDate);
+    Professor(const std::string& firstName, const std::string& lastName, const std::string& subject, const std::string& email, const std::string& phoneNumber, const int& birthDay, const int& birthMonth, const int& birthYear);
 
     Professor(const Professor& other);
 
@@ -29,7 +32,9 @@ public:
         subject = other.subject;
         email = other.email;
         phoneNumber = other.phoneNumber;
-        birthDate = other.birthDate;
+        birthDay = other.birthDay;
+        birthMonth = other.birthMonth;
+        birthYear = other.birthYear;
 //        std::cout << "Professor Operator =\n";
         return *this;
     }
@@ -42,7 +47,7 @@ public:
         os << "Subject: " << other.subject << "\n";
         os << "E-mail: " << other.email << "\n";
         os << "Phone number: " << other.phoneNumber << "\n";
-        os << "Birth date: " << other.birthDate << "\n\n";
+        os << "Birth date: " << other.birthDay << "/" << other.birthMonth << "/" << other.birthYear << "\n\n";
 
         return os;
     }
