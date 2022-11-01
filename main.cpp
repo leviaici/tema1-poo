@@ -30,18 +30,18 @@ std::string checkAccountType(std::string accountType) {
 void test() {
     std::vector<Professor> p;
 
-    Professor p1 = Professor("Marius", "Micluta", "Informatica", "marius.micluta@unibuc.ro", "Unknown", 23);
-    Professor p2 = Professor("Radu", "Boriga", "Informatica", "radu.boriga@unibuc.ro", "Unknown", 50);
+    Professor p1 = Professor("Marius", "Micluta", "Informatica", "marius.micluta@unibuc.ro", "Unknown", "23/02/1999");
+    Professor p2 = Professor("Radu", "Boriga", "Informatica", "radu.boriga@unibuc.ro", "Unknown", "20/07/1975");
     p.push_back(p1); p.push_back(p2);
 
     std::vector<Student> s;
 
-    Student s1 = Student("Adrian", "Leventiu", "adrian.leventiu@s.unibuc.ro", "Unknown", 262, 19);
-    Student s2 = Student("Stefan", "Radu", "stefan.radu@s.unibuc.ro", "Unknown", 263, 19);
+    Student s1 = Student("Adrian", "Leventiu", "adrian.leventiu@s.unibuc.ro", "Unknown", 262, "31/01/2003");
+    Student s2 = Student("Stefan", "Radu", "stefan.radu@s.unibuc.ro", "Unknown", 263, "19/05/2002");
     s.push_back(s1); s.push_back(s2);
 
     University unibuc("Universitatea din Bucuresti", "Matematica si Informatica", 1864, {}, {});
-    unibuc.add_professor(Professor("Liliana", "Mitre", "Matematica", "liliana.mitre@unibuc.ro", "Unknown", 35));
+    unibuc.add_professor(Professor("Liliana", "Mitre", "Matematica", "liliana.mitre@unibuc.ro", "Unknown", "20/01/1990"));
     unibuc.add_multipleProfessors(p);
 
     unibuc.sortProfessors();
@@ -58,29 +58,27 @@ void test() {
     note4.push_back(note2); note4.push_back(Subject("Informatica", std::vector<int>{4, 9, 7, 5}));
 
 
-    unibuc.add_student(Student("Flavius", "Popescu", "flavius.popescu@s.unibuc.ro", "0711223344", 261, 19, note3));
+    unibuc.add_student(Student("Flavius", "Popescu", "flavius.popescu@s.unibuc.ro", "0711223344", 261, "19/09/2001", note3));
     unibuc.add_multipleStudents(s);
-    unibuc.add_student(Student("Flavius", "Ratat", "flavius.popescu@s.damada.ro", "nu am", 262, 25, note4));
-    unibuc.add_student(Student("Radu", "Macelaru", "radu.macelaru@s.unibuc.ro", "0711223344", 104, 19, note3));
+    unibuc.add_student(Student("Flavius", "Ratat", "flavius.popescu@s.damada.ro", "nu am", 262, "26/06/1996", note4));
+    unibuc.add_student(Student("Radu", "Macelaru", "radu.macelaru@s.unibuc.ro", "0711223344", 104, "19/04/1998", note3));
     unibuc.print_students();
     unibuc.reclassify();
     unibuc.print_students();
 
     unibuc.print_groups();
-//    Student s5("Flavius Popescu", "flavius.popescu@s.unibuc.ro", "0711223344", 261, 19, note3);
-//    s5.print();
 }
 
-void createProfessorSavingsFile(const std::string& firstName, const std::string& lastName, const std::string& email, const std::string& password, const std::string& subject, const std::string& phoneNumber, const int& age) {
+void createProfessorSavingsFile(const std::string& firstName, const std::string& lastName, const std::string& email, const std::string& password, const std::string& subject, const std::string& phoneNumber, const std::string& birthDate) {
     std::ofstream print("../savings/professors/" + email + ".txt");
 
-    print << email + "\n" + password + "\n" + firstName + "\n" + lastName + "\n" + subject + "\n" + phoneNumber + "\n" << age << "\n";
+    print << email + "\n" + password + "\n" + firstName + "\n" + lastName + "\n" + subject + "\n" + phoneNumber + "\n" << birthDate << "\n";
     print.close();
 }
-void createStudentSavingsFile(const std::string& firstName, const std::string& lastName, const std::string& email, const std::string& password, const std::string& phoneNumber, const int& group, const int& age, const std::vector<Subject>& subjects) {
+void createStudentSavingsFile(const std::string& firstName, const std::string& lastName, const std::string& email, const std::string& password, const std::string& phoneNumber, const int& group, const std::string& birthDate, const std::vector<Subject>& subjects) {
     std::ofstream print("../savings/students/" + email + ".txt");
 
-    print << email + "\n" + password + "\n" + firstName + "\n" + lastName + "\n" + phoneNumber + "\n" << group << "\n" << age << "\n";
+    print << email + "\n" + password + "\n" + firstName + "\n" + lastName + "\n" + phoneNumber + "\n" << group << "\n" << birthDate << "\n";
 
     for(auto c1: subjects) {
         print << c1.get_subject() << "\n" << "Grades: ";
@@ -101,8 +99,7 @@ bool checkExistingAccount(const std::string& email, const std::string& accountTy
 }
 
 void registerProfessorAccount(const std::string& firstName, const std::string& lastName, const std::string& email) {
-    std::string phoneNumber, subject;
-    int age;
+    std::string phoneNumber, subject, birthDate;
 
     std::cout << "Nice to meet you, " << firstName << "!\n";
 
@@ -117,8 +114,8 @@ void registerProfessorAccount(const std::string& firstName, const std::string& l
     std::cout << "What's your phone number?\n";
     std::cin >> phoneNumber;
 
-    std::cout << "How old are you?\n";
-    std::cin >> age;
+    std::cout << "When were you born? DD/MM/YYYY\n";
+    std::cin >> birthDate;
 
     std::cout << "Great! Now the next and final step...\nLet's choose a password!\n";
 
@@ -134,15 +131,15 @@ void registerProfessorAccount(const std::string& firstName, const std::string& l
         std::cin >> passwordVerification;
     }
 
-    createProfessorSavingsFile(firstName, lastName, email, password, subject, phoneNumber, age);
+    createProfessorSavingsFile(firstName, lastName, email, password, subject, phoneNumber, birthDate);
 
     std::cout << "Great! Now, when you'll want to login you'll need to enter your data as it is like in the example below:\n";
     std::cout << "E-mail: generated_email@s.unibuc.ro\n";
     std::cout << "Password: yourPasswordHere\n";
 }
 void registerStudentAccount(const std::string& firstName, const std::string& lastName, const std::string& email) {
-    std::string phoneNumber;
-    int group, age;
+    std::string phoneNumber, birthDate;
+    int group;
 
     std::cout << "Nice to meet you, " << firstName << "!\n";
 
@@ -157,8 +154,8 @@ void registerStudentAccount(const std::string& firstName, const std::string& las
     std::cout << "What group were you assigned to?\n";
     std::cin >> group;
 
-    std::cout << "How old are you?\n";
-    std::cin >> age;
+    std::cout << "When were you born? DD/MM/YYYY\n";
+    std::cin >> birthDate;
 
     std::cout << "Great! Now the next step...\n";
 
@@ -193,7 +190,7 @@ void registerStudentAccount(const std::string& firstName, const std::string& las
         std::cin >> passwordVerification;
     }
 
-    createStudentSavingsFile(firstName, lastName, email, password, phoneNumber, group, age, subjects);
+    createStudentSavingsFile(firstName, lastName, email, password, phoneNumber, group, birthDate, subjects);
 
     std::cout << "Great! Now, when you'll want to login you'll need to enter your data as it is like in the example below:\n";
     std::cout << "E-mail: generated_email@s.unibuc.ro\n";
