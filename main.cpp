@@ -10,28 +10,28 @@ std::string toLower(std::string word) {
             word[i + 1] += 32;
     return word;
 }
-/*std::string toLowerWholeWord(std::string word) {
-    for(unsigned i = 0; i < word.size(); i++)
-        if(word[i] >= 65 && word[i] <= 90)
-            word[i] += 32;
+std::string toLowerWholeWord(std::string word) {
+    for(char &letter : word)
+        if(letter >= 65 && letter <= 90)
+            letter += 32;
     return word;
-}*/
+}
 
-/*std::string generateEmail(std::string university, std::string firstName, std::string lastName) {
-    university = toLowerWholeWord(university);
-    if(strstr(university, "universitate"))
-        return toLower(firstName) + "." + toLower(lastName) + "@s.unibuc.ro";
-    if(strstr(university, "politehnica"))
-        return toLower(firstName) + "." + toLower(lastName) + "@upb.ro";
-    if(strstr(university, "babes"))
-        return toLower(firstName) + "." + toLower(lastName) + "@ubb.ro";
-}*/ ///TBA
+std::string checkAccountType(std::string accountType) {
+    if(accountType == "student" || accountType == "professor")
+        return accountType;
+    if(accountType[0] == 's' && accountType[1] == 't')
+        return "student";
+    if(accountType[0] == 'p' && accountType[1] == 'r')
+        return "professor";
+    return "wrong";
+}
 
 void test() {
     std::vector<Professor> p;
 
-    Professor p1 = Professor("Marius Micluta", "Informatica", "marius.micluta@unibuc.ro", "Unknown", 23);
-    Professor p2 = Professor("Radu Boriga", "Informatica", "radu.boriga@unibuc.ro", "Unknown", 50);
+    Professor p1 = Professor("Marius", "Micluta", "Informatica", "marius.micluta@unibuc.ro", "Unknown", 23);
+    Professor p2 = Professor("Radu", "Boriga", "Informatica", "radu.boriga@unibuc.ro", "Unknown", 50);
     p.push_back(p1); p.push_back(p2);
 
     std::vector<Student> s;
@@ -41,7 +41,7 @@ void test() {
     s.push_back(s1); s.push_back(s2);
 
     University unibuc("Universitatea din Bucuresti", "Matematica si Informatica", 1864, {}, {});
-    unibuc.add_professor(Professor("Liliana Mitre", "Matematica", "liliana.mitre@unibuc.ro", "Unknown", 35));
+    unibuc.add_professor(Professor("Liliana", "Mitre", "Matematica", "liliana.mitre@unibuc.ro", "Unknown", 35));
     unibuc.add_multipleProfessors(p);
 
     unibuc.sortProfessors();
@@ -71,8 +71,16 @@ void test() {
 //    s5.print();
 }
 
-void createSavingsFile(const std::string& firstName, const std::string& lastName, const std::string& email, const std::string& password, const std::string& phoneNumber, const int& group, const int& age, const std::vector<Subject>& subjects) {
-    std::ofstream print("../savings/" + email + ".txt");
+void createProfessorSavingsFile(const std::string& firstName, const std::string& lastName, const std::string& email, const std::string& password, const std::string& subject, const std::string& phoneNumber, const int& age) {
+    std::ofstream print("../savings/professors/" + email + ".txt");
+
+    print << email + "\n" + password + "\n" + firstName + "\n" + lastName + "\n" + subject + "\n" + phoneNumber + "\n" << age << "\n";
+    print.close();
+
+    Professor professor(firstName, lastName, subject, email, phoneNumber, age);
+}
+void createStudentSavingsFile(const std::string& firstName, const std::string& lastName, const std::string& email, const std::string& password, const std::string& phoneNumber, const int& group, const int& age, const std::vector<Subject>& subjects) {
+    std::ofstream print("../savings/students/" + email + ".txt");
 
     print << email + "\n" + password + "\n" + firstName + "\n" + lastName + "\n" + phoneNumber + "\n" << group << "\n" << age << "\n";
 
@@ -89,99 +97,146 @@ void createSavingsFile(const std::string& firstName, const std::string& lastName
     Student student(firstName, lastName, email, phoneNumber, group, age, subjects);
 }
 
-bool checkExistingAccount(const std::string& email) {
-    std::ifstream read("../savings/" + email + ".txt");
+bool checkExistingAccount(const std::string& email, const std::string& accountType) {
+    std::ifstream read("../savings/" + accountType + "s/" + email + ".txt");
     if(read)
         return true;
     return false;
 }
 
-void registerAccount() {
-    std::string firstName, lastName, email;
+void registerProfessorAccount(const std::string& firstName, const std::string& lastName, const std::string& email) {
+    std::string phoneNumber, subject;
+    int age;
 
-    std::cout << "Let's start creating your brand new account!\nWhat's your name?\n";
-    std::cin >> firstName >> lastName;
+    std::cout << "Nice to meet you, " << firstName << "!\n";
 
+    std::cout << "Here's your brand new generated e-mail: " << email << "\n";
 
-    email = toLower(firstName) + "." + toLower(lastName) + "@s.unibuc.ro";
+    std::cout << "Key note if you ever forget your e-mail. It's your firstName.lastName@s.unibuc.ro\n";
+    std::cout << "If you have 2 first names, it's going to be firstName1-firstName2.lastName@s.unibuc.ro\n";
 
-    if(checkExistingAccount(email)) {
-        char choice;
-        std::cout << "Account already exists. Do you want to login?\nY/N: ";
-        std::cin >> choice;
-        if(choice == 'Y')
-            //login
-        return;
-    }else {
-        std::string phoneNumber;
-        int group, age;
+    std::cout << "What is the subject you are teaching students?\n";
+    std::cin >> subject;
 
-        std::cout << "Nice to meet you, " << firstName << "!\n";
+    std::cout << "What's your phone number?\n";
+    std::cin >> phoneNumber;
 
-        std::cout << "Here's your brand new generated e-mail: " << email << "\n";
+    std::cout << "How old are you?\n";
+    std::cin >> age;
 
-        std::cout << "Key note if you ever forget your e-mail. It's your firstName.lastName@s.unibuc.ro\n";
-        std::cout << "If you have 2 first names, it's going to be firstName1-firstName2.lastName@s.unibuc.ro\n";
+    std::cout << "Great! Now the next and final step...\nLet's choose a password!\n";
 
-        std::cout << "What's your phone number?\n";
-        std::cin >> phoneNumber;
+    std::string password, passwordVerification;
+    std::cin >> password;
+    std::cout << "Now let's verify the password!\n";
+    std::cin >> passwordVerification;
 
-        std::cout << "What group were you assigned to?\n";
-        std::cin >> group;
-
-        std::cout << "How old are you?\n";
-        std::cin >> age;
-
-        std::cout << "Great! Now the next step...\n";
-
-        std::vector<Subject> subjects;
-        std::vector<std::string> listOfSubjects = {"Mathematics", "Computer Science", "Physics"};
-        unsigned length = listOfSubjects.size();
-
-        for (unsigned i = 0; i < length; i++) {
-            int grade = -1;
-            Subject subject(listOfSubjects[i], {});
-            std::cout << "Tell us your grades at " + listOfSubjects[i] + ": ";
-
-            while (grade != 0) {
-                std::cin >> grade;
-                subject.addGrade(grade);
-            }
-            subjects.push_back(subject);
-        }
-
-        std::cout<< "Super! Now that we completed all these steps, we have one last step and we finished the registration!\n";
-        std::cout << "Let's choose a password!\n";
-
-        std::string password, passwordVerification;
+    while (password != passwordVerification) {
+        std::cout << "Passwords don't match. Try again!\n";
         std::cin >> password;
         std::cout << "Now let's verify the password!\n";
         std::cin >> passwordVerification;
-
-        while (password != passwordVerification) {
-            std::cout << "Passwords don't match. Try again!\n";
-            std::cin >> password;
-            std::cout << "Now let's verify the password!\n";
-            std::cin >> passwordVerification;
-        }
-
-        createSavingsFile(firstName, lastName, email, password, phoneNumber, group, age, subjects);
-
-        std::cout << "Great! Now, when you'll want to login you'll need to enter your data as it is like in the example below:\n";
-        std::cout << "E-mail: generated_email@s.unibuc.ro\n";
-        std::cout << "Password: yourPasswordHere\n";
     }
 
+    createProfessorSavingsFile(firstName, lastName, email, password, subject, phoneNumber, age);
 
+    std::cout << "Great! Now, when you'll want to login you'll need to enter your data as it is like in the example below:\n";
+    std::cout << "E-mail: generated_email@s.unibuc.ro\n";
+    std::cout << "Password: yourPasswordHere\n";
+}
+void registerStudentAccount(const std::string& firstName, const std::string& lastName, const std::string& email) {
+    std::string phoneNumber;
+    int group, age;
 
-//    for(unsigned i = 0; i < listOfSubjects.size(); i++)
-//        std::cout << subjects[i] << "\n";
+    std::cout << "Nice to meet you, " << firstName << "!\n";
 
+    std::cout << "Here's your brand new generated e-mail: " << email << "\n";
 
-//    std::cout << student;
+    std::cout << "Key note if you ever forget your e-mail. It's your firstName.lastName@s.unibuc.ro\n";
+    std::cout << "If you have 2 first names, it's going to be firstName1-firstName2.lastName@s.unibuc.ro\n";
 
-    ///salvam in fisiere, la fel ca in login system. la fel facem si login system ul, "cryptam" prin aceeasi metoda
-    ///salvam in fisier luna + anul in care am ajuns cu simulatul pentru a putea relua o salvare deja existenta
+    std::cout << "What's your phone number?\n";
+    std::cin >> phoneNumber;
+
+    std::cout << "What group were you assigned to?\n";
+    std::cin >> group;
+
+    std::cout << "How old are you?\n";
+    std::cin >> age;
+
+    std::cout << "Great! Now the next step...\n";
+
+    std::vector<Subject> subjects;
+    std::vector<std::string> listOfSubjects = {"Mathematics", "Computer Science", "Physics"};
+    unsigned length = listOfSubjects.size();
+
+    for (unsigned i = 0; i < length; i++) {
+        int grade = -1;
+        Subject subject(listOfSubjects[i], {});
+        std::cout << "Tell us your grades at " + listOfSubjects[i] + ": ";
+
+        while (grade != 0) {
+            std::cin >> grade;
+            subject.addGrade(grade);
+        }
+        subjects.push_back(subject);
+    }
+
+    std::cout<< "Super! Now that we completed all these steps, we have one last step and we finished the registration!\n";
+    std::cout << "Let's choose a password!\n";
+
+    std::string password, passwordVerification;
+    std::cin >> password;
+    std::cout << "Now let's verify the password!\n";
+    std::cin >> passwordVerification;
+
+    while (password != passwordVerification) {
+        std::cout << "Passwords don't match. Try again!\n";
+        std::cin >> password;
+        std::cout << "Now let's verify the password!\n";
+        std::cin >> passwordVerification;
+    }
+
+    createStudentSavingsFile(firstName, lastName, email, password, phoneNumber, group, age, subjects);
+
+    std::cout << "Great! Now, when you'll want to login you'll need to enter your data as it is like in the example below:\n";
+    std::cout << "E-mail: generated_email@s.unibuc.ro\n";
+    std::cout << "Password: yourPasswordHere\n";
+}
+
+void registerAccount() {
+    std::string firstName, lastName, email, accountType;
+
+    std::cout << "Let's start creating your brand new account!\nAre you a student or a professor?\n";
+    std::cin >> accountType;
+    accountType = checkAccountType(toLowerWholeWord(accountType));
+
+    if(accountType == "wrong") {
+        std::cout << "Wrong input of account type. You needed to choose between being a student or a professor.\n";
+        while(accountType == "wrong") {
+            std::cout << "Let's try again. Are you a student or a professor?\n";
+            std::cin >> accountType;
+            accountType = checkAccountType(toLowerWholeWord(accountType));
+        }
+    }
+
+    std::cout << "Great! Now... what's your name?\n";
+    std::cin >> firstName >> lastName;
+
+    email = toLower(firstName) + "." + toLowerWholeWord(lastName) + "@s.unibuc.ro";
+
+    if(checkExistingAccount(email, accountType)) {
+        char choice;
+        std::cout << "Account already exists. Do you want to login?\nY/N: ";
+        std::cin >> choice;
+        if(choice == 'Y' || choice == 'y')
+            //login
+        return;
+    }else {
+        if(accountType == "student")
+            registerStudentAccount(firstName, lastName, email);
+        else registerProfessorAccount(firstName, lastName, email);
+    }
 }
 
 void stART() {
