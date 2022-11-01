@@ -31,7 +31,7 @@ std::string checkAccountType(std::string accountType) {
 }
 
 void showLocalTime() {
-    time_t now = time(0);
+    time_t now = time(nullptr);
 
     tm *ltm = localtime(&now);
 
