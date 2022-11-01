@@ -1,7 +1,8 @@
 #include <vector>
 #include <fstream>
 #include <ctime>
-#include <unistd.h>
+#include <thread>
+#include <chrono>
 #include "headers/University.h"
 
 std::string toLower(std::string word) {
@@ -285,7 +286,7 @@ int main() {
     for (int i = 0; i < 12; i++) {
         for(int j = 1; j <= 31; j++) {
             std::cout << j << " " << monthsOfYear[i] << "\r" << std::flush;
-            for (int k = 0; k < 99999999; ++k);
+            std::this_thread::sleep_for(std::chrono::milliseconds (100));
         }
     }
 
