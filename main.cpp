@@ -1,5 +1,7 @@
 #include <vector>
 #include <fstream>
+#include <ctime>
+#include <unistd.h>
 #include "headers/University.h"
 
 std::string toLower(std::string word) {
@@ -25,6 +27,19 @@ std::string checkAccountType(std::string accountType) {
     if(accountType[0] == 'p' && accountType[1] == 'r')
         return "professor";
     return "wrong";
+}
+
+void showLocalTime() {
+    time_t now = time(0);
+
+    tm *ltm = localtime(&now);
+
+    std::cout << "Year: " << 1900 + ltm -> tm_year << "\n";
+    std::cout << "Month: "<< 1 + ltm -> tm_mon<< "\n";
+    std::cout << "Day: " << ltm -> tm_mday << "\n";
+    std::cout << "Time: " << ltm -> tm_hour << ":";
+    std::cout << ltm->tm_min << ":";
+    std::cout << ltm->tm_sec << "\n";
 }
 
 void test() {
@@ -101,6 +116,7 @@ bool checkExistingAccount(const std::string& email, const std::string& accountTy
 void registerProfessorAccount(const std::string& firstName, const std::string& lastName, const std::string& email) {
     std::string phoneNumber, subject;
     int birthDay, birthMonth, birthYear;
+    char unused1, unused2;
 
     std::cout << "Nice to meet you, " << firstName << "!\n";
 
@@ -116,7 +132,7 @@ void registerProfessorAccount(const std::string& firstName, const std::string& l
     std::cin >> phoneNumber;
 
     std::cout << "When were you born? DD/MM/YYYY\n";
-    scanf("%d/%d/%d", &birthDay, &birthMonth, &birthYear);
+    std::cin >> birthDay >> unused1 >> birthMonth >> unused2 >> birthYear;
 
     std::cout << "Great! Now the next and final step...\nLet's choose a password!\n";
 
@@ -141,6 +157,7 @@ void registerProfessorAccount(const std::string& firstName, const std::string& l
 void registerStudentAccount(const std::string& firstName, const std::string& lastName, const std::string& email) {
     std::string phoneNumber;
     int group, birthDay, birthMonth, birthYear;
+    char unused1, unused2;
 
     std::cout << "Nice to meet you, " << firstName << "!\n";
 
@@ -156,7 +173,7 @@ void registerStudentAccount(const std::string& firstName, const std::string& las
     std::cin >> group;
 
     std::cout << "When were you born? DD/MM/YYYY\n";
-    scanf("%d/%d/%d", &birthDay, &birthMonth, &birthYear);
+    std::cin >> birthDay >> unused1 >> birthMonth >> unused2 >> birthYear;
 
     std::cout << "Great! Now the next step...\n";
 
@@ -242,6 +259,7 @@ void stART() {
     std::cout << "   \\ \\_______\\ \\__\\\\ \\__\\ \\__\\ \\_______\\ \\__\\ \\__\\   \\ \\__\\ \\ \\_______\\ \\__\\\\ _\\\n";
     std::cout << "    \\|_______|\\|__| \\|__|\\|__|\\|_______|\\|__|\\|__|    \\|__|  \\|_______|\\|__|\\|__|\n\n";
     std::cout << "Hi! Welcome to Unilator, a University based Simulator!\n";
+    showLocalTime();
 }
 
 void registerOrLogin() {
@@ -263,5 +281,15 @@ void registerOrLogin() {
 int main() {
     test();
     registerOrLogin();
+    std::vector<std::string>monthsOfYear = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+    for (uint i = 0; i < 12; i++) {
+        std::cout << "Progress: ";
+        std::cout << monthsOfYear[i] << "\r" << std::flush;
+        for(uint j = 1; j <= 31; j++) {
+            std::cout << j << "\r" << std::flush;
+            for (uint k = 0; k < 999999999; ++k);
+        }
+    }
+
     return 0;
 }///TBA birthday message
