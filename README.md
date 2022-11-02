@@ -2,28 +2,28 @@
 
 ### Tema 0
 
-- [ ] Nume proiect (îl puteți schimba ulterior)
-- [ ] Scurtă descriere a temei alese, ce v-ați propus să implementați
+- [X] Nume proiect (îl puteți schimba ulterior)
+- [X] Scurtă descriere a temei alese, ce v-ați propus să implementați
 
 ## Tema 1
 
 #### Cerințe
-- [ ] definirea a minim 3-4 clase folosind compunere
-- [ ] constructori de inițializare
-- [ ] pentru o clasă: constructor de copiere, `operator=` de copiere, destructor
+- [X] definirea a minim 3-4 clase folosind compunere
+- [X] constructori de inițializare
+- [X] pentru o clasă: constructor de copiere, `operator=` de copiere, destructor
 <!-- - [ ] pentru o altă clasă: constructor de mutare, `operator=` de mutare, destructor -->
 <!-- - [ ] pentru o altă clasă: toate cele 5 funcții membru speciale -->
-- [ ] `operator<<` pentru toate clasele
-- [ ] cât mai multe `const`
-- [ ] implementarea a minim 3 funcții membru publice pentru funcționalități specifice temei alese
-- [ ] scenariu de utilizare a claselor definite: crearea de obiecte și apelarea funcțiilor membru publice în main
-- [ ] tag de `git`: de exemplu `v0.1`
-- [ ] serviciu de integrare continuă (CI); exemplu: GitHub Actions
+- [X] `operator<<` pentru toate clasele
+- [X] cât mai multe `const`
+- [X] implementarea a minim 3 funcții membru publice pentru funcționalități specifice temei alese
+- [X] scenariu de utilizare a claselor definite: crearea de obiecte și apelarea funcțiilor membru publice în main
+- [X] tag de `git`: de exemplu `v0.1`
+- [X] serviciu de integrare continuă (CI); exemplu: GitHub Actions
 
 ## Tema 2
 
 #### Cerințe
-- [ ] separarea codului din clase în `.h` (sau `.hpp`) și `.cpp`
+- [X] separarea codului din clase în `.h` (sau `.hpp`) și `.cpp`
 - [ ] moșteniri
   - [ ] funcții virtuale (pure) apelate prin pointeri de bază, constructori virtuali (clone)
   - [ ] apelarea constructorului din clasa de bază 
@@ -35,7 +35,7 @@
   - [ ] utilizare cu sens: de exemplu, `throw` în constructor, `try`/`catch` în `main`
 - [ ] funcții și atribute `static`
 - [ ] STL
-- [ ] cât mai multe `const`
+- [X] cât mai multe `const`
 - [ ] la sfârșit: commit separat cu adăugarea unei noi derivate
 - [ ] tag de `git`: de exemplu `v0.2`
 
