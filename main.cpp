@@ -5,6 +5,9 @@
 #include <chrono>
 #include "headers/University.h"
 
+void loginAccount(int counter);
+void registerAccount();
+
 std::string toLower(std::string word) {
     if(word[0] >= 65 && word[0] <= 90)
         word[0] += 32;
@@ -79,6 +82,16 @@ void test() {
     unibuc.print_students();
 
     unibuc.print_groups();
+}
+
+void blockUser(int counter) {
+    std::cout << "I am sorry to inform you but you are now being blocked from trying to log back in.\n";
+    for (int i = counter * 20; i >= 1; i--) {
+        std::cout << "You have " << i << " seconds left until you can try and log in again.\r" << std::flush;
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+    }
+    std::cout << "\r" << std::flush;
+    std::cout << "You can try to log back in now as your cooldown expired.\n";
 }
 
 void createProfessorSavingsFile(const std::string& firstName, const std::string& lastName, const std::string& email, const std::string& password, const std::string& subject, const std::string& phoneNumber, const int& birthDay, const int& birthMonth, const int& birthYear) {
@@ -238,7 +251,7 @@ void registerAccount() {
         std::cout << "Account already exists. Do you want to login?\nY/N: ";
         std::cin >> choice;
         if(choice == 'Y' || choice == 'y')
-            //login
+            loginAccount(1);
         return;
     }else {
         if(accountType == "student")
@@ -248,7 +261,67 @@ void registerAccount() {
 }
 
 void loginAccount(int counter) {
-    std::cout << counter; ///TBA function!!!!!1
+    std::string email, password;
+    std::cout << "E-mail: ";    std::cin >> email;
+    std::ifstream read("../savings/students/" + email + ".txt");
+
+    if(!read)
+        read = std::ifstream("../savings/professors/" + email + ".txt");
+    if(!read) {
+        std::cout << "This e-mail wasn't registered. Do you want to register a new account?\n(Y/N): ";
+        char choice;    std::cin >> choice;
+        if(choice == 'y' || choice == 'Y') {
+            registerAccount();
+            return;
+        }
+        std::cout << "Try again.\n";
+        loginAccount(1);
+        return;
+    }
+
+    std::cout << "Password: ";  std::cin >> password;
+
+    std::string readEmail, readPassword;
+    getline(read, readEmail);
+    getline(read, readPassword);
+
+    read.close();
+
+    if(password == readPassword) {
+        bool choice;
+        std::cout << "Do you want to continue the saved game (1) or do you want to delete the savings and start again (0)?\n(1/0): ";
+        std::cin >> choice;
+        if(choice)
+            std::cout << "Continuing...\n"; ///TBA CONTINUING GAME FUNCTION
+        else std:: cout << "Deleting savings...\n"; ///TBA DELETING SAVINGS FUNCTION
+    } else {
+        std::cout << "Incorrect E-mail or password. ";
+        if(counter % 3) {
+            std::cout << "You have " << 3 - (counter % 3);
+            if(counter % 3 == 1)
+                std::cout << " more attempts ";
+            else std:: cout << " more attempt ";
+            char choice;
+            std::cout << "left before you get a cooldown. Would you like to try again?\n(Y/N): ";
+            std::cin >> choice;
+            if(choice == 'Y' || choice == 'y') {
+                loginAccount(++counter);
+                return;
+            }
+            std::cout << "Would you like to register a new account?\n(Y/N): ";
+            std::cin >> choice;
+            if(choice == 'Y' || choice == 'y') {
+                registerAccount();
+                return;
+            }
+            std::cout << "Well... Goodbye!";
+            return;
+        } else {
+            blockUser(counter);
+            loginAccount(++counter);
+            return;
+        }
+    }
 }
 
 void stART() {
@@ -276,7 +349,7 @@ void registerOrLogin() {
 
     if(choice == 'r' || choice == 'R')
         registerAccount();
-    else loginAccount(0);
+    else loginAccount(1);
 }
 
 int main() {
