@@ -35,12 +35,8 @@ void showLocalTime() {
 
     tm *ltm = localtime(&now);
 
-    std::cout << "Year: " << 1900 + ltm -> tm_year << "\n";
-    std::cout << "Month: "<< 1 + ltm -> tm_mon<< "\n";
-    std::cout << "Day: " << ltm -> tm_mday << "\n";
-    std::cout << "Time: " << ltm -> tm_hour << ":";
-    std::cout << ltm->tm_min << ":";
-    std::cout << ltm->tm_sec << "\n";
+    std::cout << "Your current date: " << ltm -> tm_mday << "/" << 1 + ltm -> tm_mon << "/" << 1900 + ltm -> tm_year << "\n";
+    std::cout << "Your current time: " << ltm -> tm_hour << ":" << ltm -> tm_min << ":" << ltm -> tm_sec << "\n";
 }
 
 void test() {
@@ -251,6 +247,10 @@ void registerAccount() {
     }
 }
 
+void loginAccount(int counter) {
+    std::cout << counter; ///TBA function!!!!!1
+}
+
 void stART() {
     std::cout << " ___  ___  ________   ___  ___       ________  _________  ________  ________\n";
     std::cout << "|\\  \\|\\  \\|\\   ___  \\|\\  \\|\\  \\     |\\   __  \\|\\___   ___\\\\   __  \\|\\   __  \\\n";
@@ -276,7 +276,7 @@ void registerOrLogin() {
 
     if(choice == 'r' || choice == 'R')
         registerAccount();
-//    else loginAccount();
+    else loginAccount(0);
 }
 
 int main() {
@@ -289,6 +289,5 @@ int main() {
             std::this_thread::sleep_for(std::chrono::milliseconds (100));
         }
     }
-
     return 0;
 }///TBA birthday message
