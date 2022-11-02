@@ -51,18 +51,18 @@ void University::add_multipleStudents(const std::vector<Student>& other) {
 }
 
 void University::print_students() {
-    for(auto c : this -> students)
+    for(const auto& c : this -> students)
         std :: cout << c;
 }
 
 void University::print_professors() {
     std::cout << "List of professors:\n";
-    for(auto c : this -> professors)
+    for(const auto& c : this -> professors)
         std::cout << c;
 }
 
 void University::reclassify() {
-    sort((this -> students).begin(), (this -> students).end(), [](Student s1, Student s2) { return(s1.get_overallAverage() > s2.get_overallAverage()); });
+    sort((this -> students).begin(), (this -> students).end(), [](const Student& s1, const Student& s2) { return(s1.get_overallAverage() > s2.get_overallAverage()); });
     unsigned count = 1;
     for(Student& c: this -> students) {
         c.set_id(int(count));
@@ -90,7 +90,7 @@ void University::print_groups() {
 
     int group = (this -> students)[0].get_group();
     std::cout << group << "\n\n\n";
-    for(Student& c: this -> students) {
+    for(const Student& c: this -> students) {
         if(c.get_group() != group) {
             group = c.get_group();
             std::cout << group << "\n\n\n";
