@@ -58,9 +58,9 @@ public:
 
     void calculateOverallAverage();
 
-    float get_overallAverage();
+    float get_overallAverage() const;
 
-    int get_group();
+    int get_group() const;
 
     void print();
 

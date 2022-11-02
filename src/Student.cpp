@@ -46,9 +46,9 @@ void Student::calculateOverallAverage() {
     (this -> overallAverage) /= (this -> subjects).size();
 }
 
-float Student::get_overallAverage() { return this -> overallAverage; }
+float Student::get_overallAverage() const { return this -> overallAverage; }
 
-int Student::get_group() { return this -> group; }
+int Student::get_group() const { return this -> group; }
 
 void Student::set_tuitionFree(const bool& status) { this -> tuitionFree = status; }
 
