@@ -226,7 +226,10 @@ void deleteAccount(const std::string& email, const std::string& password) {
 
         std::cout << "Deleting account...\n";
         try {
-            if(!(std::filesystem::remove("../savings/" + accountType + "s/" + email + ".txt")))
+            std::string path = "../savings/" + accountType + "s/" + email + ".txt";
+            const char* filePath = path.c_str(); /// PENTRU CA NU MA LASA CU std::filesystem::remove() MA IMPUSC
+
+            if((remove(filePath)))
                 throw std::exception();
             std::cout << "Account deletion complete. All your data have been erased.\n";
         } catch (std::exception& e) {
@@ -330,12 +333,12 @@ void registerOrLogin() {
 int main() {
     test();
     registerOrLogin();
-    std::vector<std::string>monthsOfYear = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
-    for (int i = 0; i < 12; i++) {
-        for(int j = 1; j <= 31; j++) {
-            std::cout << j << " " << monthsOfYear[i] << "\r" << std::flush;
-            std::this_thread::sleep_for(std::chrono::milliseconds (100));
-        }
-    }
+//    std::vector<std::string>monthsOfYear = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+//    for (int i = 0; i < 12; i++) {
+//        for(int j = 1; j <= 31; j++) {
+//            std::cout << j << " " << monthsOfYear[i] << "\r" << std::flush;
+//            std::this_thread::sleep_for(std::chrono::milliseconds (100));
+//        }
+//    }
     return 0;
 }///TBA birthday message
