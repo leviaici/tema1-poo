@@ -29,13 +29,13 @@ void blockUser(int counter) {
 }
 
 void createProfessorSavingsFile(const std::string& firstName, const std::string& lastName, const std::string& email, const std::string& password, const std::string& subject, const std::string& phoneNumber, const int& birthDay, const int& birthMonth, const int& birthYear) {
-    std::ofstream print("../savings/professors/" + email + ".txt");
+    std::ofstream print("savings/professors/" + email + ".txt");
 
     print << email + "\n" + password + "\n" + firstName + "\n" + lastName + "\n" + subject + "\n" + phoneNumber + "\n" << birthDay << "\n" << birthMonth << "\n" << birthYear << "\n";
     print.close();
 }
 void createStudentSavingsFile(const std::string& firstName, const std::string& lastName, const std::string& email, const std::string& password, const std::string& phoneNumber, const int& group, const int& birthDay, const int& birthMonth, const int& birthYear, const std::vector<Subject>& subjects) {
-    std::ofstream print("../savings/students/" + email + ".txt");
+    std::ofstream print("savings/students/" + email + ".txt");
 
     print << email + "\n" + password + "\n" + firstName + "\n" + lastName + "\n" + phoneNumber + "\n" << group << "\n" << birthDay << "\n" << birthMonth << "\n" << birthYear << "\n";
 
@@ -51,7 +51,7 @@ void createStudentSavingsFile(const std::string& firstName, const std::string& l
 }
 
 bool checkExistingAccount(const std::string& email, const std::string& accountType) {
-    std::ifstream read("../savings/" + accountType + "s/" + email + ".txt");
+    std::ifstream read("savings/" + accountType + "s/" + email + ".txt");
     if(read)
         return true;
     return false;
@@ -236,7 +236,7 @@ void deleteAccount(const std::string& email, const std::string& password) {
 
         std::cout << "Deleting account...\n";
         try {
-            std::string path = "../savings/" + accountType + "s/" + email + ".txt";
+            std::string path = "savings/" + accountType + "s/" + email + ".txt";
             const char* filePath = path.c_str(); /// PENTRU CA NU MA LASA CU std::filesystem::remove() MA IMPUSC
 
             if((remove(filePath)))
@@ -251,10 +251,10 @@ void deleteAccount(const std::string& email, const std::string& password) {
 void loginAccount(int counter) {
     std::string email, password;
     std::cout << "E-mail: ";    std::cin >> email;
-    std::ifstream read("../savings/students/" + email + ".txt");
+    std::ifstream read("savings/students/" + email + ".txt");
 
     if(!read)
-        read = std::ifstream("../savings/professors/" + email + ".txt");
+        read = std::ifstream("savings/professors/" + email + ".txt");
     if(!read) {
         std::cout << "This e-mail wasn't registered. Do you want to register a new account?\n(Y/N): ";
         char choice;    std::cin >> choice;
