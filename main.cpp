@@ -242,8 +242,9 @@ void deleteAccount(const std::string& email, const std::string& password) {
             if((remove(filePath)))
                 throw std::exception();
             std::cout << "Account deletion complete. All your data have been erased.\n";
-        } catch (const std::exception& e) {
-            std::cout << "Error 404: Account deletion incomplete as file was not found.\n";
+        } catch (std::exception& e) {
+            std::cout << e.what();
+            std::cout << " Error 404: Account deletion incomplete as file was not found.\n";
         }
     }
 }
