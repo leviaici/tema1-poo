@@ -192,6 +192,16 @@ void registerAccount() {
             registerStudentAccount(firstName, lastName, email);
         else registerProfessorAccount(firstName, lastName, email);
     }
+
+    std::cout << "Do you want now to login?\n";
+    char choice;
+    std::cin >> choice;
+    while(choice != 'Y' && choice != 'y' && choice != 'N' && choice != 'n') {
+        std::cout << "Asked for Y or N. Try again, please.\n";
+        std::cin >> choice;
+    }
+    if(choice == 'y' || choice == 'Y')
+        loginAccount(1);
 }
 
 void deleteAccount(const std::string& email, const std::string& password) {
@@ -232,7 +242,7 @@ void deleteAccount(const std::string& email, const std::string& password) {
             if((remove(filePath)))
                 throw std::exception();
             std::cout << "Account deletion complete. All your data have been erased.\n";
-        } catch (std::exception& e) {
+        } catch (const std::exception& e) {
             std::cout << "Error 404: Account deletion incomplete as file was not found.\n";
         }
     }

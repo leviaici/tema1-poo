@@ -1,6 +1,14 @@
-l
-test.student@s.unibuc.ro
-teststudent
+r
+prof
+Test Github
+Github
+0711223344
+01/01/2000
+git
+git
+y
+test.github@s.unibuc.ro
+git
 0
 y
-teststudent
+git
