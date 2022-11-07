@@ -8,7 +8,7 @@ Student
 1
 2000
 Mathematics
-Grades: 10 
+Grades: 10
 Average: 10
 Passed/Failed (1/0): 0
 
