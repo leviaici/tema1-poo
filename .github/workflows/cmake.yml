@@ -348,7 +348,7 @@ jobs:
         if: runner.os == 'Linux' && matrix.cxx == 'clang++-13'
         run: |
           cppcheck --enable=all \
-                   --inline-suppr
+                   --inline-suppr \
                    --project="${BUILD_DIR}"/compile_commands.json \
                    -i"${BUILD_DIR}" --suppress='*:"${BUILD_DIR}"/*' \
                    -i"${EXT_DIR}" --suppress='*:"${EXT_DIR}"/*' \
@@ -409,7 +409,7 @@ jobs:
             cp "${vcbindir}/clang_rt.asan_dynamic-x86_64.dll" \
                "${vcbindir}/clang_rt.asan_dbg_dynamic-x86_64.dll" \
                bin/
-          fi
+#          fi
           cat "${INPUT_FILENAME}" | ./bin/"${EXECUTABLE_NAME}".exe
 
       # Application Verifier does not work with sanitizers, need separate executable
