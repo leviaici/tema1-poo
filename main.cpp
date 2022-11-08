@@ -177,16 +177,17 @@ void registerStudentAccount(const std::string& firstName, const std::string& las
     std::cout<< "Super! Now that we completed all these steps, we have one last step and we finished the registration!\n";
     std::cout << "Let's choose a password!\n";
 
-    std::string password, passwordVerification;
-    std::cin >> password;
-    std::cout << "Now let's verify the password!\n";
-    std::cin >> passwordVerification;
+    std::cin.ignore();
+    std::string password = getPassword(true);
+    std::string passwordVerification = getPassword(false);
+    rlutil::cls();
 
     while (password != passwordVerification) {
         std::cout << "Passwords don't match. Try again!\n";
-        std::cin >> password;
-        std::cout << "Now let's verify the password!\n";
-        std::cin >> passwordVerification;
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+        password = getPassword(true);
+        passwordVerification = getPassword(false);
+        rlutil::cls();
     }
 
     createStudentSavingsFile(firstName, lastName, email, password, phoneNumber, group, birthDay, birthMonth, birthYear, subjects);
@@ -197,6 +198,7 @@ void registerStudentAccount(const std::string& firstName, const std::string& las
 }
 
 void registerAccount() {
+    rlutil::cls();
     std::string firstName, lastName, email, accountType;
 
     std::cout << "Let's start creating your brand new account!\nAre you a student or a professor?\n";
@@ -230,7 +232,7 @@ void registerAccount() {
         else registerProfessorAccount(firstName, lastName, email);
     }
 
-    std::cout << "Do you want now to login?\n";
+    std::cout << "Do you want now to login?\n(Y/N): ";
     char choice;
     std::cin >> choice;
     while(choice != 'Y' && choice != 'y' && choice != 'N' && choice != 'n') {
@@ -242,6 +244,7 @@ void registerAccount() {
 }
 
 void deleteAccount(const std::string& email, const std::string& password) {
+    rlutil::cls();
     char choice;
     std::cout << "Are you sure you want to permanently delete your account?\n(Y/N): ";
     std::cin >> choice;
@@ -252,9 +255,11 @@ void deleteAccount(const std::string& email, const std::string& password) {
     }
 
     if(choice == 'y' || choice == 'Y') {
-        std::string passwordVerification;
         std::cout << "Enter the password for confirmation and your account will be deleted as you wish.\n";
-        std::cin >> passwordVerification;
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+        std::cin.ignore();
+        std::string passwordVerification = getPassword(true);
+        rlutil::cls();
 
         int counter = 0;
         while(passwordVerification != password) {
@@ -263,7 +268,9 @@ void deleteAccount(const std::string& email, const std::string& password) {
             if(!(counter % 3))
                 blockUser(counter);
             std::cout << "Try again typing your password to confirm the account deletion.\n";
-            std::cin >> passwordVerification;
+            std::this_thread::sleep_for(std::chrono::seconds(1));
+            passwordVerification = (true);
+            rlutil::cls();
         }
 
         std::string accountType;
@@ -272,7 +279,7 @@ void deleteAccount(const std::string& email, const std::string& password) {
         else accountType = "professor";
 
         std::cout << "Deleting account...\n";
-        try {
+        try { // DE IMPLEMENTAT INDICATORS AICI
             std::string path = "savings/" + accountType + "s/" + email + ".txt";
             const char* filePath = path.c_str(); /// PENTRU CA NU MA LASA CU std::filesystem::remove() MA IMPUSC
 
@@ -287,6 +294,7 @@ void deleteAccount(const std::string& email, const std::string& password) {
 }
 
 void loginAccount(int counter) {
+    rlutil::cls();
     std::string email, password;
     std::cout << "E-mail: ";    std::cin >> email;
     std::ifstream read("savings/students/" + email + ".txt");
@@ -299,13 +307,16 @@ void loginAccount(int counter) {
         if(choice == 'y' || choice == 'Y') {
             registerAccount();
             return;
-        }
+        } else if(choice == 'n' || choice == 'N')
+            return;
         std::cout << "Try again.\n";
         loginAccount(1);
         return;
     }
 
-    std::cout << "Password: ";  std::cin >> password;
+    std::cin.ignore();
+    password = getPassword(true);
+    rlutil::cls();
 
     std::string readEmail, readPassword;
     getline(read, readEmail);
@@ -414,7 +425,7 @@ void registerOrLogin() {
 //}
 
 int main() {
-//    test();
+    test();
     registerOrLogin();
 //    std::vector<std::string>monthsOfYear = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
 //    for (int i = 0; i < 12; i++) {
