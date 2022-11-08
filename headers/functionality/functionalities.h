@@ -40,6 +40,7 @@ void test() {
     unibuc.add_professor(Professor("Liliana", "Mitre", "Matematica", "liliana.mitre@unibuc.ro", "Unknown", 20, 1, 1990));
     unibuc.add_multipleProfessors(p);
 
+    unibuc.print_professors();
     unibuc.sortProfessors();
     unibuc.print_professors();
 

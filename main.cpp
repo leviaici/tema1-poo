@@ -5,6 +5,7 @@
 
 #include "headers/functionality/functionalities.h"
 //#include <indicators.hpp>
+#include "ext/include/rlutil.h"
 
 void loginAccount(int counter);
 void registerAccount();
@@ -342,7 +343,7 @@ void registerOrLogin() {
 }
 
 //void afisTest() {
-//    // Hide cursor
+//     Hide cursor
 //    indicators::show_console_cursor(false);
 //
 //    indicators::ProgressSpinner spinner{
@@ -353,7 +354,7 @@ void registerOrLogin() {
 //            indicators::option::FontStyles{
 //                    std::vector<indicators::FontStyle>{indicators::FontStyle::bold}}};
 //
-//    // Update spinner state
+//     Update spinner state
 //    auto job = [&spinner]() {
 //        while (true) {
 //            if (spinner.is_completed()) {
@@ -372,10 +373,34 @@ void registerOrLogin() {
 //    std::thread thread(job);
 //    thread.join();
 //
-//    // Show cursor
+//     Show cursor
 //    indicators::show_console_cursor(true);
 //
 //}
+
+/*void pass2Test() {
+    std::string password;
+    int x = 7; int y = 7;
+    while (true) {
+//        rlutil::cls();
+        rlutil::locate(x,y);
+        unsigned char ch = getch();
+        if (ch == 127 || ch == 8) {
+            if(password.length() > 0) {
+                --x;
+                rlutil::locate(x,y);    std::cout << " ";
+                password.erase(password.length() - 1);
+            }
+        }
+        else if (ch == '\n') break;
+        else {
+            std::cout << '*';
+            password += ch;
+            ++x;
+        }
+    }
+    std::cout << "\nam citit " << password << "\n";
+}*/
 
 int main() {
     test();
@@ -387,7 +412,7 @@ int main() {
 //            std::this_thread::sleep_for(std::chrono::milliseconds (100));
 //        }
 //    }
-//    afisTest();
+//    pass2Test();
     return 0;
 }
 ///TBA birthday message
