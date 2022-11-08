@@ -10,6 +10,40 @@
 void loginAccount(int counter);
 void registerAccount();
 
+std::string getPassword(const bool& mode) { // true - password, false - verify password
+    int x, y;
+    std::string password;
+    rlutil::cls();
+
+    if(mode) {
+        std::cout << "Password: ";
+        x = 11; y = 1;
+    } else {
+        std::cout << "Verify password: ";
+        x = 18; y = 1;
+    }
+
+    while (true) {
+        rlutil::locate(x,y);
+        unsigned char ch = getch();
+        if (ch == 127 || ch == 8) {
+            if(password.length() > 0) {
+                --x;
+                rlutil::locate(x,y);
+                std::cout << " ";
+                password.erase(password.length() - 1);
+            }
+        }
+        else if (ch == '\n') break;
+        else {
+            std::cout << '*';
+            password += ch;
+            ++x;
+        }
+    }
+    return password;
+}
+
 std::string checkAccountType(std::string accountType) {
     if(accountType == "student" || accountType == "professor")
         return accountType;
@@ -82,16 +116,17 @@ void registerProfessorAccount(const std::string& firstName, const std::string& l
 
     std::cout << "Great! Now the next and final step...\nLet's choose a password!\n";
 
-    std::string password, passwordVerification;
-    std::cin >> password;
-    std::cout << "Now let's verify the password!\n";
-    std::cin >> passwordVerification;
+    std::cin.ignore();
+    std::string password = getPassword(true);
+    std::string passwordVerification = getPassword(false);
+    rlutil::cls();
 
     while (password != passwordVerification) {
         std::cout << "Passwords don't match. Try again!\n";
-        std::cin >> password;
-        std::cout << "Now let's verify the password!\n";
-        std::cin >> passwordVerification;
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+        password = getPassword(true);
+        passwordVerification = getPassword(false);
+        rlutil::cls();
     }
 
     createProfessorSavingsFile(firstName, lastName, email, password, subject, phoneNumber, birthDay, birthMonth, birthYear);
@@ -378,32 +413,8 @@ void registerOrLogin() {
 //
 //}
 
-/*void pass2Test() {
-    std::string password;
-    int x = 7; int y = 7;
-    while (true) {
-//        rlutil::cls();
-        rlutil::locate(x,y);
-        unsigned char ch = getch();
-        if (ch == 127 || ch == 8) {
-            if(password.length() > 0) {
-                --x;
-                rlutil::locate(x,y);    std::cout << " ";
-                password.erase(password.length() - 1);
-            }
-        }
-        else if (ch == '\n') break;
-        else {
-            std::cout << '*';
-            password += ch;
-            ++x;
-        }
-    }
-    std::cout << "\nam citit " << password << "\n";
-}*/
-
 int main() {
-    test();
+//    test();
     registerOrLogin();
 //    std::vector<std::string>monthsOfYear = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
 //    for (int i = 0; i < 12; i++) {
@@ -412,7 +423,6 @@ int main() {
 //            std::this_thread::sleep_for(std::chrono::milliseconds (100));
 //        }
 //    }
-//    pass2Test();
     return 0;
 }
 ///TBA birthday message
