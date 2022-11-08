@@ -348,6 +348,7 @@ jobs:
         if: runner.os == 'Linux' && matrix.cxx == 'clang++-13'
         run: |
           cppcheck --enable=all \
+                   --inline-suppr
                    --project="${BUILD_DIR}"/compile_commands.json \
                    -i"${BUILD_DIR}" --suppress='*:"${BUILD_DIR}"/*' \
                    -i"${EXT_DIR}" --suppress='*:"${EXT_DIR}"/*' \

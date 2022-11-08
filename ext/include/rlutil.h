@@ -431,7 +431,8 @@ namespace rlutil {
 /// Function: nb_getch
 /// Non-blocking getch(). Returns 0 if no key was pressed.
     RLUTIL_INLINE int nb_getch(void) {
-        if (kbhit()) return getch();
+        if (kbhit()) // cppcheck-suppress knownConditionTrueFalse
+            return getch();
         else return 0;
     }
 
