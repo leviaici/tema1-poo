@@ -410,7 +410,7 @@ jobs:
                "${vcbindir}/clang_rt.asan_dbg_dynamic-x86_64.dll" \
                bin/
           fi
-#          cat "${INPUT_FILENAME}" | ./bin/"${EXECUTABLE_NAME}".exe
+          # cat "${INPUT_FILENAME}" | ./bin/"${EXECUTABLE_NAME}".exe
 
       # Application Verifier does not work with sanitizers, need separate executable
       #- name: Application Verifier (Windows MSVC)
