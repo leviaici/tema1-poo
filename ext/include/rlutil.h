@@ -748,7 +748,7 @@ namespace rlutil {
         getch();
     }
 
-    RLUTIL_INLINE void setConsoleTitle(RLUTIL_STRING_T title) {
+    RLUTIL_INLINE void setConsoleTitle(RLUTIL_STRING_T& title) {
         const char * true_title =
 #ifdef __cplusplus
                 title.c_str();
