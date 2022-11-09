@@ -54,7 +54,6 @@ std::string getPassword(const bool& mode) { // true - password, false - verify p
             counter++;
             std::cout << '*';
             password += ch;
-            ++x;
         }
     }
     return password;
