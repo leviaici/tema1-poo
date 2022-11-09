@@ -44,15 +44,13 @@ std::string getPassword(const bool& mode) { // true - password, false - verify p
                 std::cout << " ";
                 password.erase(password.length() - 1);
             }
-        }
-        else if (ch == '\n') {
+        } else if (ch == '\n') {
             if(!mode)
                 break;
             if(complexity >= 50 && password.size() >= 10)
                 break;
             else continue;
-        }
-        else {
+        } else {
             counter++;
             std::cout << '*';
             password += ch;
