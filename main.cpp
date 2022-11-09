@@ -5,37 +5,55 @@
 
 #include "headers/functionality/functionalities.h"
 //#include <indicators.hpp>
-#include "ext/include/rlutil.h"
+//#include "ext/include/rlutil.h"
 
 void loginAccount(int counter);
 void registerAccount();
 
 std::string getPassword(const bool& mode) { // true - password, false - verify password
+    int counter = 0;
     int x, y;
     std::string password;
-    rlutil::cls();
-
-    if(mode) {
-        std::cout << "Password: ";
-        x = 11; y = 1;
-    } else {
-        std::cout << "Verify password: ";
-        x = 18; y = 1;
-    }
+    float complexity = 100;
 
     while (true) {
-        rlutil::locate(x,y);
+        rlutil::cls();
+
+        if(mode) {
+            complexity = checkPasswordComplexity(password);
+            printComplexity(int(complexity), password);
+            x = 11; y = 4;
+            rlutil::locate(1, 4);
+            std::cout << "Password: ";
+        } else {
+            x = 18; y = 1;
+            std::cout << "Verify password: ";
+        }
+        rlutil::locate(x, y);
+        for(int i = 0; i < counter; i++) {
+            std::cout << "*";
+            ++x;
+        }
+        rlutil::locate(x, y);
         unsigned char ch = getch();
         if (ch == 127 || ch == 8) {
             if(password.length() > 0) {
                 --x;
+                --counter;
                 rlutil::locate(x,y);
                 std::cout << " ";
                 password.erase(password.length() - 1);
             }
         }
-        else if (ch == '\n') break;
+        else if (ch == '\n') {
+            if(!mode)
+                break;
+            if(complexity >= 50 && password.size() >= 10)
+                break;
+            else continue;
+        }
         else {
+            counter++;
             std::cout << '*';
             password += ch;
             ++x;
@@ -159,7 +177,8 @@ void registerStudentAccount(const std::string& firstName, const std::string& las
     std::cout << "Great! Now the next step...\n";
 
     std::vector<Subject> subjects;
-    std::vector<std::string> listOfSubjects = {"Mathematics", "Computer Science", "Physics"};
+    std::vector<std::string> listOfSubjects;
+    listOfSubjects.push_back("Mathematics");    listOfSubjects.push_back("Computer Science");   listOfSubjects.push_back("Physics");
     unsigned length = listOfSubjects.size();
 
     for (unsigned i = 0; i < length; i++) {
@@ -258,7 +277,7 @@ void deleteAccount(const std::string& email, const std::string& password) {
         std::cout << "Enter the password for confirmation and your account will be deleted as you wish.\n";
         std::this_thread::sleep_for(std::chrono::seconds(1));
         std::cin.ignore();
-        std::string passwordVerification = getPassword(true);
+        std::string passwordVerification = getPassword(false);
         rlutil::cls();
 
         int counter = 0;
@@ -315,7 +334,7 @@ void loginAccount(int counter) {
     }
 
     std::cin.ignore();
-    password = getPassword(true);
+    password = getPassword(false);
     rlutil::cls();
 
     std::string readEmail, readPassword;
@@ -425,7 +444,7 @@ void registerOrLogin() {
 //}
 
 int main() {
-    test();
+//    test();
     registerOrLogin();
 //    std::vector<std::string>monthsOfYear = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
 //    for (int i = 0; i < 12; i++) {
@@ -440,4 +459,3 @@ int main() {
 ///TBA simulation speed
 ///TBA start date on savings file 1 Oct
 ///TBA bye bye saving file message
-///De ascuns parola

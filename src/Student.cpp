@@ -52,8 +52,12 @@ int Student::get_group() const { return this -> group; }
 
 void Student::set_tuitionFree(const bool& status) { this -> tuitionFree = status; }
 
+//void Student::set_subjects(const std::vector<Subject>& other) { this -> subjects = other; }
+
 std::string Student::get_firstName() { return this -> firstName; }
 std::string Student::get_lastName() { return this -> lastName; }
+//std::vector<Subject> Student::get_subjects() { return this -> subjects; }
+
 /*std::string Student::get_email() { return this -> email; }
 std::string Student::get_phoneNumber() { return this -> phoneNumber; }
 int Student::get_group() { return this -> group; }

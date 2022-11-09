@@ -65,9 +65,11 @@ public:
     void print();
 
     void set_tuitionFree(const bool& status);
+//    void set_subjects(const std::vector<Subject>& other);
 
     std::string get_firstName();
     std::string get_lastName();
+//    std::vector<Subject> get_subjects();
     /*std::string get_email();
     std::string get_phoneNumber();
     int get_group();
