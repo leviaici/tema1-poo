@@ -126,8 +126,65 @@ void registerProfessorAccount(const std::string& firstName, const std::string& l
     std::cout << "What's your phone number?\n";
     std::cin >> phoneNumber;
 
+    while(phoneNumber.size() < 10) {
+        std::cout << "Invalid phone number. Try again.\nPhone number: ";
+        std::cin >> phoneNumber;
+    }
+
     std::cout << "When were you born? DD/MM/YYYY\n";
     std::cin >> birthDay >> unused1 >> birthMonth >> unused2 >> birthYear;
+
+    while(!(birthMonth > 0 && birthMonth < 13)) {
+        std::cout << "Invalid month. Try again.\nMonth: ";
+        std::cin >> birthMonth;
+    }
+
+    if(birthYear < 1900) {
+        rlutil::setColor(12);
+        std::cout << "Oh... you are dead, so... Goodbye and rest in peace.";
+        exit(1);
+    }
+
+    if(birthYear >= localYear() && birthMonth >= localMonth()) {
+        if(birthMonth == localMonth() && birthDay > localDay()) {
+            rlutil::setColor(12);
+            std::cout << "Oh... you are not born yet so wait a little bit more for this.";
+            exit(1);
+        } else {
+            rlutil::setColor(12);
+            std::cout << "Oh... you are too young for this.";
+            exit(1);
+        }
+    }
+
+    if(localYear() - birthYear <= 17) {
+        rlutil::setColor(12);
+        std::cout << "Oh... you are too young for this.";
+        exit(1);
+    }
+
+    while(!(birthDay > 0 && birthDay < 32)) {
+        std::cout << "Invalid birthday. Try again.\nDay: ";
+        std::cin >> birthDay;
+    }
+
+    if(birthDay == 29 && birthMonth == 2 && birthYear % 4) {
+        rlutil::setColor(12);
+        std::cout << "Check your birthday again and try again.\nYour birth year didn't have any 29th February.\n";
+        exit(1);
+    }
+
+    if(birthDay == 31 && !(birthMonth % 2) && birthMonth < 7) {
+        rlutil::setColor(12);
+        std::cout << "Check your birthday again and try again.\nYour birth month didn't have any 31st.\n";
+        exit(1);
+    }
+
+    if(birthDay == 31 && birthMonth % 2 && birthMonth > 8) {
+        rlutil::setColor(12);
+        std::cout << "Check your birthday again and try again.\nYour birth month didn't have any 31st.\n";
+        exit(1);
+    }
 
     std::cout << "Great! Now the next and final step...\nLet's choose a password!\n";
 
@@ -165,17 +222,78 @@ void registerStudentAccount(const std::string& firstName, const std::string& las
     std::cout << "What's your phone number?\n";
     std::cin >> phoneNumber;
 
+    while(phoneNumber.size() < 10) {
+        std::cout << "Invalid phone number. Try again.\nPhone number: ";
+        std::cin >> phoneNumber;
+    }
+
     std::cout << "What group were you assigned to?\n";
     std::cin >> group;
+
+    while(!group) {
+        std::cout << "Invalid group. Try again.\nGroup: ";
+        std::cin >> phoneNumber;
+    }
 
     std::cout << "When were you born? DD/MM/YYYY\n";
     std::cin >> birthDay >> unused1 >> birthMonth >> unused2 >> birthYear;
 
+    while(!(birthMonth > 0 && birthMonth < 13)) {
+        std::cout << "Invalid month. Try again.\nMonth: ";
+        std::cin >> birthMonth;
+    }
+
+    if(birthYear < 1900) {
+        rlutil::setColor(12);
+        std::cout << "Oh... you are dead, so... Goodbye and rest in peace.";
+        exit(1);
+    }
+
+    if(birthYear >= localYear() && birthMonth >= localMonth()) {
+        if(birthMonth == localMonth() && birthDay > localDay()) {
+            rlutil::setColor(12);
+            std::cout << "Oh... you are not born yet so wait a little bit more for this.";
+            exit(1);
+        } else {
+            rlutil::setColor(12);
+            std::cout << "Oh... you are too young for this.";
+            exit(1);
+        }
+    }
+
+    if(localYear() - birthYear <= 17) {
+        rlutil::setColor(12);
+        std::cout << "Oh... you are too young for this.";
+        exit(1);
+    }
+
+    while(!(birthDay > 0 && birthDay < 32)) {
+        std::cout << "Invalid birthday. Try again.\nDay: ";
+        std::cin >> birthDay;
+    }
+
+    if(birthDay == 29 && birthMonth == 2 && birthYear % 4) {
+        rlutil::setColor(12);
+        std::cout << "Check your birthday again and try again.\nYour birth year didn't have any 29th February.\n";
+        exit(1);
+    }
+
+    if(birthDay == 31 && !(birthMonth % 2) && birthMonth < 7) {
+        rlutil::setColor(12);
+        std::cout << "Check your birthday again and try again.\nYour birth month didn't have any 31st.\n";
+        exit(1);
+    }
+
+    if(birthDay == 31 && birthMonth % 2 && birthMonth > 8) {
+        rlutil::setColor(12);
+        std::cout << "Check your birthday again and try again.\nYour birth month didn't have any 31st.\n";
+        exit(1);
+    }
+
     std::cout << "Great! Now the next step...\n";
 
     std::vector<Subject> subjects;
-    std::vector<std::string> listOfSubjects;
-    listOfSubjects.push_back("Mathematics");    listOfSubjects.push_back("Computer Science");   listOfSubjects.push_back("Physics");
+    std::vector<std::string> listOfSubjects = {"Mathematics", "Computer Science", "Physics"};
     unsigned length = listOfSubjects.size();
 
     for (unsigned i = 0; i < length; i++) {
@@ -285,7 +403,7 @@ void deleteAccount(const std::string& email, const std::string& password) {
                 blockUser(counter);
             std::cout << "Try again typing your password to confirm the account deletion.\n";
             std::this_thread::sleep_for(std::chrono::seconds(1));
-            passwordVerification = (true);
+            passwordVerification = getPassword(true);
             rlutil::cls();
         }
 

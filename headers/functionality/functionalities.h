@@ -67,6 +67,27 @@ void test() {
     unibuc.print_groups();
 }
 
+int localDay() {
+    time_t now = time(nullptr);
+    tm *ltm = localtime(&now);
+
+    return ltm -> tm_mday;
+}
+
+int localMonth() {
+    time_t now = time(nullptr);
+    tm *ltm = localtime(&now);
+
+    return 1 + ltm -> tm_mon;
+}
+
+int localYear() {
+    time_t now = time(nullptr);
+    tm *ltm = localtime(&now);
+
+    return 1900 + ltm -> tm_year;
+}
+
 void showLocalTime() {
     time_t now = time(nullptr);
 
