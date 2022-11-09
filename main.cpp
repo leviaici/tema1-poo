@@ -5,12 +5,11 @@
 
 #include "headers/functionality/functionalities.h"
 //#include <indicators.hpp>
-//#include "ext/include/rlutil.h"
 
 void loginAccount(int counter);
 void registerAccount();
 
-std::string getPassword(const bool& mode) { // true - password, false - verify password
+std::string getPassword(bool mode) { // true - password, false - verify password
     int counter = 0;
     int x, y;
     std::string password;
