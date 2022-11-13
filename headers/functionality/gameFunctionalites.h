@@ -196,7 +196,7 @@ void finalPrintRegistration() {
     std::cout << "Password: yourPasswordHere\n";
 }
 
-void readPassword(std::string &password) {
+void readInputPassword(std::string &password) {
     std::cin.ignore();
     password = getPassword(true);
     std::string passwordVerification = getPassword(false);
@@ -227,7 +227,7 @@ void registerProfessorAccount(const std::string& firstName, const std::string& l
     std::cout << "Great! Now the next and final step...\nLet's choose a password!\n";
 
     std::string password;
-    readPassword(password);
+    readInputPassword(password);
 
     createProfessorSavingsFile(firstName, lastName, email, password, subject, phoneNumber, birthDay, birthMonth, birthYear);
 
@@ -272,7 +272,7 @@ void registerStudentAccount(const std::string& firstName, const std::string& las
     std::cout<< "Super! Now that we completed all these steps, we have one last step and we finished the registration!\nLet's choose a password!\n";
 
     std::string password;
-    readPassword(password);
+    readInputPassword(password);
 
     createStudentSavingsFile(firstName, lastName, email, password, phoneNumber, group, birthDay, birthMonth, birthYear, subjects);
 
