@@ -212,8 +212,8 @@ void readInputPassword(std::string &password) {
 }
 
 void registerProfessorAccount(const std::string& firstName, const std::string& lastName, const std::string& email) {
-    std::string phoneNumber, subject;
-    int birthDay, birthMonth, birthYear;
+    std::string phoneNumber = " ", subject;
+    int birthDay = 0, birthMonth = 0, birthYear = 0;
 
     greetings(firstName, email);
 
@@ -234,8 +234,8 @@ void registerProfessorAccount(const std::string& firstName, const std::string& l
     finalPrintRegistration();
 }
 void registerStudentAccount(const std::string& firstName, const std::string& lastName, const std::string& email) {
-    std::string phoneNumber;
-    int group, birthDay, birthMonth, birthYear;
+    std::string phoneNumber = " ";
+    int group, birthDay = 0, birthMonth = 0, birthYear = 0;
 
     greetings(firstName, email);
 
