@@ -2,7 +2,7 @@
 //#include <indicators.hpp>
 
 int main() {
-    test();
+//    test();
     registerOrLogin();
 //    std::vector<std::string>monthsOfYear = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
 //    for (int i = 0; i < 12; i++) {
@@ -17,3 +17,4 @@ int main() {
 ///TBA simulation speed
 ///TBA start date on savings file 1 Oct
 ///TBA bye bye saving file message
+///laboratory && seminar teacher

@@ -9,6 +9,10 @@
 #include "../University.h"
 #include "rlutil.h"
 
+void ignoreReading() {
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max());
+}
+
 std::string toLower(std::string word) {
     if(word[0] >= 65 && word[0] <= 90)
         word[0] += 32;

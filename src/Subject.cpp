@@ -35,13 +35,13 @@ bool Subject::passedOrFailed() {
 
 //void Subject::sortGrades() { sort((this -> grades).begin(), (this -> grades).end()); }
 
-std::string Subject::get_subject() { return this -> subject; }
+std::string Subject::get_subject() const { return this -> subject; }
 
-std::vector<int> Subject::get_grades() { return this -> grades; }
+std::vector<int> Subject::get_grades() const { return this -> grades; }
 
-float Subject::get_average() { return this ->  average; }
+float Subject::get_average() const { return this ->  average; }
 
-bool Subject::get_passed() { return this -> passed; }
+bool Subject::get_passed() const { return this -> passed; }
 
 void Subject::addGrade(int grade) {
     if(grade > 0 && grade <= 10) {

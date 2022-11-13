@@ -40,13 +40,13 @@ public:
 
     //void sortGrades();
 
-    std::string get_subject();
+    std::string get_subject() const;
 
-    std::vector<int> get_grades();
+    std::vector<int> get_grades() const;
 
-    float get_average();
+    float get_average() const;
 
-    bool get_passed();
+    bool get_passed() const;
 
     void addGrade(int grade);
 

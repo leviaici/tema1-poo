@@ -82,6 +82,7 @@ void blockUser(int counter) {
         std::this_thread::sleep_for(std::chrono::seconds(1));
     }
     std::cout << "\r" << std::flush;
+    ignoreReading();
     std::cout << "You can try to log back in now as your cooldown expired.\n";
 }
 
@@ -96,47 +97,24 @@ void createStudentSavingsFile(const std::string& firstName, const std::string& l
 
     print << email + "\n" + password + "\n" + firstName + "\n" + lastName + "\n" + phoneNumber + "\n" << group << "\n" << birthDay << "\n" << birthMonth << "\n" << birthYear << "\n";
 
-    for(auto c1: subjects) {
-        print << c1.get_subject() << "\n" << "Grades: ";
-        for(auto c2: c1.get_grades())
-            print << c2 << " ";
-        print << "\n" << "Average: " << c1.get_average() << "\n";
-        print << "Passed/Failed (1/0): " << c1.get_passed() << "\n\n";
+    for(const auto& subject: subjects) {
+        print << subject.get_subject() << "\n" << "Grades: ";
+        for(const auto& grade: subject.get_grades())
+            print << grade << " ";
+        print << "\n" << "Average: " << subject.get_average() << "\n";
+        print << "Passed/Failed (1/0): " << subject.get_passed() << "\n\n";
     }
 
     print.close();
 }
 
 bool checkExistingAccount(const std::string& email, const std::string& accountType) {
-    std::ifstream read("savings/" + accountType + "s/" + email + ".txt");
-    if(read)
-        return true;
-    return false;
+    std::ifstream open("savings/" + accountType + "s/" + email + ".txt");
+    return bool(open);
 }
 
-void registerProfessorAccount(const std::string& firstName, const std::string& lastName, const std::string& email) {
-    std::string phoneNumber, subject;
-    int birthDay, birthMonth, birthYear;
+void readBirthDate(int &birthDay, int &birthMonth, int &birthYear) {
     char unused1, unused2;
-
-    std::cout << "Nice to meet you, " << firstName << "!\n";
-
-    std::cout << "Here's your brand new generated e-mail: " << email << "\n";
-
-    std::cout << "Key note if you ever forget your e-mail. It's your firstName.lastName@s.unibuc.ro\n";
-    std::cout << "If you have 2 first names, it's going to be firstName1-firstName2.lastName@s.unibuc.ro\n";
-
-    std::cout << "What is the subject you are teaching students?\n";
-    std::cin >> subject;
-
-    std::cout << "What's your phone number?\n";
-    std::cin >> phoneNumber;
-
-    while(phoneNumber.size() < 10) {
-        std::cout << "Invalid phone number. Try again.\nPhone number: ";
-        std::cin >> phoneNumber;
-    }
-
     std::cout << "When were you born? DD/MM/YYYY\n";
     std::cin >> birthDay >> unused1 >> birthMonth >> unused2 >> birthYear;
 
@@ -191,11 +169,36 @@ void registerProfessorAccount(const std::string& firstName, const std::string& l
         std::cout << "Check your birthday again and try again.\nYour birth month didn't have any 31st.\n";
         exit(1);
     }
+}
 
-    std::cout << "Great! Now the next and final step...\nLet's choose a password!\n";
+void greetings(const std::string& firstName, const std::string& email) {
+    std::cout << "Nice to meet you, " << firstName << "!\n";
 
+    std::cout << "Here's your brand new generated e-mail: " << email << "\n";
+
+    std::cout << "Key note if you ever forget your e-mail. It's your firstName.lastName@s.unibuc.ro\n";
+    std::cout << "If you have 2 first names, it's going to be firstName1-firstName2.lastName@s.unibuc.ro\n";
+}
+
+void readPhoneNumber(std::string &phoneNumber) {
+    std::cout << "What's your phone number?\n";
+    std::cin >> phoneNumber;
+
+    while(phoneNumber.size() < 10) {
+        std::cout << "Invalid phone number. Try again.\nPhone number: ";
+        std::cin >> phoneNumber;
+    }
+}
+
+void finalPrintRegistration() {
+    std::cout << "Great! Now, when you'll want to login you'll need to enter your data as it is like in the example below:\n";
+    std::cout << "E-mail: generated_email@s.unibuc.ro\n";
+    std::cout << "Password: yourPasswordHere\n";
+}
+
+void readPassword(std::string &password) {
     std::cin.ignore();
-    std::string password = getPassword(true);
+    password = getPassword(true);
     std::string passwordVerification = getPassword(false);
     rlutil::cls();
 
@@ -206,32 +209,37 @@ void registerProfessorAccount(const std::string& firstName, const std::string& l
         passwordVerification = getPassword(false);
         rlutil::cls();
     }
+}
+
+void registerProfessorAccount(const std::string& firstName, const std::string& lastName, const std::string& email) {
+    std::string phoneNumber, subject;
+    int birthDay, birthMonth, birthYear;
+
+    greetings(firstName, email);
+
+    readPhoneNumber(phoneNumber);
+
+    std::cout << "What is the subject you are teaching students?\n";
+    std::cin >> subject;
+
+    readBirthDate(birthDay, birthMonth, birthYear);
+
+    std::cout << "Great! Now the next and final step...\nLet's choose a password!\n";
+
+    std::string password;
+    readPassword(password);
 
     createProfessorSavingsFile(firstName, lastName, email, password, subject, phoneNumber, birthDay, birthMonth, birthYear);
 
-    std::cout << "Great! Now, when you'll want to login you'll need to enter your data as it is like in the example below:\n";
-    std::cout << "E-mail: generated_email@s.unibuc.ro\n";
-    std::cout << "Password: yourPasswordHere\n";
+    finalPrintRegistration();
 }
 void registerStudentAccount(const std::string& firstName, const std::string& lastName, const std::string& email) {
     std::string phoneNumber;
     int group, birthDay, birthMonth, birthYear;
-    char unused1, unused2;
 
-    std::cout << "Nice to meet you, " << firstName << "!\n";
+    greetings(firstName, email);
 
-    std::cout << "Here's your brand new generated e-mail: " << email << "\n";
-
-    std::cout << "Key note if you ever forget your e-mail. It's your firstName.lastName@s.unibuc.ro\n";
-    std::cout << "If you have 2 first names, it's going to be firstName1-firstName2.lastName@s.unibuc.ro\n";
-
-    std::cout << "What's your phone number?\n";
-    std::cin >> phoneNumber;
-
-    while(phoneNumber.size() < 10) {
-        std::cout << "Invalid phone number. Try again.\nPhone number: ";
-        std::cin >> phoneNumber;
-    }
+    readPhoneNumber(phoneNumber);
 
     std::cout << "What group were you assigned to?\n";
     std::cin >> group;
@@ -241,60 +249,7 @@ void registerStudentAccount(const std::string& firstName, const std::string& las
         std::cin >> phoneNumber;
     }
 
-    std::cout << "When were you born? DD/MM/YYYY\n";
-    std::cin >> birthDay >> unused1 >> birthMonth >> unused2 >> birthYear;
-
-    while(!(birthMonth > 0 && birthMonth < 13)) {
-        std::cout << "Invalid month. Try again.\nMonth: ";
-        std::cin >> birthMonth;
-    }
-
-    if(birthYear < 1900) {
-        rlutil::setColor(12);
-        std::cout << "Oh... you are dead, so... Goodbye and rest in peace.";
-        exit(1);
-    }
-
-    if(birthYear >= localYear() && birthMonth >= localMonth()) {
-        if(birthMonth == localMonth() && birthDay > localDay()) {
-            rlutil::setColor(12);
-            std::cout << "Oh... you are not born yet so wait a little bit more for this.";
-            exit(1);
-        } else {
-            rlutil::setColor(12);
-            std::cout << "Oh... you are too young for this.";
-            exit(1);
-        }
-    }
-
-    if(localYear() - birthYear <= 17) {
-        rlutil::setColor(12);
-        std::cout << "Oh... you are too young for this.";
-        exit(1);
-    }
-
-    while(!(birthDay > 0 && birthDay < 32)) {
-        std::cout << "Invalid birthday. Try again.\nDay: ";
-        std::cin >> birthDay;
-    }
-
-    if(birthDay == 29 && birthMonth == 2 && birthYear % 4) {
-        rlutil::setColor(12);
-        std::cout << "Check your birthday again and try again.\nYour birth year didn't have any 29th February.\n";
-        exit(1);
-    }
-
-    if(birthDay == 31 && !(birthMonth % 2) && birthMonth < 7) {
-        rlutil::setColor(12);
-        std::cout << "Check your birthday again and try again.\nYour birth month didn't have any 31st.\n";
-        exit(1);
-    }
-
-    if(birthDay == 31 && birthMonth % 2 && birthMonth > 8) {
-        rlutil::setColor(12);
-        std::cout << "Check your birthday again and try again.\nYour birth month didn't have any 31st.\n";
-        exit(1);
-    }
+    readBirthDate(birthDay, birthMonth, birthYear);
 
     std::cout << "Great! Now the next step...\n";
 
@@ -314,27 +269,14 @@ void registerStudentAccount(const std::string& firstName, const std::string& las
         subjects.push_back(subject);
     }
 
-    std::cout<< "Super! Now that we completed all these steps, we have one last step and we finished the registration!\n";
-    std::cout << "Let's choose a password!\n";
+    std::cout<< "Super! Now that we completed all these steps, we have one last step and we finished the registration!\nLet's choose a password!\n";
 
-    std::cin.ignore();
-    std::string password = getPassword(true);
-    std::string passwordVerification = getPassword(false);
-    rlutil::cls();
-
-    while (password != passwordVerification) {
-        std::cout << "Passwords don't match. Try again!\n";
-        std::this_thread::sleep_for(std::chrono::seconds(1));
-        password = getPassword(true);
-        passwordVerification = getPassword(false);
-        rlutil::cls();
-    }
+    std::string password;
+    readPassword(password);
 
     createStudentSavingsFile(firstName, lastName, email, password, phoneNumber, group, birthDay, birthMonth, birthYear, subjects);
 
-    std::cout << "Great! Now, when you'll want to login you'll need to enter your data as it is like in the example below:\n";
-    std::cout << "E-mail: generated_email@s.unibuc.ro\n";
-    std::cout << "Password: yourPasswordHere\n";
+    finalPrintRegistration();
 }
 
 void registerAccount() {
@@ -437,11 +379,11 @@ void loginAccount(int counter) {
     rlutil::cls();
     std::string email, password;
     std::cout << "E-mail: ";    std::cin >> email;
-    std::ifstream read("savings/students/" + email + ".txt");
+    std::ifstream open("savings/students/" + email + ".txt");
 
-    if(!read)
-        read = std::ifstream("savings/professors/" + email + ".txt");
-    if(!read) {
+    if(!open)
+        open = std::ifstream("savings/professors/" + email + ".txt");
+    if(!open) {
         std::cout << "This e-mail wasn't registered. Do you want to register a new account?\n(Y/N): ";
         char choice;    std::cin >> choice;
         if(choice == 'y' || choice == 'Y') {
@@ -459,10 +401,10 @@ void loginAccount(int counter) {
     rlutil::cls();
 
     std::string readEmail, readPassword;
-    getline(read, readEmail);
-    getline(read, readPassword);
+    getline(open, readEmail);
+    getline(open, readPassword);
 
-    read.close();
+    open.close();
 
     if(password == readPassword) {
         bool choice;
