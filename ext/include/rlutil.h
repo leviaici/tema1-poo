@@ -55,11 +55,11 @@ namespace rlutil {
 
 #ifdef _WIN32
 #ifndef WIN32_LEAN_AND_MEAN
-		//#define WIN32_LEAN_AND_MEAN 1
+		#define WIN32_LEAN_AND_MEAN 1
 		#define LOCAL_WIN32_LEAN_AND_MEAN 1
 	#endif
 	#ifndef NOMINMAX
-		//#define NOMINMAX  1
+		#define NOMINMAX  1
 		#define LOCAL_NOMINMAX 1
 	#endif
 	#include <windows.h>  // for WinAPI and Sleep()
