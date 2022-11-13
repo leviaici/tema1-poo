@@ -56,7 +56,7 @@ std::string getPassword(bool mode) { // true - password, false - verify password
             if(complexity >= 50 && password.size() >= 10)
                 break;
             else continue;
-        } else {
+        } else if(ch != ' ') {
             counter++;
             std::cout << '*';
             password += ch;
