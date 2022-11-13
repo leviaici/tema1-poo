@@ -6,6 +6,9 @@
 #define OOP_FUNCTIONALITIES_H
 #include <iostream>
 #include <ctime>
+#include <filesystem>
+#include <limits>
+#include <ios>
 #include "../University.h"
 #include "rlutil.h"
 
