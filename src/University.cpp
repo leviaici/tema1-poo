@@ -71,11 +71,11 @@ void University::reclassify() {
 }
 
 void University::sortProfessors() {
-    sort((this -> professors).begin(), (this -> professors).end(), [](Professor p1, Professor p2) { return(p1.get_subject() < p2.get_subject()); });
+    sort((this -> professors).begin(), (this -> professors).end(), [](const Professor& p1, const Professor& p2) { return(p1.get_subject() < p2.get_subject()); });
 }
 
 void University::divisionIntoGroups() {
-    sort((this -> students).begin(), (this -> students).end(), [](Student s1, Student s2) {
+    sort((this -> students).begin(), (this -> students).end(), [](const Student& s1, const Student& s2) {
         if(s1.get_group() == s2.get_group())
             if(s1.get_lastName() == s2.get_lastName())
                 return s1.get_firstName() < s2.get_firstName();
