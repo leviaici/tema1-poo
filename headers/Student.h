@@ -20,7 +20,7 @@ private:
     int birthDay = 0;
     int birthMonth = 0;
     int birthYear = 0;
-    int id = 0;
+    int id = 0; ///TBA static int id_max!!!
     float overallAverage = .0;
     bool tuitionFree = false;
 
@@ -67,8 +67,8 @@ public:
     void set_tuitionFree(const bool& status);
 //    void set_subjects(const std::vector<Subject>& other);
 
-    std::string get_firstName();
-    std::string get_lastName();
+    std::string get_firstName() const;
+    std::string get_lastName() const;
 //    std::vector<Subject> get_subjects();
     /*std::string get_email();
     std::string get_phoneNumber();
@@ -84,7 +84,7 @@ public:
         os << "ID: " << other.id << "\n";
         os << "Overall average: " << other.overallAverage << "\n";
 
-        for(auto c: other.subjects)
+        for(const auto &c: other.subjects)
             os << c;
 
         os << "Tuition free: " << other.tuitionFree << "\n\n\n";

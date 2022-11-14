@@ -25,7 +25,7 @@ Professor::~Professor() {
 //    std::cout << "Killing the professor.\n";
 }
 
-std::string Professor::get_subject() { return this -> subject; }
+std::string Professor::get_subject() const { return this -> subject; }
 /*std::string Professor::get_firstName() { return this -> firstName; }
 std::string Professor::get_lastName() { return this -> lastName; }
 [[maybe_unused]] std::string Professor::get_email() { return this -> email; }

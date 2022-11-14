@@ -52,7 +52,7 @@ public:
         return os;
     }
 
-    std::string get_subject();
+    std::string get_subject() const;
     /*std::string get_firstName();
     std::string get_lastName();
     [[maybe_unused]] std::string get_email();
