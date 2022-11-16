@@ -25,6 +25,10 @@ Professor::~Professor() {
 //    std::cout << "Killing the professor.\n";
 }
 
+void Professor::print([[maybe_unused]] std::ostream &os) const {
+
+}
+
 std::string Professor::get_subject() const { return this -> subject; }
 /*std::string Professor::get_firstName() { return this -> firstName; }
 std::string Professor::get_lastName() { return this -> lastName; }

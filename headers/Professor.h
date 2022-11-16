@@ -20,6 +20,7 @@ private:
     int birthMonth = 0;
     int birthYear = 0;
 
+    virtual void print([[maybe_unused]] std::ostream &os) const;
 public:
     Professor();
 
@@ -50,6 +51,7 @@ public:
         os << "E-mail: " << other.email << "\n";
         os << "Phone number: " << other.phoneNumber << "\n";
         os << "Birth date: " << other.birthDay << "/" << other.birthMonth << "/" << other.birthYear << "\n";
+        other.print(os);
 
         return os;
     }

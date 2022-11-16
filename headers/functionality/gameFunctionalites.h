@@ -11,6 +11,7 @@
 #include <thread>
 #include <chrono>
 #include <memory>
+#include <filesystem>
 
 #include "functionalities.h"
 
@@ -469,6 +470,10 @@ void registerOrLogin() {
     if(choice == 'r' || choice == 'R')
         registerAccount();
     else loginAccount(1);
+}
+
+void prepareFileSystem() {
+    std::filesystem::create_directory("savings");
 }
 
 //void afisTest() {

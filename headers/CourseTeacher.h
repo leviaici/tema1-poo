@@ -10,6 +10,8 @@
 #include <memory>
 
 class CourseTeacher : public Professor {
+private:
+    void print([[maybe_unused]] std::ostream &os) const override;
 public:
     CourseTeacher();
 

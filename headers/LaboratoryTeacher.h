@@ -10,6 +10,8 @@
 #include <memory>
 
 class LaboratoryTeacher : public Professor {
+private:
+    void print([[maybe_unused]] std::ostream &os) const override;
 public:
     LaboratoryTeacher();
 
@@ -20,6 +22,7 @@ public:
     std::shared_ptr<Professor> clone() const override;
 
     friend std::ostream &operator<<(std::ostream &os, const LaboratoryTeacher &other);
+
 
     ~LaboratoryTeacher();
 };

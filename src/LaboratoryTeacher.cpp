@@ -16,9 +16,13 @@ std::shared_ptr<Professor> LaboratoryTeacher::clone() const {
 
 std::ostream &operator<<(std::ostream &os, const LaboratoryTeacher &other) {
     os << static_cast<const Professor&>(other);
-    os << "Laboratory subject: " << other.get_subject() << "\n\n";
+    other.print(os);
 
     return os;
+}
+
+void LaboratoryTeacher::print([[maybe_unused]] std::ostream &os) const {
+    os << "Laboratory subject: " << get_subject() << "\n\n";
 }
 
 LaboratoryTeacher::~LaboratoryTeacher() {}
