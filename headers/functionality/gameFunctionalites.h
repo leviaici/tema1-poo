@@ -71,9 +71,9 @@ std::string checkAccountType(std::string accountType) {
     if(accountType == "student" || accountType == "professor")
         return accountType;
 
-    if(accountType.substr(2) == "st")
+    if(accountType.substr(0, 2) == "st")
         return "student";
-    if(accountType.substr(2) == "pr")
+    if(accountType.substr(0, 2) == "pr")
         return "professor";
     return "wrong";
 }
@@ -222,11 +222,11 @@ void readProfessorType(std::string& type) {
         std::cin >> type;
     }
 
-    if (type.substr(2) == "se")
+    if (type.substr(0, 2) == "se")
         type = "seminar";
-    else if (type.substr(2) == "la")
+    else if (type.substr(0, 2) == "la")
         type = "laboratory";
-    else if (type.substr(2) == "co")
+    else if (type.substr(0, 2) == "co")
         type = "course";
 }
 

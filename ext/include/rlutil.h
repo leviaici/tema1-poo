@@ -43,15 +43,25 @@
 #include <iostream>
 #include <string>
 #include <cstdio> // for getch()
+#include <cstdlib> // for std::getenv
 /// Namespace forward declarations
 namespace rlutil {
     RLUTIL_INLINE void locate(int x, int y);
 }
 #else
 #include <stdio.h> // for getch() / printf()
+	#include <stdlib.h> // for getenv()
 	#include <string.h> // for strlen()
 	RLUTIL_INLINE void locate(int x, int y); // Forward declare for C to avoid warnings
 #endif // __cplusplus
+
+int runs_on_ci() {
+    return
+#ifdef __cplusplus
+            std::
+#endif
+            getenv("GITHUB_ACTIONS") != NULL;
+}
 
 #ifdef _WIN32
 #ifndef WIN32_LEAN_AND_MEAN
@@ -86,9 +96,9 @@ namespace rlutil {
 /// Get character without waiting for Return to be pressed.
 /// Windows has this in conio.h
 RLUTIL_INLINE int getch(void) {
-#ifdef GITHUB_ACTIONS
-    return getchar();
-#else // GITHUB_ACTIONS
+    if(runs_on_ci())
+        return getchar();
+
     // Here be magic.
     struct termios oldt, newt;
     int ch;
@@ -99,16 +109,15 @@ RLUTIL_INLINE int getch(void) {
     ch = getchar();
     tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
     return ch;
-#endif // GITHUB_ACTIONS
 }
 
 /// Function: kbhit
 /// Determines if keyboard has been hit.
 /// Windows has this in conio.h
 RLUTIL_INLINE int kbhit(void) {
-#ifdef GITHUB_ACTIONS
-    return 1;
-#else // GITHUB_ACTIONS
+    if(runs_on_ci())
+        return 1;
+
     // Here be dragons.
     static struct termios oldt, newt;
     int cnt = 0;
@@ -127,7 +136,6 @@ RLUTIL_INLINE int kbhit(void) {
     select(STDIN_FILENO+1, NULL, NULL, NULL, &tv); // A small time delay
     tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
     return cnt; // Return number of characters
-#endif // GITHUB_ACTIONS
 }
 #endif // _WIN32
 
@@ -368,9 +376,9 @@ namespace rlutil {
 /// Note:
 /// Only Arrows, Esc, Enter and Space are currently working properly.
     RLUTIL_INLINE int getkey(void) {
-#if defined(GITHUB_ACTIONS) && defined(_WIN32)
-        return getchar();
-#else // GITHUB_ACTIONS
+        if(runs_on_ci())
+            return getchar();
+
 #ifndef _WIN32
         int cnt = kbhit(); // for ANSI escapes processing
 #endif
@@ -425,14 +433,12 @@ namespace rlutil {
 #endif // _WIN32
             default: return k;
         }
-#endif // GITHUB_ACTIONS
     }
 
 /// Function: nb_getch
 /// Non-blocking getch(). Returns 0 if no key was pressed.
     RLUTIL_INLINE int nb_getch(void) {
-        if (kbhit()) // cppcheck-suppress knownConditionTrueFalse
-            return getch();
+        if (kbhit()) return getch();
         else return 0;
     }
 
@@ -557,11 +563,11 @@ namespace rlutil {
 /// Function: cls
 /// Clears screen, resets all attributes and moves cursor home.
     RLUTIL_INLINE void cls(void) {
-#ifdef GITHUB_ACTIONS
-        return;
-#else // GITHUB_ACTIONS
+        if(runs_on_ci())
+            return;
+
 #if defined(_WIN32) && !defined(RLUTIL_USE_ANSI)
-        // Based on https://msdn.microsoft.com/en-us/library/windows/desktop/ms682022%28v=vs.85%29.aspx
+            // Based on https://msdn.microsoft.com/en-us/library/windows/desktop/ms682022%28v=vs.85%29.aspx
 	const HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	const COORD coordScreen = {0, 0};
 	DWORD cCharsWritten;
@@ -579,7 +585,6 @@ namespace rlutil {
         RLUTIL_PRINT(ANSI_CLS);
         RLUTIL_PRINT(ANSI_CURSOR_HOME);
 #endif
-#endif // GITHUB_ACTIONS
     }
 
 /// Function: locate
@@ -749,7 +754,7 @@ namespace rlutil {
         getch();
     }
 
-    RLUTIL_INLINE void setConsoleTitle(RLUTIL_STRING_T& title) {
+    RLUTIL_INLINE void setConsoleTitle(RLUTIL_STRING_T title) {
         const char * true_title =
 #ifdef __cplusplus
                 title.c_str();
