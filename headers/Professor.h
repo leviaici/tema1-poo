@@ -39,15 +39,16 @@ public:
         return *this;
     }
 
-    ~Professor();
+    virtual std::shared_ptr<Professor> clone() const = 0;
+
+    virtual ~Professor();
 
     friend std::ostream& operator<< (std::ostream& os, const Professor& other)
     {
-        os << "Name: " << other.firstName << " " << other.lastName << "\n";
-        os << "Subject: " << other.subject << "\n";
+        os << "Full name: " << other.firstName << " " << other.lastName << "\n";
         os << "E-mail: " << other.email << "\n";
         os << "Phone number: " << other.phoneNumber << "\n";
-        os << "Birth date: " << other.birthDay << "/" << other.birthMonth << "/" << other.birthYear << "\n\n";
+        os << "Birth date: " << other.birthDay << "/" << other.birthMonth << "/" << other.birthYear << "\n";
 
         return os;
     }

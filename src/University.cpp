@@ -7,7 +7,7 @@
 #include <algorithm>
 #include <vector>
 
-University::University(const std::string& name, const std::string& subject, const int& foundationYear, const std::vector<Professor>& professors, const std::vector<Student>& students) {
+University::University(const std::string& name, const std::string& subject, const int& foundationYear, std::vector<std::shared_ptr<Professor>>& professors, const std::vector<Student>& students) {
     this -> name = name;
     this -> subject = subject;
     this -> foundationYear = foundationYear;
@@ -32,15 +32,15 @@ std::vector<Student> University::get_students() { return this -> students; }*/
     std::cout << this -> name << " cu specializarea " << this -> subject << " a fost fondata in anul " << this -> foundationYear << ".\nAre un cumul de 500 profesori de exceptie printre care si " << (this -> professors)[2].get_name() << "\n";
 }*/
 
-void University::add_professor(const Professor& other) {
-    (this -> professors).push_back(other);
+void University::add_professor(std::shared_ptr<Professor> other) {
+    (this -> professors).push_back(*new std::shared_ptr<Professor>(other));
 }
 
 void University::add_student(const Student& other) {
     (this -> students).push_back(other);
 }
 
-void University::add_multipleProfessors(const std::vector<Professor>& other) {
+void University::add_multipleProfessors(std::vector<std::shared_ptr<Professor>>& other) {
     for(auto& pr : other)
         (this -> professors).push_back(pr);
 }
@@ -58,7 +58,7 @@ void University::print_students() {
 void University::print_professors() {
     std::cout << "List of professors:\n";
     for(const auto& c : this -> professors)
-        std::cout << c;
+        std::cout << *c;
 }
 
 void University::reclassify() {
@@ -71,7 +71,7 @@ void University::reclassify() {
 }
 
 void University::sortProfessors() {
-    sort((this -> professors).begin(), (this -> professors).end(), [](const Professor& p1, const Professor& p2) { return(p1.get_subject() < p2.get_subject()); });
+    sort((this -> professors).begin(), (this -> professors).end(), [](const std::shared_ptr<Professor>& p1, const std::shared_ptr<Professor>& p2) { return(p1 -> get_subject() < p2 -> get_subject()); });
 }
 
 void University::divisionIntoGroups() {

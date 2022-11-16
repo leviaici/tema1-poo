@@ -8,6 +8,7 @@
 #include <iostream>
 #include "Professor.h"
 #include "Student.h"
+#include "SeminarTeacher.h"
 
 class University {
 private:
@@ -15,11 +16,11 @@ private:
     std::string subject;
     int foundationYear;
 
-    std::vector<Professor> professors;
+    std::vector<std::shared_ptr<Professor>> professors;
     std::vector<Student> students;
 
 public:
-    University(const std::string& name, const std::string& subject, const int& foundationYear, const std::vector<Professor>& professors, const std::vector<Student>& students);
+    University(const std::string& name, const std::string& subject, const int& foundationYear, std::vector<std::shared_ptr<Professor>>& professors, const std::vector<Student>& students);
 
     University(const University& other);
 
@@ -42,11 +43,11 @@ public:
 
 //    void print();
 
-    void add_professor(const Professor& other);
+    void add_professor(std::shared_ptr<Professor> other);
 
     void add_student(const Student& other);
 
-    void add_multipleProfessors(const std::vector<Professor>& other);
+    void add_multipleProfessors(std::vector<std::shared_ptr<Professor>>& other);
 
     void add_multipleStudents(const std::vector<Student>& other);
 

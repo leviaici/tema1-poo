@@ -9,8 +9,11 @@
 #include <filesystem>
 #include <limits>
 #include <ios>
-#include "../University.h"
 #include "rlutil.h"
+#include "../University.h"
+#include "../SeminarTeacher.h"
+#include "../LaboratoryTeacher.h"
+#include "../CourseTeacher.h"
 
 void ignoreReading() {
     std::cin.ignore(std::numeric_limits<std::streamsize>::max());
@@ -32,11 +35,16 @@ std::string toLowerWholeWord(std::string word) {
 }
 
 void test() {
-    std::vector<Professor> p;
+    std::vector<std::shared_ptr<Professor>> p;
+    std::vector<std::shared_ptr<Professor>> empty;
 
-    Professor p1 = Professor("Marius", "Micluta", "Informatica", "marius.micluta@unibuc.ro", "Unknown", 23, 02, 1999);
-    Professor p2 = Professor("Radu", "Boriga", "Informatica", "radu.boriga@unibuc.ro", "Unknown", 20, 7 ,1975);
+    std::shared_ptr<Professor> p1 = static_cast<std::shared_ptr<Professor>>(new LaboratoryTeacher("Marius", "Micluta","Informatica","marius.micluta@unibuc.ro","Unknown", 23, 02,1999));
+    std::shared_ptr<Professor> p2 = static_cast<std::shared_ptr<Professor>>(new CourseTeacher("Radu", "Boriga","Informatica","radu.boriga@unibuc.ro","Unknown", 20, 7, 1975));
     p.push_back(p1); p.push_back(p2);
+
+//    LaboratoryTeacher p3 = LaboratoryTeacher("Marius", "Micluta","Informatica","marius.micluta@unibuc.ro","Unknown", 23, 02,1999);
+
+//    std::cout << *(p1);
 
     std::vector<Student> s;
 
@@ -44,14 +52,15 @@ void test() {
     Student s2 = Student("Stefan", "Radu", "stefan.radu@s.unibuc.ro", "Unknown", 263, 19, 5, 2002);
     s.push_back(s1); s.push_back(s2);
 
-    University unibuc("Universitatea din Bucuresti", "Matematica si Informatica", 1864, {}, {});
-    unibuc.add_professor(Professor("Liliana", "Mitre", "Matematica", "liliana.mitre@unibuc.ro", "Unknown", 20, 1, 1990));
+    University unibuc("Universitatea din Bucuresti", "Matematica si Informatica", 1864, empty , {});
+    unibuc.add_professor(static_cast<std::shared_ptr<Professor>>(new SeminarTeacher("Liliana", "Mitre", "Matematica","liliana.mitre@unibuc.ro","Unknown", 20, 1, 1990)));
     unibuc.add_multipleProfessors(p);
 
     unibuc.print_professors();
+
     unibuc.sortProfessors();
     unibuc.print_professors();
-
+//
     std::vector<int> g;
     g.push_back(4); g.push_back(8); g.push_back(7); g.push_back(5);
 
