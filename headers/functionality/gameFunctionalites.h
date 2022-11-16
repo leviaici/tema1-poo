@@ -496,6 +496,8 @@ void registerOrLogin() {
 
 void prepareFileSystem() {
     std::filesystem::create_directory("savings");
+    std::filesystem::create_directory("savings/professors");
+    std::filesystem::create_directory("savings/students");
 }
 
 //void afisTest() {
