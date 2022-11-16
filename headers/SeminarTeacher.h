@@ -6,6 +6,7 @@
 #define OOP_SEMINARTEACHER_H
 
 #include "Professor.h"
+#include <memory>
 
 class SeminarTeacher : public Professor {
 public:

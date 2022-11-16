@@ -6,6 +6,7 @@
 #define OOP_PROFESSOR_H
 
 #include <iostream>
+#include <memory>
 
 class Professor {
 private:

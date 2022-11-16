@@ -7,6 +7,7 @@
 
 
 #include "Professor.h"
+#include <memory>
 
 class LaboratoryTeacher : public Professor {
 public:
