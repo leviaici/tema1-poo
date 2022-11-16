@@ -9,6 +9,7 @@
 #include <filesystem>
 #include <limits>
 #include <ios>
+#include <memory>
 #include "rlutil.h"
 #include "../University.h"
 #include "../SeminarTeacher.h"
