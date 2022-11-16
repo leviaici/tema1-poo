@@ -34,9 +34,9 @@ std::vector<Student> University::get_students() { return this -> students; }*/
 }*/
 
 void University::add_professor(std::shared_ptr<Professor> other) {
-    std::shared_ptr<Professor> p = *new std::shared_ptr<Professor>(other);
-    (this -> professors).push_back(p);
-    p.reset();
+//    std::shared_ptr<Professor> p = std::shared_ptr<Professor>(other);
+    (this -> professors).push_back(std::move(other));
+//    p.reset();
 }
 
 void University::add_student(const Student& other) {
