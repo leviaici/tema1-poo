@@ -30,7 +30,7 @@ std::string toLower(std::string word) {
 }
 std::string toLowerWholeWord(std::string word) {
     for(char &letter : word)
-        if(letter >= 65 && letter <= 90)
+        if(letter >= 'A' && letter <= 'Z')
             letter += 32;
     return word;
 }

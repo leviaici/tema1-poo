@@ -1,8 +1,9 @@
 test.professor@s.unibuc.ro
-testprofessor
+Test.professor4Git
 Test
 Professor
-Mathematics
+Git
+laboratory
 0711223344
 1
 1

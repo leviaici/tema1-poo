@@ -4,7 +4,7 @@
 int main() {
     test();
     prepareFileSystem();
-//    registerOrLogin();
+    registerOrLogin();
 //    std::vector<std::string>monthsOfYear = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
 //    for (int i = 0; i < 12; i++) {
 //        for(int j = 1; j <= 31; j++) {
@@ -18,5 +18,4 @@ int main() {
 ///TBA simulation speed
 ///TBA start date on savings file 1 Oct
 ///TBA bye bye saving file message
-///laboratory && seminar teacher
 ///TBA static int id_max

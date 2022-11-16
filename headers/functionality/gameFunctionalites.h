@@ -88,10 +88,10 @@ void blockUser(int counter) {
     std::cout << "You can try to log back in now as your cooldown expired.\n";
 }
 
-void createProfessorSavingsFile(const std::string& firstName, const std::string& lastName, const std::string& email, const std::string& password, const std::string& subject, const std::string& phoneNumber, const int& birthDay, const int& birthMonth, const int& birthYear) {
+void createProfessorSavingsFile(const std::string& firstName, const std::string& lastName, const std::string& email, const std::string& password, const std::string& subject, const std::string& phoneNumber, const int& birthDay, const int& birthMonth, const int& birthYear, const std::string& type) {
     std::ofstream print("savings/professors/" + email + ".txt");
 
-    print << email + "\n" + password + "\n" + firstName + "\n" + lastName + "\n" + subject + "\n" + phoneNumber + "\n" << birthDay << "\n" << birthMonth << "\n" << birthYear << "\n";
+    print << email + "\n" + password + "\n" + firstName + "\n" + lastName + "\n" + subject + "\n" + type + "\n" + phoneNumber + "\n" << birthDay << "\n" << birthMonth << "\n" << birthYear << "\n";
     print.close();
 }
 void createStudentSavingsFile(const std::string& firstName, const std::string& lastName, const std::string& email, const std::string& password, const std::string& phoneNumber, const int& group, const int& birthDay, const int& birthMonth, const int& birthYear, const std::vector<Subject>& subjects) {
@@ -213,8 +213,24 @@ void readInputPassword(std::string &password) {
     }
 }
 
+void readProfessorType(std::string& type) {
+    type = toLowerWholeWord(type);
+
+    while((type[0] != 's' || type[1] != 'e') && (type[0] != 'l' || type[1] != 'a') && (type[0] != 'c' || type[1] != 'o')) {
+        std::cout << "Seminar/Laboratory/Course:\n";
+        std::cin >> type;
+    }
+
+    if (type[0] == 's' && type[1] == 'e')
+        type = "seminar";
+    else if (type[0] == 'l' && type[1] == 'a')
+        type = "laboratory";
+    else if (type[0] == 'c' && type[1] == 'o')
+        type = "course";
+}
+
 void registerProfessorAccount(const std::string& firstName, const std::string& lastName, const std::string& email) {
-    std::string phoneNumber = " ", subject;
+    std::string phoneNumber = " ", subject, type;
     int birthDay = 0, birthMonth = 0, birthYear = 0;
 
     greetings(firstName, email);
@@ -224,6 +240,11 @@ void registerProfessorAccount(const std::string& firstName, const std::string& l
     std::cout << "What is the subject you are teaching students?\n";
     std::cin >> subject;
 
+    std::cout << "Seminar/Laboratory/Course:\n";
+    std::cin >> type;
+
+    readProfessorType(type);
+
     readBirthDate(birthDay, birthMonth, birthYear);
 
     std::cout << "Great! Now the next and final step...\nLet's choose a password!\n";
@@ -231,7 +252,7 @@ void registerProfessorAccount(const std::string& firstName, const std::string& l
     std::string password;
     readInputPassword(password);
 
-    createProfessorSavingsFile(firstName, lastName, email, password, subject, phoneNumber, birthDay, birthMonth, birthYear);
+    createProfessorSavingsFile(firstName, lastName, email, password, subject, phoneNumber, birthDay, birthMonth, birthYear, type);
 
     finalPrintRegistration();
 }

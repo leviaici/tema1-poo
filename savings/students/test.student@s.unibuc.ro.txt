@@ -1,5 +1,5 @@
 test.student@s.unibuc.ro
-teststudent
+Test.Student4Git
 Test
 Student
 0711223344
