@@ -43,7 +43,7 @@ public:
 
 //    void print();
 
-    void add_professor(std::shared_ptr<Professor> other);
+    void add_professor(const std::shared_ptr<Professor>& other);
 
     void add_student(const Student& other);
 

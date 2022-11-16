@@ -33,7 +33,7 @@ std::vector<Student> University::get_students() { return this -> students; }*/
     std::cout << this -> name << " cu specializarea " << this -> subject << " a fost fondata in anul " << this -> foundationYear << ".\nAre un cumul de 500 profesori de exceptie printre care si " << (this -> professors)[2].get_name() << "\n";
 }*/
 
-void University::add_professor(std::shared_ptr<Professor> other) {
+void University::add_professor(const std::shared_ptr<Professor>& other) {
 //    std::shared_ptr<Professor> p = std::shared_ptr<Professor>(other);
     (this -> professors).push_back(std::move(other));
 //    p.reset();
