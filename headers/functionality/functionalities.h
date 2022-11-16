@@ -50,6 +50,8 @@ void test() {
     std::shared_ptr<Professor> p4 = p1 -> clone();
     std::shared_ptr<Professor> p6 = p5 -> clone();
 
+    std::cout << *p3 << *p4 << *p6 << "\n\n\n\n";
+
 //    std::cout << *(p1);
 
     std::vector<Student> s;
