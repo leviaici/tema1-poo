@@ -8,7 +8,7 @@
 #include <vector>
 #include <memory>
 
-University::University(const std::string& name, const std::string& subject, const int& foundationYear, std::vector<std::shared_ptr<Professor>>& professors, const std::vector<Student>& students) {
+University::University(const std::string& name, const std::string& subject, const int& foundationYear, const std::vector<std::shared_ptr<Professor>>& professors, const std::vector<Student>& students) {
     this -> name = name;
     this -> subject = subject;
     this -> foundationYear = foundationYear;

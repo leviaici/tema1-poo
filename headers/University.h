@@ -20,7 +20,7 @@ private:
     std::vector<Student> students;
 
 public:
-    University(const std::string& name, const std::string& subject, const int& foundationYear, std::vector<std::shared_ptr<Professor>>& professors, const std::vector<Student>& students);
+    University(const std::string& name, const std::string& subject, const int& foundationYear, const std::vector<std::shared_ptr<Professor>>& professors, const std::vector<Student>& students);
 
     University(const University& other);
 

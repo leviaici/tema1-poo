@@ -15,7 +15,7 @@ public:
 
     SeminarTeacher(const SeminarTeacher& other);
 
-    std::shared_ptr<Professor> clone() const;
+    std::shared_ptr<Professor> clone() const override;
 
     friend std::ostream &operator<<(std::ostream &os, const SeminarTeacher &other);
 
