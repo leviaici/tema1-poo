@@ -62,10 +62,6 @@ void test() {
     unibuc.sortProfessors();
     unibuc.print_professors();
 
-    p1.reset();
-    p2.reset();
-    std::destroy(p.begin(), p.end());
-//
     std::vector<int> g;
     g.push_back(4); g.push_back(8); g.push_back(7); g.push_back(5);
 
@@ -86,6 +82,10 @@ void test() {
     unibuc.print_students();
 
     unibuc.print_groups();
+
+    p1.reset();
+    p2.reset();
+    std::destroy(p.begin(), p.end());
 
     std::destroy(note3.begin(), note3.end());
     std::destroy(note4.begin(), note4.end());
