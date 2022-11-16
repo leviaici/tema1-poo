@@ -88,8 +88,6 @@ void test() {
     p2.reset();
 
     std::destroy(g.begin(), g.end());
-    std::destroy(note3.begin(), note3.end());
-    std::destroy(note4.begin(), note4.end());
 }
 
 int localDay() {
