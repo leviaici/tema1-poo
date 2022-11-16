@@ -70,9 +70,10 @@ std::string getPassword(bool mode) { // true - password, false - verify password
 std::string checkAccountType(std::string accountType) {
     if(accountType == "student" || accountType == "professor")
         return accountType;
-    if(accountType[0] == 's' && accountType[1] == 't')
+
+    if(accountType.substr(2) == "st")
         return "student";
-    if(accountType[0] == 'p' && accountType[1] == 'r')
+    if(accountType.substr(2) == "pr")
         return "professor";
     return "wrong";
 }
@@ -221,11 +222,11 @@ void readProfessorType(std::string& type) {
         std::cin >> type;
     }
 
-    if (type[0] == 's' && type[1] == 'e')
+    if (type.substr(2) == "se")
         type = "seminar";
-    else if (type[0] == 'l' && type[1] == 'a')
+    else if (type.substr(2) == "la")
         type = "laboratory";
-    else if (type[0] == 'c' && type[1] == 'o')
+    else if (type.substr(2) == "co")
         type = "course";
 }
 

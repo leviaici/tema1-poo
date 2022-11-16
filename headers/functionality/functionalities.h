@@ -22,16 +22,16 @@ void ignoreReading() {
 
 std::string toLower(std::string word) {
     if(word[0] >= 65 && word[0] <= 90)
-        word[0] += 32;
+        std::tolower(word[0]);
     for(unsigned i = 1; i < word.size(); i++)
         if(word[i] == '-' && word[i + 1] >= 65 && word[i + 1] <= 90)
-            word[i + 1] += 32;
+            std::tolower(word[i + 1]);
     return word;
 }
 std::string toLowerWholeWord(std::string word) {
     for(char &letter : word)
         if(letter >= 'A' && letter <= 'Z')
-            letter += 32;
+            std::tolower(letter);
     return word;
 }
 
