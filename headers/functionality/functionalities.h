@@ -22,16 +22,16 @@ void ignoreReading() {
 
 std::string toLower(std::string word) {
     if(word[0] >= 65 && word[0] <= 90)
-        std::tolower(word[0]);
+        word[0] = std::tolower(word[0]);
     for(unsigned i = 1; i < word.size(); i++)
         if(word[i] == '-' && word[i + 1] >= 65 && word[i + 1] <= 90)
-            std::tolower(word[i + 1]);
+            word[i + 1] = std::tolower(word[i + 1]);
     return word;
 }
 std::string toLowerWholeWord(std::string word) {
     for(char &letter : word)
         if(letter >= 'A' && letter <= 'Z')
-            std::tolower(letter);
+            letter = std::tolower(letter);
     return word;
 }
 
@@ -91,17 +91,8 @@ void test() {
 
     unibuc.print_groups();
 
-//    std::destroy(p.begin(), p.end())
-
-    p1.reset();
-    p2.reset();
-    p3.reset();
-    p4.reset();
-    p5.reset();
-    p6.reset();
-
-//    std::destroy(g.begin(), g.end());
-
+    p1.reset(); p2.reset(); p3.reset();
+    p4.reset(); p5.reset(); p6.reset();
 }
 
 int localDay() {
