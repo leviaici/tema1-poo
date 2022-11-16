@@ -83,13 +83,13 @@ void test() {
 
     unibuc.print_groups();
 
+    std::destroy(p.begin(), p.end());
     p1.reset();
     p2.reset();
-    std::destroy(p.begin(), p.end());
 
+    std::destroy(g.begin(), g.end());
     std::destroy(note3.begin(), note3.end());
     std::destroy(note4.begin(), note4.end());
-    std::destroy(g.begin(), g.end());
 }
 
 int localDay() {
