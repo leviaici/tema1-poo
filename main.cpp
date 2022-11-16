@@ -2,8 +2,8 @@
 //#include <indicators.hpp>
 
 int main() {
-    registerOrLogin();
     test();
+//    registerOrLogin();
 //    std::vector<std::string>monthsOfYear = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
 //    for (int i = 0; i < 12; i++) {
 //        for(int j = 1; j <= 31; j++) {

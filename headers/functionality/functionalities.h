@@ -41,9 +41,14 @@ void test() {
 
     std::shared_ptr<Professor> p1 = static_cast<std::shared_ptr<Professor>>(new LaboratoryTeacher("Marius", "Micluta","Informatica","marius.micluta@unibuc.ro","Unknown", 23, 02,1999));
     std::shared_ptr<Professor> p2 = static_cast<std::shared_ptr<Professor>>(new CourseTeacher("Radu", "Boriga","Informatica","radu.boriga@unibuc.ro","Unknown", 20, 7, 1975));
+    std::shared_ptr<Professor> p5 = static_cast<std::shared_ptr<Professor>>(new SeminarTeacher("Liliana", "Mitre", "Matematica","liliana.mitre@unibuc.ro","Unknown", 20, 1, 1990));
     p.push_back(p1); p.push_back(p2);
 
 //    LaboratoryTeacher p3 = LaboratoryTeacher("Marius", "Micluta","Informatica","marius.micluta@unibuc.ro","Unknown", 23, 02,1999);
+
+    std::shared_ptr<Professor> p3 = p2 -> clone();
+    std::shared_ptr<Professor> p4 = p1 -> clone();
+    std::shared_ptr<Professor> p6 = p5 -> clone();
 
 //    std::cout << *(p1);
 
@@ -53,8 +58,9 @@ void test() {
     Student s2 = Student("Stefan", "Radu", "stefan.radu@s.unibuc.ro", "Unknown", 263, 19, 5, 2002);
     s.push_back(s1); s.push_back(s2);
 
+
     University unibuc("Universitatea din Bucuresti", "Matematica si Informatica", 1864, empty , {});
-    unibuc.add_professor(static_cast<std::shared_ptr<Professor>>(new SeminarTeacher("Liliana", "Mitre", "Matematica","liliana.mitre@unibuc.ro","Unknown", 20, 1, 1990)));
+    unibuc.add_professor(p5);
     unibuc.add_multipleProfessors(p);
 
     unibuc.print_professors();
@@ -83,11 +89,17 @@ void test() {
 
     unibuc.print_groups();
 
-    std::destroy(p.begin(), p.end());
+//    std::destroy(p.begin(), p.end())
+
     p1.reset();
     p2.reset();
+    p3.reset();
+    p4.reset();
+    p5.reset();
+    p6.reset();
 
-    std::destroy(g.begin(), g.end());
+//    std::destroy(g.begin(), g.end());
+
 }
 
 int localDay() {
