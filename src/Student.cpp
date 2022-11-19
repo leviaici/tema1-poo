@@ -38,7 +38,11 @@ Student::~Student() {
 //    std::cout << "Killing the student.\n";
 }
 
-void Student::set_id(const int& other) { this -> id = other; }
+void Student::set_id(const int& other) {
+    this -> id = other;
+    if(other > id_max)
+        id_max = other;
+}
 
 void Student::calculateOverallAverage() {
     for(auto c : (this -> subjects))
@@ -62,3 +66,5 @@ std::string Student::get_lastName() const { return this -> lastName; }
 std::string Student::get_phoneNumber() { return this -> phoneNumber; }
 int Student::get_group() { return this -> group; }
 bool Student::get_tuitionFree() { return this -> tuitionFree; } */
+
+int Student::id_max = 0;

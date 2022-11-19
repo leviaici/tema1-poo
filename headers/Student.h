@@ -21,6 +21,7 @@ private:
     int birthMonth = 0;
     int birthYear = 0;
     int id = 0; ///TBA static int id_max!!!
+    static int id_max;
     float overallAverage = .0;
     bool tuitionFree = false;
 
@@ -91,6 +92,8 @@ public:
         return os;
     }
 };
+
+
 
 
 #endif //OOP_STUDENT_H
