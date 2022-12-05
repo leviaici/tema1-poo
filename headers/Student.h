@@ -20,7 +20,7 @@ private:
     int birthDay = 0;
     int birthMonth = 0;
     int birthYear = 0;
-    int id = 0; ///TBA static int id_max!!!
+    int id = 0;
     static int id_max;
     float overallAverage = .0;
     bool tuitionFree = false;
