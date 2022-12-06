@@ -56,6 +56,8 @@ int Student::get_group() const { return this -> group; }
 
 void Student::set_tuitionFree(const bool& status) { this -> tuitionFree = status; }
 
+//int Student::get_id_max() { return id_max; } // never used, so it's commented
+
 //void Student::set_subjects(const std::vector<Subject>& other) { this -> subjects = other; }
 
 std::string Student::get_firstName() const { return this -> firstName; }

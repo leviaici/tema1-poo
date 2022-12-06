@@ -14,6 +14,7 @@
 #include <filesystem>
 
 #include "functionalities.h"
+#include "../Exceptions.h"
 
 void loginAccount(int counter);
 void registerAccount();
@@ -38,7 +39,7 @@ std::string getPassword(bool mode) { // true - password, false - verify password
             std::cout << "Verify password: ";
         }
         rlutil::locate(x, y);
-        for(int i = 0; i < counter; i++) {
+        for (int i = 0; i < counter; i++) {
             std::cout << "*";
             ++x;
         }
@@ -58,7 +59,7 @@ std::string getPassword(bool mode) { // true - password, false - verify password
             if(complexity >= 50 && password.size() >= 10)
                 break;
             else continue;
-        } else if(ch != ' ') {
+        } else if (ch != ' ') {
             counter++;
             std::cout << '*';
             password += ch;
@@ -68,12 +69,12 @@ std::string getPassword(bool mode) { // true - password, false - verify password
 }
 
 std::string checkAccountType(std::string accountType) {
-    if(accountType == "student" || accountType == "professor")
+    if (accountType == "student" || accountType == "professor")
         return accountType;
 
-    if(accountType.substr(0, 2) == "st")
+    if (accountType.substr(0, 2) == "st")
         return "student";
-    if(accountType.substr(0, 2) == "pr")
+    if (accountType.substr(0, 2) == "pr")
         return "professor";
     return "wrong";
 }
@@ -100,7 +101,7 @@ void createStudentSavingsFile(const std::string& firstName, const std::string& l
 
     print << email + "\n" + password + "\n" + firstName + "\n" + lastName + "\n" + phoneNumber + "\n" << group << "\n" << birthDay << "\n" << birthMonth << "\n" << birthYear << "\n";
 
-    for(const auto& subject: subjects) {
+    for (const auto& subject: subjects) {
         print << subject.get_subject() << "\n" << "Grades: ";
         for(const auto& grade: subject.get_grades())
             print << grade << " ";
@@ -121,55 +122,61 @@ void readBirthDate(int &birthDay, int &birthMonth, int &birthYear) {
     std::cout << "When were you born? DD/MM/YYYY\n";
     std::cin >> birthDay >> unused1 >> birthMonth >> unused2 >> birthYear;
 
-    while(!(birthMonth > 0 && birthMonth < 13)) {
+    while (!(birthMonth > 0 && birthMonth < 13)) {
         std::cout << "Invalid month. Try again.\nMonth: ";
         std::cin >> birthMonth;
     }
 
-    if(birthYear < 1900) {
-        rlutil::setColor(12);
-        std::cout << "Oh... you are dead, so... Goodbye and rest in peace.";
-        exit(1);
-    }
-
-    if(birthYear >= localYear() && birthMonth >= localMonth()) {
-        if(birthMonth == localMonth() && birthDay > localDay()) {
-            rlutil::setColor(12);
-            std::cout << "Oh... you are not born yet so wait a little bit more for this.";
-            exit(1);
-        } else {
-            rlutil::setColor(12);
-            std::cout << "Oh... you are too young for this.";
-            exit(1);
-        }
-    }
-
-    if(localYear() - birthYear <= 17) {
-        rlutil::setColor(12);
-        std::cout << "Oh... you are too young for this.";
-        exit(1);
-    }
-
-    while(!(birthDay > 0 && birthDay < 32)) {
+    while (!(birthDay > 0 && birthDay < 32)) {
         std::cout << "Invalid birthday. Try again.\nDay: ";
         std::cin >> birthDay;
     }
 
-    if(birthDay == 29 && birthMonth == 2 && birthYear % 4) {
-        rlutil::setColor(12);
-        std::cout << "Check your birthday again and try again.\nYour birth year didn't have any 29th February.\n";
-        exit(1);
-    }
+    try {
+        if (birthYear < 1900) {
+            throw errorDead("Oh... you are dead, so... Goodbye and rest in peace.\n");
+//            rlutil::setColor(12);
+//            std::cout << "Oh... you are dead, so... Goodbye and rest in peace.\n";
+//            exit(1);
+        }
 
-    if(birthDay == 31 && !(birthMonth % 2) && birthMonth < 7) {
-        rlutil::setColor(12);
-        std::cout << "Check your birthday again and try again.\nYour birth month didn't have any 31st.\n";
-        exit(1);
-    }
+        if (birthYear >= localYear() && birthMonth >= localMonth()) {
+            if (birthMonth == localMonth() && birthDay > localDay()) {
+                throw errorNotBorn("Oh... you are not born yet so wait a little bit more for this.\n");
+            } else throw errorYoung("Oh... you are too young for this.\n");
+        }
 
-    if(birthDay == 31 && birthMonth % 2 && birthMonth > 8) {
+        if (localYear() - birthYear <= 17)
+            throw errorYoung("Oh... you are too young for this.\n");
+
+        if (birthDay == 29 && birthMonth == 2 && birthYear % 4)
+            throw error29("Check your birthday again and try again.\\nYour birth year didn't have any 29th February.\n");
+
+        if (birthDay == 31 && !(birthMonth % 2) && birthMonth < 7)
+            throw error31st("Check your birthday again and try again.\nYour birth month didn't have any 31st.\n");
+
+        if (birthDay == 31 && birthMonth % 2 && birthMonth > 8)
+            throw error31st("Check your birthday again and try again.\nYour birth month didn't have any 31st.\n");
+
+    } catch (error31st &e) {
         rlutil::setColor(12);
-        std::cout << "Check your birthday again and try again.\nYour birth month didn't have any 31st.\n";
+        std::cout << e.what();
+        exit(1);
+    } catch (errorYoung &e) {
+        rlutil::setColor(12);
+        std::cout << e.what();
+        exit(1);
+    } catch (errorDead &e) {
+        rlutil::setColor(12);
+        std::cout << e.what();
+        exit(1);
+    } catch (errorNotBorn &e) {
+        rlutil::setColor(12);
+        std::cout << e.what();
+        exit(1);
+    } catch (error29 &e) {
+        rlutil::setColor(12);
+        std::cout << e.what();
         exit(1);
     }
 }
@@ -187,7 +194,7 @@ void readPhoneNumber(std::string &phoneNumber) {
     std::cout << "What's your phone number?\n";
     std::cin >> phoneNumber;
 
-    while(phoneNumber.size() < 10) {
+    while (phoneNumber.size() < 10) {
         std::cout << "Invalid phone number. Try again.\nPhone number: ";
         std::cin >> phoneNumber;
     }
@@ -217,7 +224,7 @@ void readInputPassword(std::string &password) {
 void readProfessorType(std::string& type) {
     type = toLowerWholeWord(type);
 
-    while((type[0] != 's' || type[1] != 'e') && (type[0] != 'l' || type[1] != 'a') && (type[0] != 'c' || type[1] != 'o')) {
+    while ((type[0] != 's' || type[1] != 'e') && (type[0] != 'l' || type[1] != 'a') && (type[0] != 'c' || type[1] != 'o')) {
         std::cout << "Seminar/Laboratory/Course:\n";
         std::cin >> type;
     }
@@ -268,7 +275,7 @@ void registerStudentAccount(const std::string& firstName, const std::string& las
     std::cout << "What group were you assigned to?\n";
     std::cin >> group;
 
-    while(!group) {
+    while (!group) {
         std::cout << "Invalid group. Try again.\nGroup: ";
         std::cin >> phoneNumber;
     }
@@ -311,7 +318,7 @@ void registerAccount() {
     std::cin >> accountType;
     accountType = checkAccountType(toLowerWholeWord(accountType));
 
-    if(accountType == "wrong") {
+    if (accountType == "wrong") {
         std::cout << "Wrong input of account type. You needed to choose between being a student or a professor.\n";
         while(accountType == "wrong") {
             std::cout << "Let's try again. Are you a student or a professor?\n";
@@ -325,15 +332,15 @@ void registerAccount() {
 
     email = toLower(firstName) + "." + toLowerWholeWord(lastName) + "@s.unibuc.ro";
 
-    if(checkExistingAccount(email, accountType)) {
+    if (checkExistingAccount(email, accountType)) {
         char choice;
         std::cout << "Account already exists. Do you want to login?\nY/N: ";
         std::cin >> choice;
-        if(choice == 'Y' || choice == 'y')
+        if (choice == 'Y' || choice == 'y')
             loginAccount(1);
         return;
     }else {
-        if(accountType == "student")
+        if (accountType == "student")
             registerStudentAccount(firstName, lastName, email);
         else registerProfessorAccount(firstName, lastName, email);
     }
@@ -355,12 +362,12 @@ void deleteAccount(const std::string& email, const std::string& password) {
     std::cout << "Are you sure you want to permanently delete your account?\n(Y/N): ";
     std::cin >> choice;
 
-    while(choice != 'Y' && choice != 'y' && choice != 'N' && choice != 'n') {
+    while (choice != 'Y' && choice != 'y' && choice != 'N' && choice != 'n') {
         std::cout << "Asked for Y or N. Try again, please.\n";
         std::cin >> choice;
     }
 
-    if(choice == 'y' || choice == 'Y') {
+    if (choice == 'y' || choice == 'Y') {
         std::cout << "Enter the password for confirmation and your account will be deleted as you wish.\n";
         std::this_thread::sleep_for(std::chrono::seconds(1));
         std::cin.ignore();
@@ -368,7 +375,7 @@ void deleteAccount(const std::string& email, const std::string& password) {
         rlutil::cls();
 
         int counter = 0;
-        while(passwordVerification != password) {
+        while (passwordVerification != password) {
             std::cout << "Wrong password.\n";
             counter++;
             if(!(counter % 3))
@@ -380,7 +387,7 @@ void deleteAccount(const std::string& email, const std::string& password) {
         }
 
         std::string accountType;
-        if(checkExistingAccount(email, "student"))
+        if (checkExistingAccount(email, "student"))
             accountType = "student";
         else accountType = "professor";
 
@@ -389,7 +396,7 @@ void deleteAccount(const std::string& email, const std::string& password) {
             std::string path = "savings/" + accountType + "s/" + email + ".txt";
             const char* filePath = path.c_str(); /// PENTRU CA NU MA LASA CU std::filesystem::remove() MA IMPUSC
 
-            if((remove(filePath)))
+            if ((remove(filePath)))
                 throw std::exception();
             std::cout << "Account deletion complete. All your data have been erased.\n";
         } catch (std::exception& e) {
@@ -405,15 +412,15 @@ void loginAccount(int counter) {
     std::cout << "E-mail: ";    std::cin >> email;
     std::ifstream open("savings/students/" + email + ".txt");
 
-    if(!open)
+    if (!open)
         open = std::ifstream("savings/professors/" + email + ".txt");
-    if(!open) {
+    if (!open) {
         std::cout << "This e-mail wasn't registered. Do you want to register a new account?\n(Y/N): ";
         char choice;    std::cin >> choice;
-        if(choice == 'y' || choice == 'Y') {
+        if (choice == 'y' || choice == 'Y') {
             registerAccount();
             return;
-        } else if(choice == 'n' || choice == 'N')
+        } else if (choice == 'n' || choice == 'N')
             return;
         std::cout << "Try again.\n";
         loginAccount(1);
@@ -430,30 +437,30 @@ void loginAccount(int counter) {
 
     open.close();
 
-    if(password == readPassword) {
+    if (password == readPassword) {
         bool choice;
         std::cout << "Do you want to continue the saved game (1) or do you want to delete the savings/account and start again (0)?\n(1/0): ";
         std::cin >> choice;
-        if(choice)
+        if (choice)
             std::cout << "Continuing...\n"; ///TBA CONTINUING GAME FUNCTION
         else deleteAccount(email, password);
     } else {
         std::cout << "Incorrect E-mail or password. ";
-        if(counter % 3) {
+        if (counter % 3) {
             std::cout << "You have " << 3 - (counter % 3);
-            if(counter % 3 == 1)
+            if (counter % 3 == 1)
                 std::cout << " more attempts ";
             else std:: cout << " more attempt ";
             char choice;
             std::cout << "left before you get a cooldown. Would you like to try again?\n(Y/N): ";
             std::cin >> choice;
-            if(choice == 'Y' || choice == 'y') {
+            if (choice == 'Y' || choice == 'y') {
                 loginAccount(++counter);
                 return;
             }
             std::cout << "Would you like to register a new account?\n(Y/N): ";
             std::cin >> choice;
-            if(choice == 'Y' || choice == 'y') {
+            if (choice == 'Y' || choice == 'y') {
                 registerAccount();
                 return;
             }
@@ -484,12 +491,12 @@ void registerOrLogin() {
     std::cout << "Login to an already existent account or register a new one?\n(L/R): ";
     std::cin >> choice;
 
-    while(choice != 'l' && choice != 'r' && choice != 'L' && choice != 'R') {
+    while (choice != 'l' && choice != 'r' && choice != 'L' && choice != 'R') {
         std::cout << "Asked for L or R... Please, try again!\n";
         std::cin >> choice;
     }
 
-    if(choice == 'r' || choice == 'R')
+    if (choice == 'r' || choice == 'R')
         registerAccount();
     else loginAccount(1);
 }

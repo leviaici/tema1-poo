@@ -34,7 +34,7 @@
   - [ ] ierarhie proprie cu baza `std::exception` sau derivată din `std::exception`
   - [X] utilizare cu sens: de exemplu, `throw` în constructor, `try`/`catch` în `main`
 - [X] funcții și atribute `static`
-- [ ] STL
+- [X] STL
 - [X] cât mai multe `const`
 - [ ] la sfârșit: commit separat cu adăugarea unei noi derivate
 - [ ] tag de `git`: de exemplu `v0.2`

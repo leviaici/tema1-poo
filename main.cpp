@@ -18,4 +18,3 @@ int main() {
 ///TBA simulation speed
 ///TBA start date on savings file 1 Oct
 ///TBA bye bye saving file message
-///TBA static int id_max

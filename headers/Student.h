@@ -70,6 +70,7 @@ public:
 
     std::string get_firstName() const;
     std::string get_lastName() const;
+//    static int get_id_max(); // never used, so it's commented
 //    std::vector<Subject> get_subjects();
     /*std::string get_email();
     std::string get_phoneNumber();
