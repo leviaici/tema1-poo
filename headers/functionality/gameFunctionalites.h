@@ -246,7 +246,8 @@ void registerProfessorAccount(const std::string& firstName, const std::string& l
     readPhoneNumber(phoneNumber);
 
     std::cout << "What is the subject you are teaching students?\n";
-    std::cin >> subject;
+//    std::cin >> subject;
+    std::getline(std::cin >> std::ws, subject);
 
     std::cout << "Seminar/Laboratory/Course:\n";
     std::cin >> type;
