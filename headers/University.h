@@ -24,13 +24,17 @@ public:
 
     University(const University& other);
 
-    University& operator = (const University &other) {
-        name = other.name;
-        subject = other.subject;
-        foundationYear = other.foundationYear;
-        professors = other.professors;
-        students = other.students;
-//        std::cout << "University Operator =\n";
+    friend void swap(University &u1, University &u2) {
+        using std::swap;
+        swap(u1.name, u2.name);
+        swap(u1.subject, u2.subject);
+        swap(u1.foundationYear, u2.foundationYear);
+        swap(u1.professors, u2.professors);
+        swap(u1.students, u2.students);
+    }
+
+    University& operator = (University other) {
+        swap(*this, other);
         return *this;
     }
 

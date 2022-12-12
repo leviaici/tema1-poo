@@ -28,7 +28,7 @@ std::string getPassword(bool mode) { // true - password, false - verify password
     while (true) {
         rlutil::cls();
 
-        if(mode) {
+        if (mode) {
             complexity = checkPasswordComplexity(password);
             printComplexity(int(complexity), password);
             x = 11; y = 4;
@@ -46,7 +46,7 @@ std::string getPassword(bool mode) { // true - password, false - verify password
         rlutil::locate(x, y);
         unsigned char ch = getch();
         if (ch == 127 || ch == 8) {
-            if(password.length() > 0) {
+            if( password.length() > 0) {
                 --x;
                 --counter;
                 rlutil::locate(x,y);
@@ -54,9 +54,9 @@ std::string getPassword(bool mode) { // true - password, false - verify password
                 password.erase(password.length() - 1);
             }
         } else if (ch == '\n') {
-            if(!mode)
+            if (!mode)
                 break;
-            if(complexity >= 50 && password.size() >= 10)
+            if (complexity >= 50 && password.size() >= 10)
                 break;
             else continue;
         } else if (ch != ' ') {
@@ -74,8 +74,10 @@ std::string checkAccountType(std::string accountType) {
 
     if (accountType.substr(0, 2) == "st")
         return "student";
+
     if (accountType.substr(0, 2) == "pr")
         return "professor";
+
     return "wrong";
 }
 
@@ -103,7 +105,7 @@ void createStudentSavingsFile(const std::string& firstName, const std::string& l
 
     for (const auto& subject: subjects) {
         print << subject.get_subject() << "\n" << "Grades: ";
-        for(const auto& grade: subject.get_grades())
+        for (const auto& grade: subject.get_grades())
             print << grade << " ";
         print << "\n" << "Average: " << subject.get_average() << "\n";
         print << "Passed/Failed (1/0): " << subject.get_passed() << "\n\n";
@@ -133,12 +135,8 @@ void readBirthDate(int &birthDay, int &birthMonth, int &birthYear) {
     }
 
     try {
-        if (birthYear < 1900) {
+        if (birthYear < 1900)
             throw errorDead("Oh... you are dead, so... Goodbye and rest in peace.\n");
-//            rlutil::setColor(12);
-//            std::cout << "Oh... you are dead, so... Goodbye and rest in peace.\n";
-//            exit(1);
-        }
 
         if (birthYear >= localYear() && birthMonth >= localMonth()) {
             if (birthMonth == localMonth() && birthDay > localDay()) {
@@ -246,7 +244,6 @@ void registerProfessorAccount(const std::string& firstName, const std::string& l
     readPhoneNumber(phoneNumber);
 
     std::cout << "What is the subject you are teaching students?\n";
-//    std::cin >> subject;
     std::getline(std::cin >> std::ws, subject);
 
     std::cout << "Seminar/Laboratory/Course:\n";
@@ -321,7 +318,7 @@ void registerAccount() {
 
     if (accountType == "wrong") {
         std::cout << "Wrong input of account type. You needed to choose between being a student or a professor.\n";
-        while(accountType == "wrong") {
+        while (accountType == "wrong") {
             std::cout << "Let's try again. Are you a student or a professor?\n";
             std::cin >> accountType;
             accountType = checkAccountType(toLowerWholeWord(accountType));
@@ -349,11 +346,11 @@ void registerAccount() {
     std::cout << "Do you want now to login?\n(Y/N): ";
     char choice;
     std::cin >> choice;
-    while(choice != 'Y' && choice != 'y' && choice != 'N' && choice != 'n') {
+    while (choice != 'Y' && choice != 'y' && choice != 'N' && choice != 'n') {
         std::cout << "Asked for Y or N. Try again, please.\n";
         std::cin >> choice;
     }
-    if(choice == 'y' || choice == 'Y')
+    if (choice == 'y' || choice == 'Y')
         loginAccount(1);
 }
 
@@ -379,7 +376,7 @@ void deleteAccount(const std::string& email, const std::string& password) {
         while (passwordVerification != password) {
             std::cout << "Wrong password.\n";
             counter++;
-            if(!(counter % 3))
+            if (!(counter % 3))
                 blockUser(counter);
             std::cout << "Try again typing your password to confirm the account deletion.\n";
             std::this_thread::sleep_for(std::chrono::seconds(1));

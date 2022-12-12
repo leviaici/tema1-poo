@@ -91,6 +91,11 @@ void test() {
 
     unibuc.print_groups();
 
+    University poli = unibuc;
+    poli.print_students();
+    poli.print_professors();
+    poli.print_groups();
+
     p1.reset(); p2.reset(); p3.reset();
     p4.reset(); p5.reset(); p6.reset();
 }
