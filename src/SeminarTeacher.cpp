@@ -15,7 +15,7 @@ std::shared_ptr<Professor> SeminarTeacher::clone() const {
 }
 
 std::ostream &operator<<(std::ostream &os, const SeminarTeacher &other) {
-    os << static_cast<const Professor&>(other);
+    os << dynamic_cast<const Professor&>(other);
     other.print(os);
 
     return os;

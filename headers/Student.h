@@ -69,13 +69,16 @@ public:
 //    void set_subjects(const std::vector<Subject>& other);
 
     std::string get_firstName() const;
+
     std::string get_lastName() const;
+
 //    static int get_id_max(); // never used, so it's commented
 //    std::vector<Subject> get_subjects();
     /*std::string get_email();
     std::string get_phoneNumber();
     int get_group();
     bool get_tuitionFree();*/
+
     friend std::ostream& operator<< (std::ostream& os, const Student& other)
     {
         os << "Full name: " << other.lastName << " " << other.firstName << "\n";

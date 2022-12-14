@@ -61,7 +61,9 @@ void Student::set_tuitionFree(const bool& status) { this -> tuitionFree = status
 //void Student::set_subjects(const std::vector<Subject>& other) { this -> subjects = other; }
 
 std::string Student::get_firstName() const { return this -> firstName; }
+
 std::string Student::get_lastName() const { return this -> lastName; }
+
 //std::vector<Subject> Student::get_subjects() { return this -> subjects; }
 
 /*std::string Student::get_email() { return this -> email; }
