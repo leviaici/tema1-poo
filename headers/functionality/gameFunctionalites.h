@@ -119,6 +119,11 @@ bool checkExistingAccount(const std::string& email, const std::string& accountTy
     return bool(open);
 }
 
+void printError(const std::string& error) {
+    rlutil::setColor(12);
+    std::cout << error;
+}
+
 void readBirthDate(int &birthDay, int &birthMonth, int &birthYear) {
     char unused1, unused2;
     std::cout << "When were you born? DD/MM/YYYY\n";
@@ -148,7 +153,7 @@ void readBirthDate(int &birthDay, int &birthMonth, int &birthYear) {
             throw errorYoung("Oh... you are too young for this.\n");
 
         if (birthDay == 29 && birthMonth == 2 && birthYear % 4)
-            throw error29("Check your birthday again and try again.\\nYour birth year didn't have any 29th February.\n");
+            throw error29("Check your birthday again and try again.\nYour birth year didn't have any 29th February.\n");
 
         if (birthDay == 31 && !(birthMonth % 2) && birthMonth < 7)
             throw error31st("Check your birthday again and try again.\nYour birth month didn't have any 31st.\n");
@@ -157,27 +162,23 @@ void readBirthDate(int &birthDay, int &birthMonth, int &birthYear) {
             throw error31st("Check your birthday again and try again.\nYour birth month didn't have any 31st.\n");
 
     } catch (error31st &e) {
-        rlutil::setColor(12);
-        std::cout << e.what();
+        printError(e.what());
         exit(1);
     } catch (errorYoung &e) {
-        rlutil::setColor(12);
-        std::cout << e.what();
+        printError(e.what());
         exit(1);
     } catch (errorDead &e) {
-        rlutil::setColor(12);
-        std::cout << e.what();
+        printError(e.what());
         exit(1);
     } catch (errorNotBorn &e) {
-        rlutil::setColor(12);
-        std::cout << e.what();
+        printError(e.what());
         exit(1);
     } catch (error29 &e) {
-        rlutil::setColor(12);
-        std::cout << e.what();
+        printError(e.what());
         exit(1);
     }
 }
+
 
 void greetings(const std::string& firstName, const std::string& email) {
     std::cout << "Nice to meet you, " << firstName << "!\n";

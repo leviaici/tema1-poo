@@ -20,6 +20,8 @@ public:
 
     std::shared_ptr<Professor> clone() const override;
 
+//    virtual void createExam(const std::string& subject) override;
+
     friend std::ostream &operator<<(std::ostream &os, const SeminarTeacher &other);
 
     ~SeminarTeacher();
