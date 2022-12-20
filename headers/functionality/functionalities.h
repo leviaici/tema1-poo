@@ -44,6 +44,10 @@ void test() {
     std::shared_ptr<Professor> p5 = static_cast<std::shared_ptr<Professor>>(new SeminarTeacher("Liliana", "Mitre", "Matematica","liliana.mitre@unibuc.ro","Unknown", 20, 1, 1990));
     p.push_back(p1); p.push_back(p2);
 
+    p5->createExam(p5->get_subject());
+    p2->createExam(p2->get_subject());
+    p1->createExam(p1->get_subject());
+
 //    LaboratoryTeacher p3 = LaboratoryTeacher("Marius", "Micluta","Informatica","marius.micluta@unibuc.ro","Unknown", 23, 02,1999);
 
     std::shared_ptr<Professor> p3 = p2 -> clone();

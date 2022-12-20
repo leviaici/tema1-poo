@@ -504,6 +504,13 @@ void prepareFileSystem() {
     std::filesystem::create_directory("savings");
     std::filesystem::create_directory("savings/professors");
     std::filesystem::create_directory("savings/students");
+    std::filesystem::create_directory("exams");
+    std::filesystem::create_directory("exams/laboratory");
+    std::filesystem::create_directory("exams/course");
+    std::filesystem::create_directory("exams/laboratory/questions");
+    std::filesystem::create_directory("exams/laboratory/answers");
+    std::filesystem::create_directory("exams/course/questions");
+    std::filesystem::create_directory("exams/course/answers");
 }
 
 //void afisTest() {
