@@ -22,8 +22,8 @@ std::ostream &operator<<(std::ostream &os, const SeminarTeacher &other) {
     return os;
 }
 
-void SeminarTeacher::createExam(const std::string &subject) {
-    std::cout << "Unfortunately, you cannot create any exams as you are a Seminar Teacher. If you would've been a " << subject << " course or laboratory teacher, you could've created an exam.\n";
+void SeminarTeacher::createExam(const std::string &classSubject) {
+    std::cout << "Unfortunately, you cannot create any exams as you are a Seminar Teacher. If you would've been a " << classSubject << " course or laboratory teacher, you could've created an exam.\n";
 }
 
 void SeminarTeacher::print([[maybe_unused]] std::ostream &os) const {

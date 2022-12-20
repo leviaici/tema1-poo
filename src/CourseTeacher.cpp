@@ -23,10 +23,10 @@ std::ostream &operator<<(std::ostream &os, const CourseTeacher &other) {
     return os;
 }
 
-void CourseTeacher::createExam(const std::string &subject) {
-    std::filesystem::create_directory("./exams/course/" + subject);
-    std::ofstream printQuestions("./exams/course/" + subject + "/questions.txt");
-    std::ofstream printAnswers("./exams/course/" + subject + "/answers.txt");
+void CourseTeacher::createExam(const std::string &classSubject) {
+    std::filesystem::create_directory("./exams/course/" + classSubject);
+    std::ofstream printQuestions("./exams/course/" + classSubject + "/questions.txt");
+    std::ofstream printAnswers("./exams/course/" + classSubject + "/answers.txt");
 
     int counter = 0;
     std::string question, answer, possibleAnswers;
