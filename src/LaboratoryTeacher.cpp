@@ -4,6 +4,7 @@
 
 #include "../headers/LaboratoryTeacher.h"
 #include <fstream>
+#include <filesystem>
 
 LaboratoryTeacher::LaboratoryTeacher() : Professor() {}
 

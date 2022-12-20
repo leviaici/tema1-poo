@@ -4,6 +4,7 @@
 
 #include "../headers/CourseTeacher.h"
 #include <fstream>
+#include <filesystem>
 
 CourseTeacher::CourseTeacher() : Professor() {}
 
