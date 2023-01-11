@@ -41,7 +41,7 @@ endif()
 ###############################################################################
 
 # NOTE: update executable name in .github/workflows/cmake.yml when changing name here
-add_executable(${PROJECT_NAME} main.cpp src/University.cpp headers/University.h src/Professor.cpp headers/Professor.h src/Student.cpp headers/Student.h src/Subject.cpp headers/Subject.h headers/functionality/functionalities.h headers/functionality/gameFunctionalites.h src/SeminarTeacher.cpp headers/SeminarTeacher.h src/LaboratoryTeacher.cpp headers/LaboratoryTeacher.h src/CourseTeacher.cpp headers/CourseTeacher.h src/Exceptions.cpp headers/Exceptions.h)
+add_executable(${PROJECT_NAME} main.cpp src/University.cpp headers/University.h src/Professor.cpp headers/Professor.h src/Student.cpp headers/Student.h src/Subject.cpp headers/Subject.h headers/functionality/functionalities.h headers/functionality/gameFunctionalites.h src/SeminarTeacher.cpp headers/SeminarTeacher.h src/LaboratoryTeacher.cpp headers/LaboratoryTeacher.h src/CourseTeacher.cpp headers/CourseTeacher.h src/Exceptions.cpp headers/Exceptions.h src/SubstituteTeacher.cpp headers/SubstituteTeacher.h)
 
 ###############################################################################
 

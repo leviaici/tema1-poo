@@ -15,6 +15,7 @@
 #include "../SeminarTeacher.h"
 #include "../LaboratoryTeacher.h"
 #include "../CourseTeacher.h"
+#include "../SubstituteTeacher.h"
 
 void ignoreReading() {
     std::cin.ignore(std::numeric_limits<std::streamsize>::max());
@@ -44,21 +45,25 @@ void test() {
     std::shared_ptr<Professor> p1 = static_cast<std::shared_ptr<Professor>>(std::make_shared<LaboratoryTeacher>("Marius", "Micluta","Informatica","marius.micluta@unibuc.ro","Unknown", 23, 02,1999));
     std::shared_ptr<Professor> p2 = static_cast<std::shared_ptr<Professor>>(std::make_shared<CourseTeacher>("Radu", "Boriga","Informatica","radu.boriga@unibuc.ro","Unknown", 20, 7, 1975));
     std::shared_ptr<Professor> p5 = static_cast<std::shared_ptr<Professor>>(std::make_shared<SeminarTeacher>("Liliana", "Mitre", "Matematica","liliana.mitre@unibuc.ro","Unknown", 20, 1, 1990));
+    std::shared_ptr<Professor> p7 = static_cast<std::shared_ptr<Professor>>(std::make_shared<SubstituteTeacher>("MC", "Marius", "Informatica","mc.marius@unibuc.ro","Unknown", 30, 5, 1970));
+
     p.push_back(p1); p.push_back(p2);
 
     std::string subject5 = p5->get_subject(), subject2 = p2->get_subject(), subject1 = p1->get_subject();
 
+    p7->createExam(p7->get_subject());
     p5->createExam(subject5);
     p2->createExam(subject2);
     p1->createExam(subject1);
 
 //    LaboratoryTeacher p3 = LaboratoryTeacher("Marius", "Micluta","Informatica","marius.micluta@unibuc.ro","Unknown", 23, 02,1999);
 
+    std::shared_ptr<Professor> p8 = p7 -> clone();
     std::shared_ptr<Professor> p3 = p2 -> clone();
     std::shared_ptr<Professor> p4 = p1 -> clone();
     std::shared_ptr<Professor> p6 = p5 -> clone();
 
-    std::cout << *p3 << *p4 << *p6 << "\n\n\n\n";
+    std::cout << *p3 << *p4 << *p6 << *p8 << "\n\n\n\n";
 
 //    std::cout << *(p1);
 
