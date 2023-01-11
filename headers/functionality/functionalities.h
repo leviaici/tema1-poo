@@ -40,7 +40,6 @@ void test() {
     std::vector<std::shared_ptr<Professor>> p;
     std::vector<std::shared_ptr<Professor>> empty;
 
-//    std::make_shared<Professor>(LaboratoryTeacher("Marius", "Micluta","Informatica","marius.micluta@unibuc.ro","Unknown", 23, 02,1999));
 
     std::shared_ptr<Professor> p1 = static_cast<std::shared_ptr<Professor>>(std::make_shared<LaboratoryTeacher>("Marius", "Micluta","Informatica","marius.micluta@unibuc.ro","Unknown", 23, 02,1999));
     std::shared_ptr<Professor> p2 = static_cast<std::shared_ptr<Professor>>(std::make_shared<CourseTeacher>("Radu", "Boriga","Informatica","radu.boriga@unibuc.ro","Unknown", 20, 7, 1975));

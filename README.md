@@ -36,8 +36,8 @@
 - [X] funcții și atribute `static`
 - [X] STL
 - [X] cât mai multe `const`
-- [ ] la sfârșit: commit separat cu adăugarea unei noi derivate
-- [ ] tag de `git`: de exemplu `v0.2`
+- [X] la sfârșit: commit separat cu adăugarea unei noi derivate
+- [X] tag de `git`: de exemplu `v0.2`
 
 ## Tema 3
 
