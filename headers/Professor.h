@@ -58,10 +58,9 @@ public:
 
     virtual void createExam(const std::string& classSubject) = 0;
 
-/// TBA FUNCTIE VIRTUALA DE EXAMEN
     std::string get_subject() const;
-    /*std::string get_firstName();
-    std::string get_lastName();
+    std::string get_firstName();
+    /*std::string get_lastName();
     [[maybe_unused]] std::string get_email();
     [[maybe_unused]] std::string get_phoneNumber();
     [[maybe_unused]] std::string get_birthDate(); */
