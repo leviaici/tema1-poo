@@ -56,7 +56,7 @@ void test() {
     p2->createExam(subject2);
     p1->createExam(subject1);
 
-    LaboratoryTeacher p10 = LaboratoryTeacher("Marius", "Micluta","Informatica","marius.micluta@unibuc.ro","Unknown", 23, 02,1999);
+    LaboratoryTeacher p10("Marius", "Micluta","Informatica","marius.micluta@unibuc.ro","Unknown", 23, 02,1999);
 
     std::shared_ptr<Professor> p8 = p7 -> clone();
     std::shared_ptr<Professor> p3 = p2 -> clone();
@@ -112,8 +112,8 @@ void test() {
     p1.reset(); p2.reset(); p3.reset();
     p4.reset(); p5.reset(); p6.reset();
 
-    TeacherEvidence<LaboratoryTeacher>profDeLab(p10, 10000, 200);
-    profDeLab.print();
+//    TeacherEvidence<LaboratoryTeacher> profDeLab(p10, 10000, 200);
+//    profDeLab.print();
 }
 
 int localDay() {

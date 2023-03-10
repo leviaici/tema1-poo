@@ -5,14 +5,14 @@
 #ifndef OOP_TEACHEREVIDENCE_H
 #define OOP_TEACHEREVIDENCE_H
 
-template<class T> class TeacherEvidence {
-    T teacher;
-    int salary;
-    int failedExamBonus;
-public:
-    TeacherEvidence(T& teacher, int salary, int failedExamBonus);
-    void print();
-};
+//template<class T> class TeacherEvidence {
+//    T teacher;
+//    int salary;
+//    int failedExamBonus;
+//public:
+//    TeacherEvidence(const T& teacherr, const int &salaryy, const int &failedExamBonuss);
+//    void print();
+//};
 
 
 #endif //OOP_TEACHEREVIDENCE_H
